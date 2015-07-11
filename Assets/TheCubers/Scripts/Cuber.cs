@@ -1,15 +1,48 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class Cuber : MonoBehaviour {
+public class Cuber : MonoBehaviour
+{
+	public MeshRenderer BodyMesh;
+	public Material BodyMat;
+	public Material InfectedBodyMat;
 
-	// Use this for initialization
-	void Start () {
-	
+	public bool Infected;
+	public float Energy;
+	public int Life;
+	public int Fourths;
+
+
+
+	void Start()
+	{
+
 	}
-	
-	// Update is called once per frame
-	void Update () {
-	
+
+	/// <summary>
+	/// Sets vars and enables
+	/// </summary>
+	public void Init(bool infected)
+	{
+		Infected = infected;
+		if (Infected)
+		{
+			BodyMesh.material = InfectedBodyMat;
+			Energy = 1f;
+			Life = 200;
+		}
+		else
+		{
+			BodyMesh.material = BodyMat;
+			Energy = 0.5f;
+			Life = 100;
+		}
+		Fourths = 0;
+		enabled = true;
+	}
+
+	void Update()
+	{
+
 	}
 }
