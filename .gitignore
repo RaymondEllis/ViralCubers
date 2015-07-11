@@ -1,0 +1,32 @@
+# unity
+Temp/
+Obj/
+UnityGenerated/
+Library/
+Assembly-CSharp*.csproj
+Assembly-CSharp*.sln
+
+# visual studio
+[Dd]ebug/
+[Rr]elease/
+*.suo
+*.user
+*.vshost.exe
+
+# NuGet Packages Directory
+packages/
+
+# blender
+*.blend1*
+*.blend2*
+*.blend3*
+*.blend4*
+
+#TheCubers
+Build/
+worlds/
+
+UnityVS.TheCubers.CSharp*.csproj
+UnityVS.TheCubers*.sln
+TheCubers-csharp.sln
+TheCubers.sln
