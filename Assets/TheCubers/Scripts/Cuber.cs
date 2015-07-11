@@ -1,48 +1,64 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class Cuber : MonoBehaviour
+namespace TheCubers
 {
-	public MeshRenderer BodyMesh;
-	public Material BodyMat;
-	public Material InfectedBodyMat;
-
-	public bool Infected;
-	public float Energy;
-	public int Life;
-	public int Fourths;
-
-
-
-	void Start()
+	public class Cuber : MonoBehaviour
 	{
+		public MeshRenderer BodyMesh;
+		public Material BodyMat;
+		public Material InfectedBodyMat;
 
-	}
+		[System.NonSerialized]
+		public World World;
 
-	/// <summary>
-	/// Sets vars and enables
-	/// </summary>
-	public void Init(bool infected)
-	{
-		Infected = infected;
-		if (Infected)
+		public bool Infected;
+		public float Energy;
+		public int Life;
+		public int Fourths;
+
+		public float Wait;
+		private float timer;
+
+
+
+		void Start()
 		{
-			BodyMesh.material = InfectedBodyMat;
-			Energy = 1f;
-			Life = 200;
+
 		}
-		else
+
+		/// <summary>
+		/// Sets vars and enables
+		/// </summary>
+		public void Init(bool infected)
 		{
-			BodyMesh.material = BodyMat;
-			Energy = 0.5f;
-			Life = 100;
+			Infected = infected;
+			if (Infected)
+			{
+				BodyMesh.material = InfectedBodyMat;
+				Energy = 1f;
+				Life = 200;
+			}
+			else
+			{
+				BodyMesh.material = BodyMat;
+				Energy = 0.5f;
+				Life = 100;
+			}
+			Fourths = 0;
+			enabled = true;
 		}
-		Fourths = 0;
-		enabled = true;
-	}
 
-	void Update()
-	{
+		void Update()
+		{
+			timer += Time.deltaTime;
+			if (timer > Wait)
+				timer = 0f;
+			else
+				return;
 
+
+
+		}
 	}
 }
