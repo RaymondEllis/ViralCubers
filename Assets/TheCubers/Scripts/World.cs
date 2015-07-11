@@ -19,10 +19,11 @@ namespace TheCubers
 		}
 
 
-		private Cuber[] cubers;
+		private Pool<Cuber> cubers;
 		private Pool<Fourth> fourths;
+		private Pool<Energy> energys;
 
-		private System.Random rnd;
+		public System.Random Random { get; private set; }
 
 		private int sizeX, sizeZ;
 		private int sizeXhalf, sizeZhalf;
@@ -35,7 +36,7 @@ namespace TheCubers
 				return;
 			}
 
-			rnd = new System.Random(Startup.Seed);
+			Random = new System.Random(Startup.Seed);
 
 			sizeX = (int)transform.localScale.x;
 			sizeXhalf = sizeX / 2;
@@ -46,36 +47,32 @@ namespace TheCubers
 				Debug.LogWarning("World lcoal scale should be int.");
 			}
 
-			// fill cubers pool.
-			cubers = new Cuber[Startup.Cubers];
-			for (int i = 0; i < cubers.Length; ++i)
-			{
-				cubers[i] = Object.Instantiate<Cuber>(PrefabCuber);
-				cubers[i].name = "Cuber " + i;
-				cubers[i].enabled = false;
-				cubers[i].World = this;
-			}
-			// fourths
+			// create pools
+			cubers = new Pool<Cuber>(PrefabCuber, Startup.Cubers);
 			fourths = new Pool<Fourth>(PrefabFouth, Startup.Cubers);
+			energys = new Pool<Energy>(PrefabEnergy, Startup.Cubers);
 
 
 			// enable cubers
 			bool hasInfected = false;
-			for (int i = 0; i < cubers.Length; ++i)
+			Cuber cuber = null;
+			for (int i = 0; i < Startup.Cubers; ++i)
 			{
-				cubers[i].transform.position = new Vector3(-sizeXhalf + rnd.Next(sizeX), 0f, -sizeZhalf + rnd.Next(sizeZ));
-				cubers[i].Init(rnd.Next(cubers.Length) < cubers.Length / Startup.PrecentInfected);
-				if (cubers[i].Infected)
+				cuber = cubers.Get();
+				cuber.transform.position = new Vector3(-sizeXhalf + Random.Next(sizeX), 0f, -sizeZhalf + Random.Next(sizeZ));
+				cuber.Init(Random.Next(Startup.Cubers) < Startup.Cubers / Startup.PrecentInfected);
+				if (cuber.Infected)
 					hasInfected = true;
 			}
 			// we need at least one infected.
 			if (!hasInfected)
-				cubers[0].Init(true);
+				cuber.Init(true);
 
-			Kill(cubers[1]);
+			Kill(cubers.Get());
 		}
 
 
+		// kill a cuber and spawn fourths
 		public void Kill(Cuber cuber)
 		{
 			cuber.gameObject.SetActive(false);
@@ -92,18 +89,21 @@ namespace TheCubers
 			Fourth f;
 			Quaternion fr;
 
-			// bottom
-			f = fourths.Get();
-			fr = r * Quaternion.Euler(0, 0, 0);
-			f.transform.position = p + new Vector3(0f, 0f, 0f);
-			f.transform.rotation = fr;
-			f.Init(color);
+			if (!cuber.Infected)
+			{
+				// bottom
+				f = fourths.Get();
+				fr = r * Quaternion.Euler(0, 0, 0);
+				f.transform.position = p + new Vector3(0f, 0f, 0f);
+				f.transform.rotation = fr;
+				f.Init(color);
 
-			f = fourths.Get();
-			fr = r * Quaternion.Euler(0, 180, 0);
-			f.transform.position = p + new Vector3(0f, 0f, 0f);
-			f.transform.rotation = fr;
-			f.Init(color);
+				f = fourths.Get();
+				fr = r * Quaternion.Euler(0, 180, 0);
+				f.transform.position = p + new Vector3(0f, 0f, 0f);
+				f.transform.rotation = fr;
+				f.Init(color);
+			}
 
 			// top
 			f = fourths.Get();
@@ -112,7 +112,7 @@ namespace TheCubers
 			f.transform.rotation = fr;
 			f.Init(color);
 
-			f = fourths.Get();	
+			f = fourths.Get();
 			fr = r * Quaternion.Euler(180, 180, 0);
 			f.transform.position = p + new Vector3(0f, 1f, 0f);
 			f.transform.rotation = fr;

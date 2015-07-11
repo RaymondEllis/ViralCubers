@@ -3,28 +3,48 @@ using System.Collections.Generic;
 
 namespace TheCubers
 {
-	public enum PoolResizeMode { Fixed, Double }
-
 	public class Pool<T> where T : MonoBehaviour
 	{
+		public enum ResizeMode { Fixed, Double }
+
+		private GameObject parent;
 		private T original;
 
 		private T[] array;
-		private PoolResizeMode resizeMode;
+		private ResizeMode resizeMode;
 		private int resize;
+		public int Max { get; private set; }
+		public int Length { get { return array.Length; } }
 
-		public Pool(T original, int initialSize) : this(original, initialSize, 0, PoolResizeMode.Double) { }
-		public Pool(T original, int initialSize, int resize, PoolResizeMode resizeMode)
+		private string typeName = typeof(T).Name;
+
+		public Pool(T original, int initialSize) : this(original, initialSize, int.MaxValue, ResizeMode.Double, 0) { }
+		public Pool(T original, int initialSize, int max) : this(original, initialSize, max, ResizeMode.Double, 0) { }
+		public Pool(T original, int initialSize, int max, ResizeMode resizeMode, int resize)
 		{
+			parent = new GameObject( "Pool<" + typeName + ">");
 			this.original = original;
 
 			array = new T[initialSize];
 			fill(0);
 
+			this.Max = max;
 			this.resize = resize;
 			this.resizeMode = resizeMode;
+
 		}
 
+		/// <summary> Gets number of active objects. </summary>
+		public int Active()
+		{
+			int a = 0;
+			for (int i = 0; i < array.Length; ++i)
+				if (array[i].gameObject.activeSelf)
+					++a;
+			return a;
+		}
+
+		/// <summary> Get a unactive item, will actavate and rezise array if nessery. </summary>
 		public T Get()
 		{
 			for (int i = 0; i < array.Length; ++i)
@@ -36,15 +56,22 @@ namespace TheCubers
 				}
 			}
 
+			// don't allow array to go over max.
+			if (array.Length == Max)
+			{
+				Debug.LogWarning(parent.name + " is full!");
+				return null;
+			}
+
 			// we need a new item, lets resize the array.
 			int startIndex = array.Length;
 			switch (resizeMode)
 			{
-				case PoolResizeMode.Fixed:
-					System.Array.Resize<T>(ref array, array.Length + resize);
+				case ResizeMode.Fixed:
+					System.Array.Resize<T>(ref array, System.Math.Min(array.Length + resize, Max));
 					break;
-				case PoolResizeMode.Double:
-					System.Array.Resize<T>(ref array, array.Length * 2);
+				case ResizeMode.Double:
+					System.Array.Resize<T>(ref array, System.Math.Min(array.Length * 2, Max));
 					break;
 			}
 
@@ -61,7 +88,8 @@ namespace TheCubers
 			for (int i = start; i < array.Length; ++i)
 			{
 				array[i] = Object.Instantiate<T>((T)original);
-				array[i].name = typeof(T).Name + " " + i;
+				array[i].transform.SetParent(parent.transform);
+				array[i].name = typeName + " " + i;
 				array[i].gameObject.SetActive(false);
 			}
 		}

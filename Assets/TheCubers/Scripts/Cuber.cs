@@ -5,12 +5,11 @@ namespace TheCubers
 {
 	public class Cuber : MonoBehaviour
 	{
+		private static World World;
+
 		public MeshRenderer BodyMesh;
 		public Material BodyMat;
 		public Material InfectedBodyMat;
-
-		[System.NonSerialized]
-		public World World;
 
 		public bool Infected;
 		public float Energy;
@@ -21,15 +20,17 @@ namespace TheCubers
 		private float timer;
 
 
+		void Awake()
+		{
+			if (!World)
+				World = GameObject.FindObjectOfType<World>();
+		}
 
 		void Start()
 		{
 
 		}
 
-		/// <summary>
-		/// Sets vars and enables
-		/// </summary>
 		public void Init(bool infected)
 		{
 			Infected = infected;
@@ -46,7 +47,6 @@ namespace TheCubers
 				Life = 100;
 			}
 			Fourths = 0;
-			enabled = true;
 		}
 
 		void Update()
