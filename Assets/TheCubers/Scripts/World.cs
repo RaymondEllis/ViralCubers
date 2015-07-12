@@ -18,6 +18,7 @@ namespace TheCubers
 			public int PrecentInfected;
 		}
 
+		public float CubersView;
 
 		private Pool<Cuber> cubers;
 		private Pool<Fourth> fourths;
@@ -117,6 +118,15 @@ namespace TheCubers
 			f.transform.position = p + new Vector3(0f, 1f, 0f);
 			f.transform.rotation = fr;
 			f.Init(color);
+		}
+
+		public List<Fourth> GetFourthsInView(Vector3 position)
+		{
+			return fourths.GetDistance(position, CubersView);
+		}
+		public List<Energy> GetEnergyInView(Vector3 position)
+		{
+			return energys.GetDistance(position, CubersView);
 		}
 
 		void Update()
