@@ -58,7 +58,7 @@ namespace TheCubers
 			Cuber cuber = null;
 			for (int i = 0; i < Startup.Cubers; ++i)
 			{
-				cuber = cubers.Get();
+				cuber = cubers.Pull();
 				cuber.transform.position = new Vector3(-sizeXhalf + Random.Next(sizeX), 0f, -sizeZhalf + Random.Next(sizeZ));
 				cuber.Init(Random.Next(Startup.Cubers) < Startup.Cubers / Startup.PrecentInfected);
 				if (cuber.Infected)
@@ -68,7 +68,7 @@ namespace TheCubers
 			if (!hasInfected)
 				cuber.Init(true);
 
-			Kill(cubers.Get());
+			Kill(cubers.Pull());
 		}
 
 
@@ -92,13 +92,13 @@ namespace TheCubers
 			if (!cuber.Infected)
 			{
 				// bottom
-				f = fourths.Get();
+				f = fourths.Pull();
 				fr = r * Quaternion.Euler(0, 0, 0);
 				f.transform.position = p + new Vector3(0f, 0f, 0f);
 				f.transform.rotation = fr;
 				f.Init(color);
 
-				f = fourths.Get();
+				f = fourths.Pull();
 				fr = r * Quaternion.Euler(0, 180, 0);
 				f.transform.position = p + new Vector3(0f, 0f, 0f);
 				f.transform.rotation = fr;
@@ -106,13 +106,13 @@ namespace TheCubers
 			}
 
 			// top
-			f = fourths.Get();
+			f = fourths.Pull();
 			fr = r * Quaternion.Euler(180, 0, 0);
 			f.transform.position = p + new Vector3(0f, 1f, 0f);
 			f.transform.rotation = fr;
 			f.Init(color);
 
-			f = fourths.Get();
+			f = fourths.Pull();
 			fr = r * Quaternion.Euler(180, 180, 0);
 			f.transform.position = p + new Vector3(0f, 1f, 0f);
 			f.transform.rotation = fr;
@@ -127,7 +127,7 @@ namespace TheCubers
 		void OnDrawGizmos()
 		{
 			Gizmos.DrawWireCube(transform.position + new Vector3(0f, transform.localScale.y * 0.5f, 0f), transform.localScale);
-			Gizmos.DrawWireCube(transform.position + new Vector3(0f, transform.localScale.y * 0.5f, 0f), transform.localScale + new Vector3(1f, 0f, 1f));
+			Gizmos.DrawWireCube(transform.position + new Vector3(0f, transform.localScale.y * 0.5f, 0f), transform.localScale + new Vector3(2f, 0f, 2f));
 		}
 	}
 }

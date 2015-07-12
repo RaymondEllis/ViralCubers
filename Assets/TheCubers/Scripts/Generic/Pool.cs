@@ -22,7 +22,7 @@ namespace TheCubers
 		public Pool(T original, int initialSize, int max) : this(original, initialSize, max, ResizeMode.Double, 0) { }
 		public Pool(T original, int initialSize, int max, ResizeMode resizeMode, int resize)
 		{
-			parent = new GameObject( "Pool<" + typeName + ">");
+			parent = new GameObject("Pool<" + typeName + ">");
 			this.original = original;
 
 			array = new T[initialSize];
@@ -44,8 +44,18 @@ namespace TheCubers
 			return a;
 		}
 
+		/// <summary> Returns items within distance of position. </summary>
+		public List<T> GetDistance(Vector3 position, float distance)
+		{
+			var list = new List<T>();
+			for (int i = 0; i < array.Length; ++i)
+				if (array[i].gameObject.activeSelf && Vector3.Distance(array[i].transform.position, position) < distance)
+					list.Add(array[i]);
+			return list;
+		}
+
 		/// <summary> Get a unactive item, will actavate and rezise array if nessery. </summary>
-		public T Get()
+		public T Pull()
 		{
 			for (int i = 0; i < array.Length; ++i)
 			{

@@ -11,12 +11,66 @@ ModelImporter:
     100006: EyeR
     100008: Mouth
     100010: Eyes
+    100012: Armature
+    100014: Armature_001
+    100016: ArmBL
+    100018: ArmBR
+    100020: ArmFL
+    100022: ArmFR
+    100024: Bottom
+    100026: Cuber
+    100028: EyeL_0
+    100030: EyeR_0
+    100032: Face
+    100034: Face_0
+    100036: LegBL
+    100038: LegBR
+    100040: LegFL
+    100042: LegFR
+    100044: MouthC
+    100046: MouthC_0
+    100048: MouthL
+    100050: MouthL_0
+    100052: MouthR
+    100054: MouthR_0
+    100056: Root
+    100058: Root_0
+    100060: SpineLower
+    100062: SpineUpper
+    100064: Top
     400000: Body
     400002: //RootNode
     400004: EyeL
     400006: EyeR
     400008: Mouth
     400010: Eyes
+    400012: Armature
+    400014: Armature_001
+    400016: ArmBL
+    400018: ArmBR
+    400020: ArmFL
+    400022: ArmFR
+    400024: Bottom
+    400026: Cuber
+    400028: EyeL_0
+    400030: EyeR_0
+    400032: Face
+    400034: Face_0
+    400036: LegBL
+    400038: LegBR
+    400040: LegFL
+    400042: LegFR
+    400044: MouthC
+    400046: MouthC_0
+    400048: MouthL
+    400050: MouthL_0
+    400052: MouthR
+    400054: MouthR_0
+    400056: Root
+    400058: Root_0
+    400060: SpineLower
+    400062: SpineUpper
+    400064: Top
     2300000: Body
     2300002: EyeL
     2300004: EyeR
@@ -32,8 +86,15 @@ ModelImporter:
     4300004: Mouth
     4300006: Body
     4300008: Eyes
+    4300010: Cuber
     7400000: Default Take
+    7400002: Hop
+    7400004: Idle
     9500000: //RootNode
+    13700000: Body
+    13700002: Cuber
+    13700004: Eyes
+    13700006: Mouth
   materials:
     importMaterials: 1
     materialName: 0
@@ -53,7 +114,205 @@ ModelImporter:
     animationScaleError: .5
     animationWrapMode: 0
     extraExposedTransformPaths: []
-    clipAnimations: []
+    clipAnimations:
+    - serializedVersion: 16
+      name: Default Take
+      takeName: Default Take
+      firstFrame: 0
+      lastFrame: 59
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask:
+      - path: 
+        weight: 1
+      - path: Armature
+        weight: 1
+      - path: Armature/Root
+        weight: 1
+      - path: Armature/Root/LegBL
+        weight: 1
+      - path: Armature/Root/LegBR
+        weight: 1
+      - path: Armature/Root/LegFL
+        weight: 1
+      - path: Armature/Root/LegFR
+        weight: 1
+      - path: Armature/Root/SpineLower
+        weight: 1
+      - path: Armature/Root/SpineLower/Face
+        weight: 1
+      - path: Armature/Root/SpineLower/Face/EyeL
+        weight: 1
+      - path: Armature/Root/SpineLower/Face/EyeR
+        weight: 1
+      - path: Armature/Root/SpineLower/Face/MouthC
+        weight: 1
+      - path: Armature/Root/SpineLower/Face/MouthL
+        weight: 1
+      - path: Armature/Root/SpineLower/Face/MouthR
+        weight: 1
+      - path: Armature/Root/SpineLower/SpineUpper
+        weight: 1
+      - path: Armature/Root/SpineLower/SpineUpper/ArmBL
+        weight: 1
+      - path: Armature/Root/SpineLower/SpineUpper/ArmBR
+        weight: 1
+      - path: Armature/Root/SpineLower/SpineUpper/ArmFL
+        weight: 1
+      - path: Armature/Root/SpineLower/SpineUpper/ArmFR
+        weight: 1
+      - path: Cuber
+        weight: 1
+      maskType: 0
+      maskSource: {instanceID: 0}
+    - serializedVersion: 16
+      name: Hop
+      takeName: Hop
+      firstFrame: 0
+      lastFrame: 59
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask:
+      - path: 
+        weight: 1
+      - path: Armature
+        weight: 1
+      - path: Armature/Root
+        weight: 1
+      - path: Armature/Root/LegBL
+        weight: 1
+      - path: Armature/Root/LegBR
+        weight: 1
+      - path: Armature/Root/LegFL
+        weight: 1
+      - path: Armature/Root/LegFR
+        weight: 1
+      - path: Armature/Root/SpineLower
+        weight: 1
+      - path: Armature/Root/SpineLower/Face
+        weight: 1
+      - path: Armature/Root/SpineLower/Face/EyeL
+        weight: 1
+      - path: Armature/Root/SpineLower/Face/EyeR
+        weight: 1
+      - path: Armature/Root/SpineLower/Face/MouthC
+        weight: 1
+      - path: Armature/Root/SpineLower/Face/MouthL
+        weight: 1
+      - path: Armature/Root/SpineLower/Face/MouthR
+        weight: 1
+      - path: Armature/Root/SpineLower/SpineUpper
+        weight: 1
+      - path: Armature/Root/SpineLower/SpineUpper/ArmBL
+        weight: 1
+      - path: Armature/Root/SpineLower/SpineUpper/ArmBR
+        weight: 1
+      - path: Armature/Root/SpineLower/SpineUpper/ArmFL
+        weight: 1
+      - path: Armature/Root/SpineLower/SpineUpper/ArmFR
+        weight: 1
+      - path: Cuber
+        weight: 1
+      maskType: 0
+      maskSource: {instanceID: 0}
+    - serializedVersion: 16
+      name: Idle
+      takeName: Idle
+      firstFrame: 0
+      lastFrame: 59
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      loopTime: 1
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask:
+      - path: 
+        weight: 1
+      - path: Armature
+        weight: 1
+      - path: Armature/Root
+        weight: 1
+      - path: Armature/Root/LegBL
+        weight: 1
+      - path: Armature/Root/LegBR
+        weight: 1
+      - path: Armature/Root/LegFL
+        weight: 1
+      - path: Armature/Root/LegFR
+        weight: 1
+      - path: Armature/Root/SpineLower
+        weight: 1
+      - path: Armature/Root/SpineLower/Face
+        weight: 1
+      - path: Armature/Root/SpineLower/Face/EyeL
+        weight: 1
+      - path: Armature/Root/SpineLower/Face/EyeR
+        weight: 1
+      - path: Armature/Root/SpineLower/Face/MouthC
+        weight: 1
+      - path: Armature/Root/SpineLower/Face/MouthL
+        weight: 1
+      - path: Armature/Root/SpineLower/Face/MouthR
+        weight: 1
+      - path: Armature/Root/SpineLower/SpineUpper
+        weight: 1
+      - path: Armature/Root/SpineLower/SpineUpper/ArmBL
+        weight: 1
+      - path: Armature/Root/SpineLower/SpineUpper/ArmBR
+        weight: 1
+      - path: Armature/Root/SpineLower/SpineUpper/ArmFL
+        weight: 1
+      - path: Armature/Root/SpineLower/SpineUpper/ArmFR
+        weight: 1
+      - path: Cuber
+        weight: 1
+      maskType: 0
+      maskSource: {instanceID: 0}
     isReadable: 1
   meshes:
     lODScreenPercentages: []
@@ -89,7 +348,7 @@ ModelImporter:
     armStretch: .0500000007
     legStretch: .0500000007
     feetSpacing: 0
-    rootMotionBoneName: 
+    rootMotionBoneName: Root
   lastHumanDescriptionAvatarSource: {instanceID: 0}
   animationType: 2
   additionalBone: 0

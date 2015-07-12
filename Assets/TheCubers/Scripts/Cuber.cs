@@ -3,13 +3,15 @@ using System.Collections;
 
 namespace TheCubers
 {
+	[RequireComponent(typeof(Animator))]
 	public class Cuber : MonoBehaviour
 	{
 		private static World World;
 
-		public MeshRenderer BodyMesh;
+		public SkinnedMeshRenderer Mesh;
 		public Material BodyMat;
 		public Material InfectedBodyMat;
+		public Animator animator;
 
 		public bool Infected;
 		public float Energy;
@@ -24,6 +26,11 @@ namespace TheCubers
 		{
 			if (!World)
 				World = GameObject.FindObjectOfType<World>();
+			if (!World)
+				Debug.LogError("Unable to find world!");
+
+			if (!animator)
+				animator = GetComponent<Animator>();
 		}
 
 		void Start()
@@ -36,17 +43,21 @@ namespace TheCubers
 			Infected = infected;
 			if (Infected)
 			{
-				BodyMesh.material = InfectedBodyMat;
+				Mesh.material = InfectedBodyMat;
 				Energy = 1f;
 				Life = 200;
 			}
 			else
 			{
-				BodyMesh.material = BodyMat;
+				Mesh.material = BodyMat;
 				Energy = 0.5f;
 				Life = 100;
 			}
 			Fourths = 0;
+
+			timer = (float)World.Random.NextDouble() * Wait;
+			transform.rotation = Quaternion.Euler(0, World.Random.Next(360), 0);
+			animator.Play("Idle", 0, (float)World.Random.NextDouble());
 		}
 
 		void Update()
