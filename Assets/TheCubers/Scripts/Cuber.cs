@@ -6,7 +6,7 @@ namespace TheCubers
 	[RequireComponent(typeof(Animator))]
 	public class Cuber : MonoBehaviour
 	{
-		private static World World;
+		private static World world;
 
 		public SkinnedMeshRenderer Mesh;
 		public Material BodyMat;
@@ -26,9 +26,9 @@ namespace TheCubers
 
 		void Awake()
 		{
-			if (!World)
-				World = GameObject.FindObjectOfType<World>();
-			if (!World)
+			if (!world)
+				world = GameObject.FindObjectOfType<World>();
+			if (!world)
 				Debug.LogError("Unable to find world!");
 
 			if (!animator)
@@ -57,9 +57,9 @@ namespace TheCubers
 			}
 			Fourths = 0;
 
-			timer = (float)World.Random.NextDouble() * Wait;
-			transform.rotation = Quaternion.Euler(0, World.Random.Next(360), 0);
-			animator.Play("Idle", 0, (float)World.Random.NextDouble());
+			timer = (float)world.Random.NextDouble() * Wait;
+			transform.rotation = Quaternion.Euler(0, world.Random.Next(360), 0);
+			animator.Play("Idle", 0, (float)world.Random.NextDouble());
 		}
 
 		void Update()
@@ -67,7 +67,7 @@ namespace TheCubers
 			Energy -= EnergyConsistentDrain * Time.deltaTime;
 			if (Energy <= 0f)
 			{
-				World.Kill(this);
+				world.Kill(this);
 				return;
 			}
 
@@ -87,37 +87,36 @@ namespace TheCubers
 			Energy eTarget = null;
 			float distance = float.MaxValue;
 			float tmp;
+			float weight = 0f;
 			if (Fourths < 4)
 			{
-				var fourths = World.GetFourthsInView(transform.position);
+				var fourths = world.GetFourthsInView(transform.position);
 				for (int i = 0; i < fourths.Count; ++i)
 				{
 					tmp = Vector3.Distance(transform.position, fourths[i].transform.position);
-					if (tmp < distance)
+					if (10f * ((float)Fourths + 1f) / tmp > weight)
 					{
 						distance = tmp;
+						weight = 10f * ((float)Fourths + 1f) / tmp;
 						fTarget = fourths[i];
 						target = fourths[i].transform.position;
 					}
 				}
 			}
-			// only try for energy if we did not find a fourth.
-			if (!fTarget)
+			// try for energy 
+			var energy = world.GetEnergyInView(transform.position);
+			for (int i = 0; i < energy.Count; ++i)
 			{
-				float weight = 0f;
-				var energy = World.GetEnergyInView(transform.position);
-				for (int i = 0; i < energy.Count; ++i)
+				tmp = Vector3.Distance(transform.position, energy[i].transform.position);
+				if ((float)energy[i].Amount * 10f / tmp > weight)
 				{
-					tmp = Vector3.Distance(transform.position, energy[i].transform.position);
-					if ((float)energy[i].Amount * 10f / tmp > weight)
-					{
-						distance = tmp;
-						eTarget = energy[i];
-						weight = (float)energy[i].Amount * 10f / tmp;
-						target = energy[i].transform.position;
-					}
+					distance = tmp;
+					eTarget = energy[i];
+					weight = (float)energy[i].Amount * 10f / tmp;
+					target = energy[i].transform.position;
 				}
 			}
+
 
 			// no target return
 			if (distance == float.MaxValue)
@@ -125,8 +124,6 @@ namespace TheCubers
 
 			target.y = transform.position.y;
 			transform.LookAt(target);
-			//target.Normalize();
-			//transform.rotation = Quaternion.LookRotation(target, Vector3.up);
 
 			// if we are close, eat it.
 			if (distance < 2f)

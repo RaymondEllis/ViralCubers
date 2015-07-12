@@ -120,6 +120,13 @@ namespace TheCubers
 			f.Init(color);
 		}
 
+		public void NewEnergy(Vector3 position, float amount)
+		{
+			var e = energys.Pull();
+			e.transform.position = position;
+			e.Amount = amount;
+		}
+
 		public List<Fourth> GetFourthsInView(Vector3 position)
 		{
 			return fourths.GetDistance(position, CubersView);
