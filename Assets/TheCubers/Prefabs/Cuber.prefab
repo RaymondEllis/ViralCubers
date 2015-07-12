@@ -600,7 +600,7 @@ MonoBehaviour:
   EnergyHopDrain: .100000001
   Life: 0
   Fourths: 0
-  Wait: 10
+  Wait: 1
 --- !u!137 &13779714
 SkinnedMeshRenderer:
   m_ObjectHideFlags: 1
@@ -692,7 +692,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: Wait
-      value: 10
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}

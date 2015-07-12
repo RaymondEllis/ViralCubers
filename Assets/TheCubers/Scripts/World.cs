@@ -61,13 +61,13 @@ namespace TheCubers
 			{
 				cuber = cubers.Pull();
 				cuber.transform.position = new Vector3(-sizeXhalf + Random.Next(sizeX), 0f, -sizeZhalf + Random.Next(sizeZ));
-				cuber.Init(Random.Next(Startup.Cubers) < Startup.Cubers / Startup.PrecentInfected);
+				cuber.Init(Random.Next(Startup.Cubers) < Startup.Cubers / Startup.PrecentInfected, Color.black);
 				if (cuber.Infected)
 					hasInfected = true;
 			}
 			// we need at least one infected.
 			if (!hasInfected)
-				cuber.Init(true);
+				cuber.Init(true, Color.black);
 
 			Kill(cubers.Pull());
 		}
@@ -120,11 +120,24 @@ namespace TheCubers
 			f.Init(color);
 		}
 
-		public void NewEnergy(Vector3 position, float amount)
+		public bool NewCuber(Vector3 position, bool infected, Color color)
 		{
+			var cuber = cubers.Pull();
+			cuber.transform.position = position;
+			cuber.Init(infected, color);
+			return true;
+		}
+
+		public bool NewEnergy(Vector3 position, float amount)
+		{
+			// check if there is already energy around here.
+			if (energys.CheckDistance(position, 1f))
+				return false;
+
 			var e = energys.Pull();
 			e.transform.position = position;
 			e.Amount = amount;
+			return true;
 		}
 
 		public List<Fourth> GetFourthsInView(Vector3 position)
@@ -145,6 +158,20 @@ namespace TheCubers
 		{
 			Gizmos.DrawWireCube(transform.position + new Vector3(0f, transform.localScale.y * 0.5f, 0f), transform.localScale);
 			Gizmos.DrawWireCube(transform.position + new Vector3(0f, transform.localScale.y * 0.5f, 0f), transform.localScale + new Vector3(2f, 0f, 2f));
+		}
+
+
+		private static int groundLayerMask = LayerMask.GetMask("ValidGround");
+		public static bool FindGround(Ray ray, out Vector3 point)
+		{
+			RaycastHit info;
+			if (Physics.Raycast(ray, out info, 100f, groundLayerMask))
+			{
+				point = info.point;
+				return true;
+			}
+			point = Vector3.zero;
+			return false;
 		}
 	}
 }

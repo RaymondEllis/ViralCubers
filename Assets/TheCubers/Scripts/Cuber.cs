@@ -19,6 +19,7 @@ namespace TheCubers
 		public float EnergyHopDrain;
 		public int Life;
 		public int Fourths;
+		public Color FourthsColor;
 
 		public float Wait;
 		private float timer;
@@ -40,7 +41,7 @@ namespace TheCubers
 
 		}
 
-		public void Init(bool infected)
+		public void Init(bool infected, Color color)
 		{
 			Infected = infected;
 			if (Infected)
@@ -52,10 +53,13 @@ namespace TheCubers
 			else
 			{
 				Mesh.material = BodyMat;
+				if (color != Color.black)
+					Mesh.material.color = color;
 				Energy = 0.5f;
 				Life = 100;
 			}
 			Fourths = 0;
+			FourthsColor = Color.black;
 
 			timer = (float)world.Random.NextDouble() * Wait;
 			transform.rotation = Quaternion.Euler(0, world.Random.Next(360), 0);
@@ -81,6 +85,28 @@ namespace TheCubers
 			if (!animator.GetCurrentAnimatorStateInfo(0).IsName("Idle"))
 				return;
 
+			Life -= 1;
+			if (Life <= 0)
+			{
+				world.Kill(this);
+				return;
+			}
+
+			// repruduce
+			if (Fourths == 4)
+			{
+				Vector3 position;
+				if (World.FindGround(new Ray(transform.position + Vector3.up, Vector3.down), out position))
+				{
+					Fourths = 0;
+					Life -= 4;
+					world.NewCuber(position, Infected, FourthsColor);
+					animator.SetTrigger("Birth");
+					timer -= 5f;
+					return;
+				}
+			}
+
 			// Find a target to go for.
 			Vector3 target = Vector3.zero;
 			Fourth fTarget = null;
@@ -94,10 +120,10 @@ namespace TheCubers
 				for (int i = 0; i < fourths.Count; ++i)
 				{
 					tmp = Vector3.Distance(transform.position, fourths[i].transform.position);
-					if (10f * ((float)Fourths + 1f) / tmp > weight)
+					if (5f * ((float)Fourths + 1f) / tmp > weight)
 					{
 						distance = tmp;
-						weight = 10f * ((float)Fourths + 1f) / tmp;
+						weight = 5f * ((float)Fourths + 1f) / tmp;
 						fTarget = fourths[i];
 						target = fourths[i].transform.position;
 					}
@@ -111,12 +137,12 @@ namespace TheCubers
 				if ((float)energy[i].Amount * 10f / tmp > weight)
 				{
 					distance = tmp;
+					fTarget = null;
 					eTarget = energy[i];
 					weight = (float)energy[i].Amount * 10f / tmp;
 					target = energy[i].transform.position;
 				}
 			}
-
 
 			// no target return
 			if (distance == float.MaxValue)
@@ -131,6 +157,9 @@ namespace TheCubers
 				if (fTarget)
 				{
 					Fourths += 1;
+					FourthsColor.r += fTarget.Color.r / 4;
+					FourthsColor.g += fTarget.Color.g / 4;
+					FourthsColor.b += fTarget.Color.b / 4;
 					fTarget.gameObject.SetActive(false);
 				}
 				else

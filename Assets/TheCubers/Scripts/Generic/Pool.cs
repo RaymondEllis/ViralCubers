@@ -44,6 +44,15 @@ namespace TheCubers
 			return a;
 		}
 
+		/// <summary> True if an item is within distance. </summary>
+		public bool CheckDistance(Vector3 position, float distance)
+		{
+			for (int i = 0; i < array.Length; ++i)
+				if (array[i].gameObject.activeSelf && Vector3.Distance(array[i].transform.position, position) < distance)
+					return true;
+			return false;
+		}
+
 		/// <summary> Returns items within distance of position. </summary>
 		public List<T> GetDistance(Vector3 position, float distance)
 		{
