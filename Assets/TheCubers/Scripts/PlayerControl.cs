@@ -2,7 +2,7 @@
 
 namespace TheCubers
 {
-	public class EnergyPlacer : MonoBehaviour
+	public class PlayerControl : MonoBehaviour
 	{
 		private static World world;
 

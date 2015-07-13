@@ -18,7 +18,7 @@ namespace TheCubers
 			public int PrecentInfected;
 		}
 
-		public float CubersView;
+		public Cuber.Global CuberGlobal = new Cuber.Global();
 
 		private Pool<Cuber> cubers;
 		private Pool<Fourth> fourths;
@@ -153,11 +153,11 @@ namespace TheCubers
 
 		public List<Fourth> GetFourthsInView(Vector3 position)
 		{
-			return fourths.GetDistance(position, CubersView);
+			return fourths.GetDistance(position, CuberGlobal.View);
 		}
 		public List<Energy> GetEnergyInView(Vector3 position)
 		{
-			return energys.GetDistance(position, CubersView);
+			return energys.GetDistance(position, CuberGlobal.View);
 		}
 
 		private static int groundLayerMask;

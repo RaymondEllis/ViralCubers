@@ -7,23 +7,33 @@ namespace TheCubers
 	public class Cuber : MonoBehaviour
 	{
 		private static World world;
+		[System.Serializable]
+		public class Global
+		{
+			[Range(0.01f, 10f)]
+			public float Wait;
+			[Range(1, 500)]
+			public float View;
+
+			[Header("Body materials")]
+			public Material BodyMat;
+			public Material InfectedBodyMat;
+
+			[Header("Energy costs")]
+			public float EnergyConsistent;
+			public float EnergyHop;
+		}
 
 		public SkinnedMeshRenderer Mesh;
-		public Material BodyMat;
-		public Material InfectedBodyMat;
-		public Animator animator;
+		private Animator animator;
 
 		public bool Infected;
 		public float Energy;
-		public float EnergyConsistentDrain;
-		public float EnergyHopDrain;
 		public int Life;
 		public int Fourths;
 		public Color FourthsColor;
 
-		public float Wait;
 		private float timer;
-
 
 		void Awake()
 		{
@@ -46,13 +56,13 @@ namespace TheCubers
 			Infected = infected;
 			if (Infected)
 			{
-				Mesh.material = InfectedBodyMat;
+				Mesh.material = world.CuberGlobal.InfectedBodyMat;
 				Energy = 1f;
 				Life = 200;
 			}
 			else
 			{
-				Mesh.material = BodyMat;
+				Mesh.material = world.CuberGlobal.BodyMat;
 				if (color != Color.black)
 					Mesh.material.color = color;
 				Energy = 0.5f;
@@ -61,14 +71,14 @@ namespace TheCubers
 			Fourths = 0;
 			FourthsColor = Color.black;
 
-			timer = (float)world.Random.NextDouble() * Wait;
+			timer = (float)world.Random.NextDouble() * world.CuberGlobal.Wait;
 			transform.rotation = Quaternion.Euler(0, world.Random.Next(360), 0);
 			animator.Play("Idle", 0, (float)world.Random.NextDouble());
 		}
 
 		void Update()
 		{
-			Energy -= EnergyConsistentDrain * Time.deltaTime;
+			Energy -= world.CuberGlobal.EnergyConsistent * Time.deltaTime;
 			if (Energy <= 0f)
 			{
 				world.Kill(this);
@@ -77,7 +87,7 @@ namespace TheCubers
 
 			// only do movment updates every Wait.
 			timer += Time.deltaTime;
-			if (timer > Wait)
+			if (timer > world.CuberGlobal.Wait)
 				timer = 0f;
 			else
 				return;
@@ -171,9 +181,9 @@ namespace TheCubers
 				animator.SetTrigger("Eat");
 
 			} // else hop to it.
-			else if (Energy > EnergyHopDrain)
+			else if (Energy > world.CuberGlobal.EnergyHop)
 			{
-				Energy -= EnergyHopDrain;
+				Energy -= world.CuberGlobal.EnergyHop;
 				animator.SetTrigger("Hop");
 			}
 
