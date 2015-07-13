@@ -54,7 +54,7 @@ namespace TheCubers
 			energys = new Pool<Energy>(PrefabEnergy, Startup.Cubers);
 
 
-			// enable cubers
+			// spawn cubers
 			bool hasInfected = false;
 			Cuber cuber = null;
 			for (int i = 0; i < Startup.Cubers; ++i)
@@ -70,7 +70,25 @@ namespace TheCubers
 				cuber.Init(true, Color.black);
 
 			Kill(cubers.Pull());
+
+			// some energy
+			for (int i = 0; i < 100; ++i)
+			{
+				NewEnergy(new Vector3(-sizeXhalf + Random.Next(sizeX), 0f, -sizeZhalf + Random.Next(sizeZ)), (float)Random.NextDouble());
+			}
 		}
+
+		void Update()
+		{
+
+		}
+
+		void OnDrawGizmos()
+		{
+			Gizmos.DrawWireCube(transform.position + new Vector3(0f, transform.localScale.y * 0.5f, 0f), transform.localScale);
+			Gizmos.DrawWireCube(transform.position + new Vector3(0f, transform.localScale.y * 0.5f, 0f), transform.localScale + new Vector3(2f, 0f, 2f));
+		}
+
 
 
 		// kill a cuber and spawn fourths
@@ -78,46 +96,38 @@ namespace TheCubers
 		{
 			cuber.gameObject.SetActive(false);
 
-			Vector3 p = cuber.transform.position;
-			Quaternion r = cuber.transform.rotation;
-
-			Color color;
-			if (cuber.Infected)
-				color = Color.white;
-			else
-				color = cuber.BodyMat.color;
-
-			Fourth f;
-			Quaternion fr;
-
 			if (!cuber.Infected)
 			{
 				// bottom
-				f = fourths.Pull();
-				fr = r * Quaternion.Euler(0, 0, 0);
-				f.transform.position = p + new Vector3(0f, 0f, 0f);
-				f.transform.rotation = fr;
-				f.Init(color);
-
-				f = fourths.Pull();
-				fr = r * Quaternion.Euler(0, 180, 0);
-				f.transform.position = p + new Vector3(0f, 0f, 0f);
-				f.transform.rotation = fr;
-				f.Init(color);
+				dropForth(cuber, Quaternion.Euler(0, 0, 0), new Vector3(0f, 0f, 0f));
+				dropForth(cuber, Quaternion.Euler(0, 180, 0), new Vector3(0f, 0f, 0f));
 			}
 
 			// top
-			f = fourths.Pull();
-			fr = r * Quaternion.Euler(180, 0, 0);
-			f.transform.position = p + new Vector3(0f, 1f, 0f);
-			f.transform.rotation = fr;
-			f.Init(color);
+			dropForth(cuber, Quaternion.Euler(180, 0, 0), new Vector3(0f, 1f, 0f));
+			dropForth(cuber, Quaternion.Euler(180, 180, 0), new Vector3(0f, 1f, 0f));
 
-			f = fourths.Pull();
-			fr = r * Quaternion.Euler(180, 180, 0);
-			f.transform.position = p + new Vector3(0f, 1f, 0f);
-			f.transform.rotation = fr;
-			f.Init(color);
+			// drop any fourths cuber was carrying.
+			if (cuber.Fourths > 0)
+				dropForth(cuber, Quaternion.Euler(0, 0, 0), new Vector3(0f, 2f, 0f));
+			if (cuber.Fourths > 1)
+				dropForth(cuber, Quaternion.Euler(0, 180, 0), new Vector3(0f, 2f, 0f));
+			if (cuber.Fourths > 2)
+				dropForth(cuber, Quaternion.Euler(180, 0, 0), new Vector3(0f, 3f, 0f));
+			if (cuber.Fourths > 3)
+				dropForth(cuber, Quaternion.Euler(180, 180, 0), new Vector3(0f, 3f, 0f));
+
+		}
+		private void dropForth(Cuber cuber, Quaternion rotation, Vector3 position)
+		{
+			Fourth f = fourths.Pull();
+			f.transform.position = cuber.transform.position + position;
+			f.transform.rotation = cuber.transform.rotation * rotation;
+
+			if (cuber.Infected)
+				f.Init(Color.white);
+			else
+				f.Init(cuber.Mesh.material.color);
 		}
 
 		public bool NewCuber(Vector3 position, bool infected, Color color)
@@ -136,6 +146,7 @@ namespace TheCubers
 
 			var e = energys.Pull();
 			e.transform.position = position;
+			e.transform.localScale = new Vector3(amount, amount, amount);
 			e.Amount = amount;
 			return true;
 		}
@@ -148,18 +159,6 @@ namespace TheCubers
 		{
 			return energys.GetDistance(position, CubersView);
 		}
-
-		void Update()
-		{
-
-		}
-
-		void OnDrawGizmos()
-		{
-			Gizmos.DrawWireCube(transform.position + new Vector3(0f, transform.localScale.y * 0.5f, 0f), transform.localScale);
-			Gizmos.DrawWireCube(transform.position + new Vector3(0f, transform.localScale.y * 0.5f, 0f), transform.localScale + new Vector3(2f, 0f, 2f));
-		}
-
 
 		private static int groundLayerMask;
 		public static bool FindGround(Ray ray, out Vector3 point)

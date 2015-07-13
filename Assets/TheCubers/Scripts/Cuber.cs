@@ -111,18 +111,19 @@ namespace TheCubers
 			Fourth fTarget = null;
 			Energy eTarget = null;
 			float distance = float.MaxValue;
-			float tmp;
+			float tmpDistance, tmpWeight;
 			float weight = 0f;
 			if (Fourths < 4)
 			{
 				var fourths = world.GetFourthsInView(transform.position);
 				for (int i = 0; i < fourths.Count; ++i)
 				{
-					tmp = Vector3.Distance(transform.position, fourths[i].transform.position);
-					if (5f * ((float)Fourths + 1f) / tmp > weight)
+					tmpDistance = Vector3.Distance(transform.position, fourths[i].transform.position);
+					tmpWeight = 10f * ((float)Fourths + 1f) / tmpDistance;
+					if (tmpWeight > weight)
 					{
-						distance = tmp;
-						weight = 5f * ((float)Fourths + 1f) / tmp;
+						distance = tmpDistance;
+						weight = tmpWeight;
 						fTarget = fourths[i];
 						target = fourths[i].transform.position;
 					}
@@ -132,13 +133,14 @@ namespace TheCubers
 			var energy = world.GetEnergyInView(transform.position);
 			for (int i = 0; i < energy.Count; ++i)
 			{
-				tmp = Vector3.Distance(transform.position, energy[i].transform.position);
-				if ((float)energy[i].Amount * 10f / tmp > weight)
+				tmpDistance = Vector3.Distance(transform.position, energy[i].transform.position);
+				tmpWeight = (float)energy[i].Amount * 10f / Energy / tmpDistance;
+				if (tmpWeight > weight)
 				{
-					distance = tmp;
+					distance = tmpDistance;
+					weight = tmpWeight;
 					fTarget = null;
 					eTarget = energy[i];
-					weight = (float)energy[i].Amount * 10f / tmp;
 					target = energy[i].transform.position;
 				}
 			}
