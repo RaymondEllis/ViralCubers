@@ -161,9 +161,12 @@ namespace TheCubers
 		}
 
 
-		private static int groundLayerMask = LayerMask.GetMask("ValidGround");
+		private static int groundLayerMask;
 		public static bool FindGround(Ray ray, out Vector3 point)
 		{
+			if (groundLayerMask == 0)
+				groundLayerMask = LayerMask.GetMask("ValidGround");
+
 			RaycastHit info;
 			if (Physics.Raycast(ray, out info, 100f, groundLayerMask))
 			{

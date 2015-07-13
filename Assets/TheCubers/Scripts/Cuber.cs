@@ -100,8 +100,7 @@ namespace TheCubers
 				{
 					Fourths = 0;
 					Life -= 4;
-					world.NewCuber(position, Infected, FourthsColor);
-					animator.SetTrigger("Birth");
+					animator.SetTrigger("GiveBirth");
 					timer -= 5f;
 					return;
 				}
@@ -176,6 +175,13 @@ namespace TheCubers
 				animator.SetTrigger("Hop");
 			}
 
+		}
+
+		public void GiveBirth()
+		{
+			Vector3 position;
+			World.FindGround(new Ray(transform.position + Vector3.up, Vector3.down), out position);
+			world.NewCuber(position, Infected, FourthsColor);
 		}
 	}
 }
