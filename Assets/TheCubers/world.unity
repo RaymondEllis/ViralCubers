@@ -385,8 +385,8 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1208506103}
-  m_LocalRotation: {x: -.298477739, y: .646797717, z: -.305544913, w: -.631827593}
-  m_LocalPosition: {x: 11.9639969, y: 9.22039795, z: -.517859578}
+  m_LocalRotation: {x: -.428487927, y: .337388635, z: -.176428333, w: -.819414496}
+  m_LocalPosition: {x: 8.02709198, y: 13.685914, z: -8.12665176}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -533,7 +533,7 @@ Prefab:
     m_Modifications:
     - target: {fileID: 454280, guid: fa1e5ede3894a7f48aa4dda1783b19e0, type: 2}
       propertyPath: m_LocalPosition.x
-      value: 0
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 454280, guid: fa1e5ede3894a7f48aa4dda1783b19e0, type: 2}
       propertyPath: m_LocalPosition.y
@@ -608,10 +608,6 @@ Prefab:
     - target: {fileID: 481888, guid: c1cc3a41f646ac54b83f7f94cd08949d, type: 2}
       propertyPath: m_RootOrder
       value: 7
-      objectReference: {fileID: 0}
-    - target: {fileID: 11461210, guid: c1cc3a41f646ac54b83f7f94cd08949d, type: 2}
-      propertyPath: CuberGlobal.Wait
-      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: c1cc3a41f646ac54b83f7f94cd08949d, type: 2}

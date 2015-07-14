@@ -15,6 +15,7 @@ namespace TheCubers
 		{
 			public int Seed;
 			public int Cubers;
+			[Range(0, 100)]
 			public int PrecentInfected;
 		}
 
@@ -55,23 +56,18 @@ namespace TheCubers
 
 
 			// spawn cubers
-			bool hasInfected = false;
 			Cuber cuber = null;
 			Vector3 position;
+			int infected = Startup.PrecentInfected / Startup.Cubers;
 			for (int i = 0; i < Startup.Cubers; ++i)
 			{
 				if (FindGround(new Ray(new Vector3(-sizeXhalf + Random.Next(sizeX), 100f, -sizeZhalf + Random.Next(sizeZ)), Vector3.down), out position))
 				{
 					cuber = cubers.Pull();
 					cuber.transform.position = position;
-					cuber.Init(Random.Next(Startup.Cubers) < Startup.Cubers / Startup.PrecentInfected, Color.black);
-					if (cuber.Infected)
-						hasInfected = true;
+					cuber.Init(--infected >= 0, Color.black);
 				}
 			}
-			// we need at least one infected.
-			if (!hasInfected)
-				cuber.Init(true, Color.black);
 
 			Kill(cubers.Pull());
 
