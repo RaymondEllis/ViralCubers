@@ -102,6 +102,19 @@ namespace TheCubers
 				return;
 			}
 
+			// Hack to fix not being on ground.
+			{
+				Vector3 position;
+				if (World.FindGround(new Ray(transform.position + Vector3.up, Vector3.down), out position))
+				{
+					if (transform.position.y != position.y)
+					{
+						transform.position = position;
+						Debug.LogWarning("HACK: Fixed not being on ground.");
+					}
+				}
+			}
+
 			// repruduce
 			if (Fourths == 4)
 			{

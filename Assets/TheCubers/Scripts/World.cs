@@ -57,13 +57,17 @@ namespace TheCubers
 			// spawn cubers
 			bool hasInfected = false;
 			Cuber cuber = null;
+			Vector3 position;
 			for (int i = 0; i < Startup.Cubers; ++i)
 			{
-				cuber = cubers.Pull();
-				cuber.transform.position = new Vector3(-sizeXhalf + Random.Next(sizeX), 0f, -sizeZhalf + Random.Next(sizeZ));
-				cuber.Init(Random.Next(Startup.Cubers) < Startup.Cubers / Startup.PrecentInfected, Color.black);
-				if (cuber.Infected)
-					hasInfected = true;
+				if (FindGround(new Ray(new Vector3(-sizeXhalf + Random.Next(sizeX), 100f, -sizeZhalf + Random.Next(sizeZ)), Vector3.down), out position))
+				{
+					cuber = cubers.Pull();
+					cuber.transform.position = position;
+					cuber.Init(Random.Next(Startup.Cubers) < Startup.Cubers / Startup.PrecentInfected, Color.black);
+					if (cuber.Infected)
+						hasInfected = true;
+				}
 			}
 			// we need at least one infected.
 			if (!hasInfected)
@@ -167,12 +171,13 @@ namespace TheCubers
 				groundLayerMask = LayerMask.GetMask("ValidGround");
 
 			RaycastHit info;
-			if (Physics.Raycast(ray, out info, 100f, groundLayerMask))
+			if (Physics.Raycast(ray, out info, 1000f, groundLayerMask))
 			{
 				point = info.point;
 				return true;
 			}
 			point = Vector3.zero;
+			Debug.LogWarning("Unable to find ground!");
 			return false;
 		}
 	}
