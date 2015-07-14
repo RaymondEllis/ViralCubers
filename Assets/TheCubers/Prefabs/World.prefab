@@ -43,12 +43,14 @@ MonoBehaviour:
   PrefabFouth: {fileID: 11402882, guid: 0a71da580c53ede488407e31524e322c, type: 2}
   PrefabEnergy: {fileID: 11474210, guid: 71da262143a985c41b3395bac9280364, type: 2}
   Startup:
-    Seed: 0
-    Cubers: 10
+    Seed: 123
+    Cubers: 100
     PrecentInfected: 10
   CuberGlobal:
     Wait: 1
     View: 100
+    InitialLife: 25
+    InitialEnergy: .5
     BodyMat: {fileID: 2100000, guid: 271d84904695dae43b548c610cad2460, type: 2}
     InfectedBodyMat: {fileID: 2100000, guid: 57b373a9f80beba47b1a525ad0ee7af8, type: 2}
     EnergyConsistent: .00999999978

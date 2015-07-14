@@ -15,6 +15,9 @@ namespace TheCubers
 			[Range(1, 500)]
 			public float View;
 
+			public int InitialLife;
+			public float InitialEnergy;
+
 			[Header("Body materials")]
 			public Material BodyMat;
 			public Material InfectedBodyMat;
@@ -54,19 +57,19 @@ namespace TheCubers
 		public void Init(Vector3 position, bool infected, Color color)
 		{
 			Infected = infected;
+			Energy = world.CuberGlobal.InitialEnergy;
+			Life = world.CuberGlobal.InitialLife;
 			if (Infected)
 			{
 				Mesh.material = world.CuberGlobal.InfectedBodyMat;
-				Energy = 1f;
-				Life = 200;
+				Energy *= 2f;
+				Life *= 2;
 			}
 			else
 			{
 				Mesh.material = world.CuberGlobal.BodyMat;
 				if (color != Color.black)
 					Mesh.material.color = color;
-				Energy = 0.5f;
-				Life = 100;
 			}
 			Fourths = 0;
 			FourthsColor = Color.black.gamma;
