@@ -14,8 +14,9 @@ namespace TheCubers
 		public struct startupvar
 		{
 			public int Seed;
+			[Range(2, 1000)]
 			public int Cubers;
-			[Range(0, 100)]
+			[Range(1, 100)]
 			public int PrecentInfected;
 		}
 
@@ -56,20 +57,17 @@ namespace TheCubers
 
 
 			// spawn cubers
-			Cuber cuber = null;
 			Vector3 position;
 			int infected = Startup.PrecentInfected / Startup.Cubers;
+			if (infected < 1)
+				infected = 1;
 			for (int i = 0; i < Startup.Cubers; ++i)
 			{
 				if (FindGround(new Ray(new Vector3(-sizeXhalf + Random.Next(sizeX), 100f, -sizeZhalf + Random.Next(sizeZ)), Vector3.down), out position))
 				{
-					cuber = cubers.Pull();
-					cuber.transform.position = position;
-					cuber.Init(--infected >= 0, Color.black);
+					cubers.Pull().Init(position, --infected >= 0, Color.black);
 				}
 			}
-
-			Kill(cubers.Pull());
 
 			// some energy
 			for (int i = 0; i < 100; ++i)
@@ -132,9 +130,7 @@ namespace TheCubers
 
 		public bool NewCuber(Vector3 position, bool infected, Color color)
 		{
-			var cuber = cubers.Pull();
-			cuber.transform.position = position;
-			cuber.Init(infected, color);
+			cubers.Pull().Init(position, infected, color);
 			return true;
 		}
 

@@ -51,7 +51,7 @@ namespace TheCubers
 
 		}
 
-		public void Init(bool infected, Color color)
+		public void Init(Vector3 position, bool infected, Color color)
 		{
 			Infected = infected;
 			if (Infected)
@@ -69,9 +69,10 @@ namespace TheCubers
 				Life = 100;
 			}
 			Fourths = 0;
-			FourthsColor = Color.black;
+			FourthsColor = Color.black.gamma;
 
 			timer = (float)world.Random.NextDouble() * world.CuberGlobal.Wait;
+			transform.position = position;
 			transform.rotation = Quaternion.Euler(0, world.Random.Next(360), 0);
 			animator.Play("Idle", 0, (float)world.Random.NextDouble());
 		}
@@ -121,7 +122,6 @@ namespace TheCubers
 				Vector3 position;
 				if (World.FindGround(new Ray(transform.position + Vector3.up, Vector3.down), out position))
 				{
-					Fourths = 0;
 					Life -= 4;
 					animator.SetTrigger("GiveBirth");
 					timer -= 5f;
@@ -181,9 +181,10 @@ namespace TheCubers
 				if (fTarget)
 				{
 					Fourths += 1;
-					FourthsColor.r += fTarget.Color.r / 4;
-					FourthsColor.g += fTarget.Color.g / 4;
-					FourthsColor.b += fTarget.Color.b / 4;
+					Color color = fTarget.Color.gamma;
+					FourthsColor.r += color.r / 4f;
+					FourthsColor.g += color.g / 4f;
+					FourthsColor.b += color.b / 4f;
 					fTarget.gameObject.SetActive(false);
 				}
 				else
@@ -206,7 +207,10 @@ namespace TheCubers
 		{
 			Vector3 position;
 			World.FindGround(new Ray(transform.position + Vector3.up, Vector3.down), out position);
-			world.NewCuber(position, Infected, FourthsColor);
+			world.NewCuber(position, Infected, FourthsColor.linear);
+
+			Fourths = 0;
+			FourthsColor = Color.black.gamma;
 		}
 	}
 }
