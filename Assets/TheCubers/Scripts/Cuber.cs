@@ -37,6 +37,7 @@ namespace TheCubers
 		public Color FourthsColor;
 
 		private float timer;
+		private bool dead;
 
 		void Awake()
 		{
@@ -78,14 +79,18 @@ namespace TheCubers
 			transform.position = position;
 			transform.rotation = Quaternion.Euler(0, world.Random.Next(360), 0);
 			animator.Play("Idle", 0, (float)world.Random.NextDouble());
+			//animator.SetTrigger("Idle");
+			dead = false;
 		}
 
 		void Update()
 		{
+			if (dead)
+				return;
 			Energy -= world.CuberGlobal.EnergyConsistent * Time.deltaTime;
 			if (Energy <= 0f)
 			{
-				world.Kill(this);
+				BeginDeath();
 				return;
 			}
 
@@ -102,7 +107,7 @@ namespace TheCubers
 			Life -= 1;
 			if (Life <= 0)
 			{
-				world.Kill(this);
+				BeginDeath();
 				return;
 			}
 
@@ -111,10 +116,12 @@ namespace TheCubers
 				Vector3 position;
 				if (World.FindGround(new Ray(transform.position + Vector3.up, Vector3.down), out position))
 				{
-					if (transform.position.y != position.y)
+					float error = 0.25f;
+					if (transform.position.y + error < position.y || transform.position.y - error > position.y)
 					{
+						float diff = transform.position.y - position.y;
 						transform.position = position;
-						Debug.LogWarning("HACK: Fixed not being on ground.");
+						Debug.LogWarning("HACK: Fixed not being on ground. difference: " + diff);
 					}
 				}
 			}
@@ -204,6 +211,17 @@ namespace TheCubers
 				animator.SetTrigger("Hop");
 			}
 
+		}
+
+		public void BeginDeath()
+		{
+			dead = true;
+			animator.SetTrigger("Die");
+			animator.ResetTrigger("Idle");
+		}
+		public void EndDeath()
+		{
+			world.Kill(this);
 		}
 
 		public void GiveBirth()
