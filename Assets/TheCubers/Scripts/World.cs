@@ -20,6 +20,17 @@ namespace TheCubers
 			public int PrecentInfected;
 		}
 
+		[Header("Energy spawn")]
+		[Range(0.01f, 1f)]
+		public float EnergyRate;
+		[Range(0, 1000)]
+		public int EnergyCount;
+		[Range(0.01f, 4f)]
+		public float EnergyMin;
+		[Range(0.01f, 4f)]
+		public float EnergyMax;
+		private float timerEnergy;
+
 		public Cuber.Global CuberGlobal = new Cuber.Global();
 
 		private Pool<Cuber> cubers;
@@ -69,16 +80,24 @@ namespace TheCubers
 				}
 			}
 
-			// some energy
-			for (int i = 0; i < 100; ++i)
+			// startup energy
+			for (int i = 0; i < EnergyCount; ++i)
 			{
-				NewEnergy(new Vector3(-sizeXhalf + Random.Next(sizeX), 0f, -sizeZhalf + Random.Next(sizeZ)), (float)Random.NextDouble());
+				NewEnergy(EnergyMin, EnergyMax);
 			}
 		}
 
 		void Update()
 		{
 
+			// add more energy
+			timerEnergy += Time.deltaTime;
+			if (timerEnergy > EnergyRate)
+			{
+				timerEnergy = 0;
+				if (energys.Active() < EnergyCount)
+					NewEnergy(EnergyMin, EnergyMax);
+			}
 		}
 
 		void OnDrawGizmos()
@@ -134,10 +153,15 @@ namespace TheCubers
 			return true;
 		}
 
+		/// <summary> new random energy </summary>
+		public void NewEnergy(float min, float max)
+		{
+			NewEnergy(new Vector3(-sizeXhalf + (float)Random.NextDouble() * sizeX, 0f, -sizeZhalf + (float)Random.NextDouble() * sizeZ), min - (float)Random.NextDouble() * (max - min));
+		}
 		public bool NewEnergy(Vector3 position, float amount)
 		{
 			// check if there is already energy around here.
-			if (energys.CheckDistance(position, 1f))
+			if (amount < 0.001f || energys.CheckDistance(position, 0.8f))
 				return false;
 
 			var e = energys.Pull();

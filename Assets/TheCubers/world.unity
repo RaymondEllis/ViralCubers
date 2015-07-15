@@ -463,7 +463,7 @@ Transform:
   m_LocalScale: {x: 22, y: 2, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 8
+  m_RootOrder: 6
 --- !u!1 &1337711963
 GameObject:
   m_ObjectHideFlags: 0
@@ -608,22 +608,6 @@ Prefab:
     - target: {fileID: 481888, guid: c1cc3a41f646ac54b83f7f94cd08949d, type: 2}
       propertyPath: m_RootOrder
       value: 7
-      objectReference: {fileID: 0}
-    - target: {fileID: 11461210, guid: c1cc3a41f646ac54b83f7f94cd08949d, type: 2}
-      propertyPath: Startup.Seed
-      value: 123
-      objectReference: {fileID: 0}
-    - target: {fileID: 11461210, guid: c1cc3a41f646ac54b83f7f94cd08949d, type: 2}
-      propertyPath: Startup.Cubers
-      value: 100
-      objectReference: {fileID: 0}
-    - target: {fileID: 11461210, guid: c1cc3a41f646ac54b83f7f94cd08949d, type: 2}
-      propertyPath: CuberGlobal.InitialLife
-      value: 25
-      objectReference: {fileID: 0}
-    - target: {fileID: 11461210, guid: c1cc3a41f646ac54b83f7f94cd08949d, type: 2}
-      propertyPath: CuberGlobal.InitialEnergy
-      value: .5
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: c1cc3a41f646ac54b83f7f94cd08949d, type: 2}
