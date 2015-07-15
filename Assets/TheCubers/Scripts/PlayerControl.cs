@@ -5,19 +5,23 @@ namespace TheCubers
 	public class PlayerControl : MonoBehaviour
 	{
 		private static World world;
+		[Header("Camera")]
 		public Camera Camera;
 
 		public Vector3 Offset;
 		public Vector3 LookOffset;
 
 		public float MoveSpeed;
-
 		public float PositionSpeed;
 		public float RotationSpeed;
 		public bool SmoothRotate;
 
 		public Transform Target;
 		private Quaternion localRotation = Quaternion.identity;
+
+
+		[Header("Control")]
+		public float Energy;
 
 		void Awake()
 		{
@@ -46,7 +50,7 @@ namespace TheCubers
 				Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
 				if (World.FindGround(ray, out position))
 				{
-					world.NewEnergy(position, 0.5f);
+					world.NewEnergy(position, Energy);
 				}
 			}
 		}

@@ -57,7 +57,7 @@ MonoBehaviour:
     InitialEnergy: .300000012
     BodyMat: {fileID: 2100000, guid: 271d84904695dae43b548c610cad2460, type: 2}
     InfectedBodyMat: {fileID: 2100000, guid: 57b373a9f80beba47b1a525ad0ee7af8, type: 2}
-    EnergyConsistent: 0
+    EnergyConsistent: .00999999978
     EnergyHop: .100000001
 --- !u!1001 &100100000
 Prefab:
