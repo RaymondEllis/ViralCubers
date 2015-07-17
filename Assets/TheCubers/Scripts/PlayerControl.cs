@@ -53,6 +53,10 @@ namespace TheCubers
 					world.NewEnergy(position, Energy);
 				}
 			}
+			if (Input.GetMouseButton(1))
+			{
+				Application.LoadLevel("world");
+			}
 		}
 
 		private void updateCamera()

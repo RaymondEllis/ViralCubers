@@ -6,7 +6,7 @@ namespace TheCubers
 	[RequireComponent(typeof(Animator))]
 	public class Cuber : MonoBehaviour
 	{
-		private static World world;
+		private World world;
 		[System.Serializable]
 		public class Global
 		{
@@ -41,18 +41,13 @@ namespace TheCubers
 
 		void Awake()
 		{
-			if (!world)
-				world = GameObject.FindObjectOfType<World>();
-			if (!world)
-				Debug.LogError("Unable to find world!");
-
 			if (!animator)
 				animator = GetComponent<Animator>();
 		}
 
-		void Start()
+		void OnEnable()
 		{
-
+			world = World.Instance;
 		}
 
 		public void Init(Vector3 position, bool infected, Color color)

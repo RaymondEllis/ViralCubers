@@ -18,11 +18,12 @@ namespace TheCubers
 
 		private string typeName = typeof(T).Name;
 
-		public Pool(T original, int initialSize) : this(original, initialSize, int.MaxValue, ResizeMode.Double, 0) { }
-		public Pool(T original, int initialSize, int max) : this(original, initialSize, max, ResizeMode.Double, 0) { }
-		public Pool(T original, int initialSize, int max, ResizeMode resizeMode, int resize)
+		public Pool(Transform rootParent, T original, int initialSize) : this(rootParent, original, initialSize, int.MaxValue, ResizeMode.Double, 0) { }
+		public Pool(Transform rootParent, T original, int initialSize, int max) : this(rootParent, original, initialSize, max, ResizeMode.Double, 0) { }
+		public Pool(Transform rootParent, T original, int initialSize, int max, ResizeMode resizeMode, int resize)
 		{
 			parent = new GameObject("Pool<" + typeName + ">");
+			parent.transform.SetParent(rootParent);
 			this.original = original;
 
 			array = new T[initialSize];
@@ -100,6 +101,15 @@ namespace TheCubers
 			// return our fresh item.
 			array[startIndex].gameObject.SetActive(true);
 			return array[startIndex];
+		}
+
+		public void DisableAll()
+		{
+			for (int i = 0; i < array.Length; ++i)
+			{
+				if (array[i])
+					array[i].gameObject.SetActive(false);
+			}
 		}
 
 		private void fill(int start)

@@ -1,13 +1,13 @@
 ﻿using System.Collections.Generic;
+using System.Collections;
 using UnityEngine;
 
 namespace TheCubers
 {
 	public class World : MonoBehaviour
 	{
-		public Cuber PrefabCuber;
-		public Fourth PrefabFouth;
-		public Energy PrefabEnergy;
+		public static World Instance { get { return instance; } }
+		public static World instance = null;
 
 		public startupvar Startup = new startupvar();
 		[System.Serializable]
@@ -42,12 +42,29 @@ namespace TheCubers
 		private int sizeX, sizeZ;
 		private int sizeXhalf, sizeZhalf;
 
-		void Start()
+		void Awake()
 		{
-			if (!PrefabCuber || !PrefabEnergy || !PrefabFouth)
+			if (instance)
 			{
-				Debug.LogError("Missing a prefab!");
-				return;
+				DestroyImmediate(gameObject);
+				Debug.LogWarning("Two worlds, HA not anymore!");
+			}
+			else
+				instance = this;
+		}
+
+		IEnumerator Start()
+		{
+			enabled = false;
+			Debug.Log("World Start");
+			// if no pools wait for them.
+			if (!PoolBase.Instance)
+			{
+				Debug.Log("Waiting for PoolBase instance.");
+				while (!PoolBase.Instance)
+				{
+					yield return null;
+				}
 			}
 
 			Random = new System.Random(Startup.Seed);
@@ -61,10 +78,11 @@ namespace TheCubers
 				Debug.LogWarning("World lcoal scale should be int.");
 			}
 
-			// create pools
-			cubers = new Pool<Cuber>(PrefabCuber, Startup.Cubers);
-			fourths = new Pool<Fourth>(PrefabFouth, Startup.Cubers);
-			energys = new Pool<Energy>(PrefabEnergy, Startup.Cubers);
+			// get pools
+			PoolBase pools = PoolBase.Instance;
+			cubers = pools.Cubers;
+			fourths = pools.Fourths;
+			energys = pools.Energys;
 
 
 			// spawn cubers
@@ -85,6 +103,7 @@ namespace TheCubers
 			{
 				NewEnergy(EnergyMin, EnergyMax);
 			}
+			enabled = true;
 		}
 
 		void Update()

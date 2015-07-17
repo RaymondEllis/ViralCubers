@@ -1,18 +1,21 @@
 ﻿using UnityEngine;
+using System.Collections;
 
 class BaseChecker : MonoBehaviour
 {
+	private static bool done = false;
 	void Awake()
 	{
-		BaseChecker[] test = GameObject.FindObjectsOfType<BaseChecker>();
-		if (test != null && test.Length > 1)
-			DestroyImmediate(gameObject);
+		if (done)
+			Destroy(this);
 	}
 
-	void Start()
+	IEnumerator Start()
 	{
-		DontDestroyOnLoad(gameObject);
 		Debug.Log("Adding base level");
-		Application.LoadLevelAdditive("base");
+		var async = Application.LoadLevelAdditiveAsync("base");
+		yield return async;
+		done = true;
+		Destroy(this);
 	}
 }
