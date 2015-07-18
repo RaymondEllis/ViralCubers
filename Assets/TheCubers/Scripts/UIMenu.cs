@@ -13,11 +13,9 @@ namespace TheCubers
 		private State state;
 		private bool needUpdate;
 
-		public float speed = 1f;
+		public float speed;
 		private float position;
 
-		private Vector2 screenLeft;
-		private Vector2 screenRight;
 		private Vector2 rest;
 
 		private new RectTransform transform;
@@ -29,11 +27,6 @@ namespace TheCubers
 			gameObject.SetActive(false);
 
 			rest = transform.anchoredPosition;
-			int w = Screen.width;
-			int h = Screen.height;
-			screenLeft = new Vector2(-w, rest.y);
-			screenRight = new Vector2(w, rest.y);
-			transform.anchoredPosition = screenLeft;
 			state = State.Closed;
 			needUpdate = false;
 		}
@@ -44,6 +37,8 @@ namespace TheCubers
 			if (!needUpdate)
 				return;
 
+			var screenLeft = new Vector2(-Screen.width, rest.y);
+			var screenRight = new Vector2(Screen.width, rest.y);
 
 			position += speed * Time.deltaTime;
 			if (state == State.Opened)

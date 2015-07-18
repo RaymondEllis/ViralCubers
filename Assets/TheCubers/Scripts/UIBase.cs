@@ -79,11 +79,12 @@ namespace TheCubers
 
 		public void LoadLevel(string level)
 		{
-			if (Application.loadedLevelName == "menu" || Application.loadedLevelName == "base")
+			if (level == "menu" || level == "base")
 				Go("Start");
 			else
 				Go("Game");
-			Application.LoadLevel(level);
+
+			Application.LoadLevelAsync(level);
 		}
 
 		public void Exit()

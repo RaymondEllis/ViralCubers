@@ -86,10 +86,12 @@ namespace TheCubers
 
 
 			// spawn cubers
-			Vector3 position;
 			int infected = Startup.PrecentInfected / Startup.Cubers;
+			if (infected <= 0 && Startup.PrecentInfected > 0)
+				infected = 1;
 			for (int i = 0; i < Startup.Cubers; ++i)
 			{
+				Vector3 position;
 				if (FindGround(new Ray(new Vector3(-sizeXhalf + Random.Next(sizeX), 100f, -sizeZhalf + Random.Next(sizeZ)), Vector3.down), out position))
 				{
 					cubers.Pull().Init(position, --infected >= 0, Color.black);
