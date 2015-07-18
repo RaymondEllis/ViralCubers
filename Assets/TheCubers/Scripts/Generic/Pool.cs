@@ -3,30 +3,27 @@ using System.Collections.Generic;
 
 namespace TheCubers
 {
+	public enum PoolResizeMode { Additive, Double }
 	public class Pool<T> where T : MonoBehaviour
 	{
-		public enum ResizeMode { Fixed, Double }
-
 		private GameObject parent;
 		private T original;
 
 		private T[] array;
-		private ResizeMode resizeMode;
+		private PoolResizeMode resizeMode;
 		private int resize;
 		public int Max { get; private set; }
 		public int Length { get { return array.Length; } }
 
 		private string typeName = typeof(T).Name;
 
-		public Pool(Transform rootParent, T original, int initialSize) : this(rootParent, original, initialSize, int.MaxValue, ResizeMode.Double, 0) { }
-		public Pool(Transform rootParent, T original, int initialSize, int max) : this(rootParent, original, initialSize, max, ResizeMode.Double, 0) { }
-		public Pool(Transform rootParent, T original, int initialSize, int max, ResizeMode resizeMode, int resize)
+		public Pool(Transform rootParent, T original, int preallocate, int max, PoolResizeMode resizeMode, int resize)
 		{
 			parent = new GameObject("Pool<" + typeName + ">");
 			parent.transform.SetParent(rootParent);
 			this.original = original;
 
-			array = new T[initialSize];
+			array = new T[preallocate];
 			fill(0);
 
 			this.Max = max;
@@ -87,10 +84,10 @@ namespace TheCubers
 			int startIndex = array.Length;
 			switch (resizeMode)
 			{
-				case ResizeMode.Fixed:
+				case PoolResizeMode.Additive:
 					System.Array.Resize<T>(ref array, System.Math.Min(array.Length + resize, Max));
 					break;
-				case ResizeMode.Double:
+				case PoolResizeMode.Double:
 					System.Array.Resize<T>(ref array, System.Math.Min(array.Length * 2, Max));
 					break;
 			}

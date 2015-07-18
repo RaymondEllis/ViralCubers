@@ -26,7 +26,7 @@ namespace TheCubers
 
 			gameObject.SetActive(false);
 
-			rest = transform.anchoredPosition;
+			rest = Vector2.zero;
 			state = State.Closed;
 			needUpdate = false;
 		}

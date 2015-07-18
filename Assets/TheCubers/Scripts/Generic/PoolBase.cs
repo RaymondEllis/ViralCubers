@@ -15,7 +15,10 @@ namespace TheCubers
 		public Fourth PrefabFouth = null;
 		public Energy PrefabEnergy = null;
 
-		public int InitialCount = 100;
+		public int PreAllocate = 100;
+		public int HardMaximum = 100000;
+		public PoolResizeMode ResizeMode = PoolResizeMode.Double;
+		public int AdditiveValue = 0;
 
 		private Pool<Cuber> cubers;
 		private Pool<Fourth> fourths;
@@ -41,29 +44,24 @@ namespace TheCubers
 
 			if (!PrefabCuber || !PrefabEnergy || !PrefabFouth)
 			{
-				Debug.LogError("Missing a prefab!");
+				Debug.LogWarning("Missing a prefab!");
 			}
 
-			cubers = new Pool<Cuber>(transform, PrefabCuber, InitialCount);
-			fourths = new Pool<Fourth>(transform, PrefabFouth, InitialCount);
-			energys = new Pool<Energy>(transform, PrefabEnergy, InitialCount);
+			cubers = new Pool<Cuber>(transform, PrefabCuber, PreAllocate, HardMaximum, ResizeMode, AdditiveValue);
+			fourths = new Pool<Fourth>(transform, PrefabFouth, PreAllocate, HardMaximum, ResizeMode, AdditiveValue);
+			energys = new Pool<Energy>(transform, PrefabEnergy, PreAllocate, HardMaximum, ResizeMode, AdditiveValue);
 			createUnloadDummy();
 		}
 
 		void OnLevelWasLoaded()
 		{
-			Debug.Log("OnLevelWasLoaded");
+			//Debug.Log("OnLevelWasLoaded");
 			createUnloadDummy();
-		}
-
-		void OnDisable()
-		{
-			Debug.Log("OnDisable");
 		}
 
 		public void OnDumyDestoryed()
 		{
-			Debug.Log("OnDumyDestoryed");
+			Debug.Log("Emptying the pools.");
 			cubers.DisableAll();
 			fourths.DisableAll();
 			energys.DisableAll();
@@ -76,9 +74,11 @@ namespace TheCubers
 		}
 	}
 
+	/// <summary>
+	/// Dummy object to tell PoolBase when scene is being destroyed.
+	/// </summary>
 	public class PoolDestroyHelper : MonoBehaviour
 	{
-		void Start() { }
 		void OnDestroy()
 		{
 			if (PoolBase.Instance)

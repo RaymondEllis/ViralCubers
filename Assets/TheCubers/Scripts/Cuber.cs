@@ -75,6 +75,7 @@ namespace TheCubers
 			transform.rotation = Quaternion.Euler(0, world.Random.Next(360), 0);
 			animator.Play("Idle", 0, (float)world.Random.NextDouble());
 			//animator.SetTrigger("Idle");
+			//ToDo : Animations are not being reset...
 			dead = false;
 		}
 
