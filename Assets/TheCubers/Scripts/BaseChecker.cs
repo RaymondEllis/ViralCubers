@@ -3,6 +3,7 @@ using System.Collections;
 
 class BaseChecker : MonoBehaviour
 {
+	private static string testObj = "UI";
 	private static bool done = false;
 	void Awake()
 	{
@@ -12,9 +13,12 @@ class BaseChecker : MonoBehaviour
 
 	IEnumerator Start()
 	{
-		Debug.Log("Adding base level");
-		var async = Application.LoadLevelAdditiveAsync("base");
-		yield return async;
+		if (GameObject.Find(testObj) == null)
+		{
+			Debug.Log("Adding base level");
+			var async = Application.LoadLevelAdditiveAsync("base");
+			yield return async;
+		}
 		done = true;
 		Destroy(this);
 	}

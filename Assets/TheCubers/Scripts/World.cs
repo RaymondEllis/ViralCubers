@@ -16,7 +16,7 @@ namespace TheCubers
 			public int Seed;
 			[Range(2, 1000)]
 			public int Cubers;
-			[Range(1, 100)]
+			[Range(0, 100)]
 			public int PrecentInfected;
 		}
 
@@ -88,8 +88,6 @@ namespace TheCubers
 			// spawn cubers
 			Vector3 position;
 			int infected = Startup.PrecentInfected / Startup.Cubers;
-			if (infected < 1)
-				infected = 1;
 			for (int i = 0; i < Startup.Cubers; ++i)
 			{
 				if (FindGround(new Ray(new Vector3(-sizeXhalf + Random.Next(sizeX), 100f, -sizeZhalf + Random.Next(sizeZ)), Vector3.down), out position))

@@ -81,7 +81,8 @@ namespace TheCubers
 		void Start() { }
 		void OnDestroy()
 		{
-			PoolBase.Instance.OnDumyDestoryed();
+			if (PoolBase.Instance)
+				PoolBase.Instance.OnDumyDestoryed();
 		}
 	}
 }
