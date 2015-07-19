@@ -54,10 +54,10 @@ MonoBehaviour:
     m_SelectOnRight: {fileID: 0}
   m_Transition: 1
   m_Colors:
-    m_NormalColor: {r: .33088237, g: .33088237, b: .33088237, a: .497000009}
-    m_HighlightedColor: {r: .183823526, g: .183823526, b: .183823526, a: 1}
-    m_PressedColor: {r: .0661764741, g: .0661764741, b: .0661764741, a: 1}
-    m_DisabledColor: {r: .705882311, g: .705882311, b: .705882311, a: .501960814}
+    m_NormalColor: {r: .352941155, g: .357403755, b: 1, a: .615999997}
+    m_HighlightedColor: {r: .352941185, g: .356862754, b: 1, a: 1}
+    m_PressedColor: {r: .175411761, g: .177360773, b: .497000009, a: 1}
+    m_DisabledColor: {r: .543893993, g: .545046151, b: .734000027, a: .634000003}
     m_ColorMultiplier: 1
     m_FadeDuration: .100000001
   m_SpriteState:
@@ -115,7 +115,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_Sprite: {fileID: 10905, guid: 0000000000000000f000000000000000, type: 0}
+  m_Sprite: {fileID: 21300000, guid: 66ae1c269d3b2714ebb495cb3bbbead3, type: 3}
   m_Type: 1
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -203,51 +203,51 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: m_Colors.m_NormalColor.r
-      value: .33088237
+      value: .352941155
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: m_Colors.m_NormalColor.g
-      value: .33088237
+      value: .357403755
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: m_Colors.m_NormalColor.b
-      value: .33088237
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: m_Colors.m_HighlightedColor.r
-      value: .183823526
+      value: .352941185
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: m_Colors.m_HighlightedColor.g
-      value: .183823526
+      value: .356862754
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: m_Colors.m_HighlightedColor.b
-      value: .183823526
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: m_Colors.m_PressedColor.r
-      value: .0661764741
+      value: .175411761
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: m_Colors.m_PressedColor.g
-      value: .0661764741
+      value: .177360773
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: m_Colors.m_PressedColor.b
-      value: .0661764741
+      value: .497000009
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: m_Colors.m_DisabledColor.r
-      value: .705882311
+      value: .543893993
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: m_Colors.m_DisabledColor.g
-      value: .705882311
+      value: .545046151
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: m_Colors.m_DisabledColor.b
-      value: .705882311
+      value: .734000027
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: m_Colors.m_ColorMultiplier
@@ -259,7 +259,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: m_Colors.m_NormalColor.a
-      value: .497000009
+      value: .615999997
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: m_AnchorMin.y
@@ -268,6 +268,27 @@ Prefab:
     - target: {fileID: 0}
       propertyPath: m_AnchorMax.y
       value: .5
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: m_Transition
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 66ae1c269d3b2714ebb495cb3bbbead3,
+        type: 3}
+    - target: {fileID: 0}
+      propertyPath: m_FillCenter
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: m_Colors.m_PressedColor.a
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: m_Colors.m_DisabledColor.a
+      value: .634000003
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}

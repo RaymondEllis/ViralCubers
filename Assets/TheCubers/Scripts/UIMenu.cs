@@ -20,6 +20,8 @@ namespace TheCubers
 
 		private new RectTransform transform;
 
+		private UnityEngine.UI.Selectable[] items;
+
 		public void Init()
 		{
 			transform = GetComponent<RectTransform>();
@@ -29,6 +31,8 @@ namespace TheCubers
 			rest = Vector2.zero;
 			state = State.Closed;
 			needUpdate = false;
+
+			items = GetComponentsInChildren<UnityEngine.UI.Selectable>(true);
 		}
 
 
@@ -67,6 +71,7 @@ namespace TheCubers
 			if (state == State.Opened)
 				return;
 			gameObject.SetActive(true);
+			interactableChildren(true);
 			state = State.Opened;
 			needUpdate = true;
 			position = 0f;
@@ -77,10 +82,17 @@ namespace TheCubers
 			if (state == State.Closed)
 				return;
 			//gameObject.SetActive(false);
+			interactableChildren(false);
 			state = State.Closed;
 			needUpdate = true;
 			position = 0f;
 		}
 
+		private void interactableChildren(bool interactable)
+		{
+			for (int i = 0; i < items.Length; ++i)
+				if (items[i])
+					items[i].interactable = interactable;
+		}
 	}
 }

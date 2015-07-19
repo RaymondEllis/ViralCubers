@@ -75,6 +75,10 @@ namespace TheCubers
 			active.Open();
 
 			back.Set(active.name != "Game");
+			// resize back to size of menu.
+			// ToDo  5: lerpy sizes.
+			Vector3 s = active.GetComponent<RectTransform>().sizeDelta;
+			back.GetComponent<RectTransform>().sizeDelta = s;
 		}
 
 		public void LoadLevel(string level)
