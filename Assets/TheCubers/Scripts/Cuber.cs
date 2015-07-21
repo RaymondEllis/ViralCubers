@@ -4,6 +4,7 @@ using System.Collections;
 namespace TheCubers
 {
 	[RequireComponent(typeof(Animator))]
+	[SelectionBase]
 	public class Cuber : MonoBehaviour
 	{
 		private World world;

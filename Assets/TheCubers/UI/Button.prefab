@@ -54,8 +54,8 @@ MonoBehaviour:
     m_SelectOnRight: {fileID: 0}
   m_Transition: 1
   m_Colors:
-    m_NormalColor: {r: .352941155, g: .357403755, b: 1, a: .615999997}
-    m_HighlightedColor: {r: .352941185, g: .356862754, b: 1, a: 1}
+    m_NormalColor: {r: .320823491, g: .324880004, b: .908999979, a: 1}
+    m_HighlightedColor: {r: .389999986, g: .393696964, b: 1, a: 1}
     m_PressedColor: {r: .175411761, g: .177360773, b: .497000009, a: 1}
     m_DisabledColor: {r: .543893993, g: .545046151, b: .734000027, a: .634000003}
     m_ColorMultiplier: 1
@@ -203,23 +203,23 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: m_Colors.m_NormalColor.r
-      value: .352941155
+      value: .320823491
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: m_Colors.m_NormalColor.g
-      value: .357403755
+      value: .324880004
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: m_Colors.m_NormalColor.b
-      value: 1
+      value: .908999979
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: m_Colors.m_HighlightedColor.r
-      value: .352941185
+      value: .389999986
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: m_Colors.m_HighlightedColor.g
-      value: .356862754
+      value: .393696964
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: m_Colors.m_HighlightedColor.b
@@ -259,7 +259,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: m_Colors.m_NormalColor.a
-      value: .615999997
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: m_AnchorMin.y

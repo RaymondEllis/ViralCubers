@@ -14,11 +14,12 @@ namespace TheCubers
 		private bool needUpdate;
 
 		public float speed;
+		public AnimationCurve SlideCurve;
 		private float position;
 
 		private Vector2 rest;
 
-		private new RectTransform transform;
+		public new RectTransform transform;
 
 		private UnityEngine.UI.Selectable[] items;
 
@@ -46,9 +47,9 @@ namespace TheCubers
 
 			position += speed * Time.deltaTime;
 			if (state == State.Opened)
-				transform.anchoredPosition = Vector3.Slerp(screenLeft, rest, position);
+				transform.anchoredPosition = Vector3.Lerp(screenLeft, rest, SlideCurve.Evaluate(position));
 			else
-				transform.anchoredPosition = Vector3.Slerp(rest, screenRight, position);
+				transform.anchoredPosition = Vector3.Lerp(rest, screenRight, SlideCurve.Evaluate(position));
 
 			if (position >= 1f)
 			{

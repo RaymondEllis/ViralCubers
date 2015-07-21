@@ -7,6 +7,9 @@ namespace TheCubers
 	{
 		private List<UIMenu> menus;
 		private UIMenu back;
+		private bool backSize = false;
+		private float backPos;
+		private Vector2 backFrom;
 
 		private UIMenu active = null;
 
@@ -26,10 +29,11 @@ namespace TheCubers
 					{
 						menu.Init();
 						menus.Add(menu);
+						if (menu.name == "Background")
+							back = menu;
 					}
 				}
 			}
-			back = GetMenu("Background");
 		}
 
 		void Start()
@@ -46,6 +50,15 @@ namespace TheCubers
 		{
 			for (int i = 0; i < menus.Count; ++i)
 				menus[i].UpdateUI();
+
+			// update background size
+			if (backSize)
+			{
+				backPos += active.speed * Time.deltaTime;
+				back.transform.sizeDelta = Vector2.Lerp(backFrom, active.transform.sizeDelta, active.SlideCurve.Evaluate(backPos));
+				if (back.transform.sizeDelta == active.transform.sizeDelta)
+					backSize = false;
+			}
 		}
 
 		/// <summary>
@@ -74,11 +87,14 @@ namespace TheCubers
 			active = menu;
 			active.Open();
 
+			// show background and set size
 			back.Set(active.name != "Game");
-			// resize back to size of menu.
-			// ToDo  5: lerpy sizes.
-			Vector3 s = active.GetComponent<RectTransform>().sizeDelta;
-			back.GetComponent<RectTransform>().sizeDelta = s;
+			if (back.transform.sizeDelta != active.transform.sizeDelta)
+			{
+				backSize = true;
+				backPos = 0f;
+				backFrom = back.transform.sizeDelta;
+			}
 		}
 
 		public void LoadLevel(string level)
@@ -93,7 +109,11 @@ namespace TheCubers
 
 		public void Exit()
 		{
+#if UNITY_EDITOR
+			UnityEditor.EditorApplication.isPlaying = false;
+#else
 			Application.Quit();
+#endif
 		}
 	}
 }

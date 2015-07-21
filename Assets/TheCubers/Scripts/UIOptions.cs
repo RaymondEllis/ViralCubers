@@ -13,7 +13,8 @@ public class UIOptions : MonoBehaviour
 		public int Height;
 		public int Quality;
 		// note LitJson can not do floats...
-		public double Audio;
+		public double AudioEffects;
+		public double AudioMusic;
 
 		public static Settings Default()
 		{
@@ -24,17 +25,19 @@ public class UIOptions : MonoBehaviour
 				Width = Screen.resolutions[Screen.resolutions.Length - 1].width,
 				Height = Screen.resolutions[Screen.resolutions.Length - 1].height,
 				Quality = 4,
-				Audio = 1f,
+				AudioEffects = 1f,
+				AudioMusic = 1f,
 			};
 		}
 		public static bool operator ==(Settings l, Settings r)
 		{
-			return l.Fullscreen == r.Fullscreen &&
-					l.VSync == r.VSync &&
-					l.Width == r.Width &&
-					l.Height == r.Height &&
-					l.Quality == r.Quality &&
-					l.Audio == r.Audio;
+			return l.Fullscreen == r.Fullscreen
+				&& l.VSync == r.VSync
+				&& l.Width == r.Width
+				&& l.Height == r.Height
+				&& l.Quality == r.Quality
+				&& l.AudioEffects == r.AudioEffects
+				&& l.AudioMusic == r.AudioMusic;
 		}
 		public static bool operator !=(Settings l, Settings r)
 		{ return !(l == r); }
@@ -56,8 +59,10 @@ public class UIOptions : MonoBehaviour
 	public Text ResolutionText;
 	public Slider QualitySlider;
 	public Text QualityValue;
-	public Slider AudioSlider;
-	public Text AudioValue;
+	public Slider AudioEffectsSlider;
+	public Text AudioEffectsValue;
+	public Slider AudioMusicSlider;
+	public Text AudioMusicValue;
 
 	private static string settingsFile { get { return Application.persistentDataPath + "/settings.json"; } }
 
@@ -113,8 +118,10 @@ public class UIOptions : MonoBehaviour
 		QualitySlider.value = current.Quality;
 		QualitySlider.onValueChanged.Invoke(QualitySlider.value);
 
-		AudioSlider.value = (float)current.Audio;
-		AudioSlider.onValueChanged.Invoke(AudioSlider.value);
+		AudioEffectsSlider.value = (float)current.AudioEffects;
+		AudioEffectsSlider.onValueChanged.Invoke(AudioEffectsSlider.value);
+		AudioMusicSlider.value = (float)current.AudioMusic;
+		AudioMusicSlider.onValueChanged.Invoke(AudioMusicSlider.value);
 
 		// apply the real settings
 		UIOptions.applyOnly(current);
@@ -185,11 +192,19 @@ public class UIOptions : MonoBehaviour
 			Changed();
 		});
 
-		AudioSlider.onValueChanged.AddListener(delegate(float value)
+		AudioEffectsSlider.onValueChanged.AddListener(delegate(float value)
 		{
 			value = Mathf.Clamp01(value);
-			AudioValue.text = Mathf.Round(value * 100f) + "%";
-			temp.Audio = value;
+			AudioEffectsValue.text = Mathf.Round(value * 100f) + "%";
+			temp.AudioEffects = value;
+			Changed();
+		});
+
+		AudioMusicSlider.onValueChanged.AddListener(delegate(float value)
+		{
+			value = Mathf.Clamp01(value);
+			AudioMusicValue.text = Mathf.Round(value * 100f) + "%";
+			temp.AudioMusic = value;
 			Changed();
 		});
 	}
