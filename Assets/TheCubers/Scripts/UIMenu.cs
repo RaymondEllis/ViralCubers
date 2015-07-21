@@ -19,6 +19,7 @@ namespace TheCubers
 
 		private Vector2 rest;
 
+		[HideInInspector]
 		public new RectTransform transform;
 
 		private UnityEngine.UI.Selectable[] items;
@@ -67,6 +68,9 @@ namespace TheCubers
 				Close();
 		}
 
+		protected virtual void OnOpenStart() { }
+		protected virtual void OnCloseStart() { }
+
 		public void Open()
 		{
 			if (state == State.Opened)
@@ -76,6 +80,7 @@ namespace TheCubers
 			state = State.Opened;
 			needUpdate = true;
 			position = 0f;
+			OnOpenStart();
 		}
 
 		public void Close()
@@ -87,6 +92,7 @@ namespace TheCubers
 			state = State.Closed;
 			needUpdate = true;
 			position = 0f;
+			OnCloseStart();
 		}
 
 		private void interactableChildren(bool interactable)

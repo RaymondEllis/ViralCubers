@@ -51,17 +51,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 417e704762e1f1c43abb8f1960a7ea7f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  PrefabCuber: {fileID: 11481458, guid: f1146861726790144ae3c29e32b68496, type: 2}
-  PrefabFouth: {fileID: 11402882, guid: 0a71da580c53ede488407e31524e322c, type: 2}
-  PrefabEnergy: {fileID: 11474210, guid: 71da262143a985c41b3395bac9280364, type: 2}
   Startup:
     Seed: 123
     Cubers: 50
     PrecentInfected: 10
-  EnergyRate: .25
+  EnergyRate: .0500000007
   EnergyCount: 100
-  EnergyMin: .600000024
-  EnergyMax: .800000012
+  EnergyMin: .0199999996
+  EnergyMax: .200000003
   CuberGlobal:
     Wait: 1
     View: 100
@@ -71,6 +68,9 @@ MonoBehaviour:
     InfectedBodyMat: {fileID: 2100000, guid: 57b373a9f80beba47b1a525ad0ee7af8, type: 2}
     EnergyConsistent: .00999999978
     EnergyHop: .100000001
+  EnergyGlobal:
+    Grow: .0500000007
+    Max: 1.20000005
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1

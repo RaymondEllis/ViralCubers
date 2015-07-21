@@ -2,7 +2,7 @@
 using UnityEngine.UI;
 using System.IO;
 
-public class UIOptions : MonoBehaviour
+public class UIOptions : TheCubers.UIMenu
 {
 	[System.Serializable]
 	private struct Settings
@@ -36,8 +36,8 @@ public class UIOptions : MonoBehaviour
 				&& l.Width == r.Width
 				&& l.Height == r.Height
 				&& l.Quality == r.Quality
-				&& l.AudioEffects == r.AudioEffects
-				&& l.AudioMusic == r.AudioMusic;
+				&& System.Math.Round(1000d * l.AudioEffects) == System.Math.Round(1000d * r.AudioEffects)
+				&& System.Math.Round(1000d * l.AudioMusic) == System.Math.Round(1000d * r.AudioMusic);
 		}
 		public static bool operator !=(Settings l, Settings r)
 		{ return !(l == r); }
@@ -74,6 +74,13 @@ public class UIOptions : MonoBehaviour
 		UIOptions.Load(this);
 	}
 
+	protected override void OnOpenStart()
+	{
+		temp = current;
+		applyUI(current);
+		Changed();
+	}
+
 	/// <summary>Load and apply settings from the settings file.</summary>
 	/// <param name="obj">Load in to this object</param>
 	public static void Load(UIOptions obj)
@@ -106,6 +113,15 @@ public class UIOptions : MonoBehaviour
 		temp = current;
 
 		// update UI
+		applyUI(current);
+
+		// apply the real settings
+		UIOptions.applyOnly(current);
+
+		Changed();
+	}
+	private void applyUI(Settings settings)
+	{
 		FullscreenUI.isOn = current.Fullscreen;
 		FullscreenUI.onValueChanged.Invoke(FullscreenUI.isOn);
 
@@ -123,10 +139,6 @@ public class UIOptions : MonoBehaviour
 		AudioMusicSlider.value = (float)current.AudioMusic;
 		AudioMusicSlider.onValueChanged.Invoke(AudioMusicSlider.value);
 
-		// apply the real settings
-		UIOptions.applyOnly(current);
-
-		Changed();
 	}
 	private static void applyOnly(Settings settings)
 	{

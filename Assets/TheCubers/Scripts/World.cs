@@ -32,6 +32,7 @@ namespace TheCubers
 		private float timerEnergy;
 
 		public Cuber.Global CuberGlobal = new Cuber.Global();
+		public Energy.Global EnergyGlobal = new Energy.Global();
 
 		private Pool<Cuber> cubers;
 		private Pool<Fourth> fourths;
@@ -86,9 +87,13 @@ namespace TheCubers
 
 
 			// spawn cubers
-			int infected = Startup.PrecentInfected / Startup.Cubers;
-			if (infected <= 0 && Startup.PrecentInfected > 0)
-				infected = 1;
+			int infected = 0;
+			if (Startup.PrecentInfected > 0)
+			{
+				infected = (int)((float)Startup.Cubers * ((float)Startup.PrecentInfected / 100f));
+				if (infected < 0)
+					infected = 1;
+			}
 			for (int i = 0; i < Startup.Cubers; ++i)
 			{
 				Vector3 position;
@@ -115,7 +120,8 @@ namespace TheCubers
 			{
 				timerEnergy = 0;
 				if (energys.Active() < EnergyCount)
-					NewEnergy(EnergyMin, EnergyMax);
+					if (!NewEnergy(EnergyMin, EnergyMax))
+						NewEnergy(EnergyMin, EnergyMax);
 			}
 		}
 
@@ -173,9 +179,9 @@ namespace TheCubers
 		}
 
 		/// <summary> new random energy </summary>
-		public void NewEnergy(float min, float max)
+		public bool NewEnergy(float min, float max)
 		{
-			NewEnergy(new Vector3(-sizeXhalf + (float)Random.NextDouble() * sizeX, 0f, -sizeZhalf + (float)Random.NextDouble() * sizeZ), min - (float)Random.NextDouble() * (max - min));
+			return NewEnergy(new Vector3(-sizeXhalf + (float)Random.NextDouble() * sizeX, 0f, -sizeZhalf + (float)Random.NextDouble() * sizeZ), min - (float)Random.NextDouble() * (max - min));
 		}
 		public bool NewEnergy(Vector3 position, float amount)
 		{

@@ -7,7 +7,6 @@ namespace TheCubers
 	[SelectionBase]
 	public class Cuber : MonoBehaviour
 	{
-		private World world;
 		[System.Serializable]
 		public class Global
 		{
@@ -28,9 +27,10 @@ namespace TheCubers
 			public float EnergyHop;
 		}
 
-		public SkinnedMeshRenderer Mesh;
+		private World world;
 		private Animator animator;
 
+		public SkinnedMeshRenderer Mesh;
 		public bool Infected;
 		public float Energy;
 		public int Life;
@@ -74,9 +74,9 @@ namespace TheCubers
 			timer = (float)world.Random.NextDouble() * world.CuberGlobal.Wait;
 			transform.position = position;
 			transform.rotation = Quaternion.Euler(0, world.Random.Next(360), 0);
-			animator.Play("Idle", 0, (float)world.Random.NextDouble());
-			//animator.SetTrigger("Idle");
 			//ToDo : Animations are not being reset...
+			//animator.Play("Idle", 0, (float)world.Random.NextDouble());
+			animator.SetTrigger("Idle");
 			dead = false;
 		}
 
@@ -131,7 +131,7 @@ namespace TheCubers
 				{
 					Life -= 4;
 					animator.SetTrigger("GiveBirth");
-					timer -= 5f;
+					//timer -= 5f;
 					return;
 				}
 			}
