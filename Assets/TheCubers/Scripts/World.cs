@@ -34,13 +34,15 @@ namespace TheCubers
 		public Cuber.Global CuberGlobal = new Cuber.Global();
 		public Energy.Global EnergyGlobal = new Energy.Global();
 
-		private Pool<Cuber> cubers;
-		private Pool<Fourth> fourths;
-		private Pool<Energy> energys;
-
 		public System.Random Random { get; private set; }
 		private static bool pauseUser, pauseWait;
 		public static bool Paused { get { return pauseUser || pauseWait; } }
+
+		public Transform Sun;
+
+		private Pool<Cuber> cubers;
+		private Pool<Fourth> fourths;
+		private Pool<Energy> energys;
 
 		private int sizeX, sizeZ;
 		private int sizeXhalf, sizeZhalf;
@@ -255,8 +257,7 @@ namespace TheCubers
 
 			var e = energys.Pull();
 			e.transform.position = position;
-			e.transform.localScale = new Vector3(amount, amount, amount);
-			e.Amount = amount;
+			e.Init(amount);
 			return true;
 		}
 

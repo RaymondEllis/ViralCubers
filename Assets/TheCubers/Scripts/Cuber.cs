@@ -39,6 +39,7 @@ namespace TheCubers
 
 		private float timer;
 		private bool dead;
+		private Edible targetFood;
 
 		void Awake()
 		{
@@ -78,6 +79,7 @@ namespace TheCubers
 			//animator.Play("Idle", 0, (float)world.Random.NextDouble());
 			animator.SetTrigger("Idle");
 			dead = false;
+			targetFood = null;
 		}
 
 		void Update()
@@ -109,6 +111,12 @@ namespace TheCubers
 			{
 				BeginDeath();
 				return;
+			}
+
+			if (targetFood)
+			{
+				Debug.LogWarning("Did not finish eating!");
+				targetFood = null;
 			}
 
 			// Hack to fix not being on ground.
@@ -151,6 +159,9 @@ namespace TheCubers
 				var fourths = world.GetFourthsInView(transform.position);
 				for (int i = 0; i < fourths.Count; ++i)
 				{
+					if (fourths[i].Eaten)
+						continue;
+
 					tmpDistance = Vector3.Distance(transform.position, fourths[i].transform.position);
 					tmpWeight = 10f * ((float)Fourths + 1f) / tmpDistance;
 					if (tmpWeight > weight)
@@ -166,6 +177,9 @@ namespace TheCubers
 			var energy = world.GetEnergyInView(transform.position);
 			for (int i = 0; i < energy.Count; ++i)
 			{
+				if (energy[i].Eaten)
+					continue;
+
 				tmpDistance = Vector3.Distance(transform.position, energy[i].transform.position);
 				tmpWeight = (float)energy[i].Amount * 10f / Energy / tmpDistance;
 				if (tmpWeight > weight)
@@ -195,13 +209,14 @@ namespace TheCubers
 					FourthsColor.r += color.r / 4f;
 					FourthsColor.g += color.g / 4f;
 					FourthsColor.b += color.b / 4f;
-					fTarget.gameObject.SetActive(false);
+					targetFood = fTarget;
 				}
 				else
 				{
 					Energy += eTarget.Amount;
-					eTarget.gameObject.SetActive(false);
+					targetFood = eTarget;
 				}
+				targetFood.Eaten = true;
 				animator.SetTrigger("Eat");
 
 			} // else hop to it.
@@ -211,6 +226,12 @@ namespace TheCubers
 				animator.SetTrigger("Hop");
 			}
 
+		}
+
+		public void FinishEating()
+		{
+			targetFood.gameObject.SetActive(false);
+			targetFood = null;
 		}
 
 		public void BeginDeath()
