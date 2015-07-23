@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.UI;
 using System.Collections;
 
 namespace TheCubers
@@ -22,7 +23,7 @@ namespace TheCubers
 		[HideInInspector]
 		public new RectTransform transform;
 
-		private UnityEngine.UI.Selectable[] items;
+		private Selectable[] items;
 
 		public void Init()
 		{
@@ -34,7 +35,7 @@ namespace TheCubers
 			state = State.Closed;
 			needUpdate = false;
 
-			items = GetComponentsInChildren<UnityEngine.UI.Selectable>(true);
+			items = GetComponentsInChildren<Selectable>(true);
 		}
 
 

@@ -61,6 +61,15 @@ namespace TheCubers
 			return list;
 		}
 
+		public List<T> GetActive()
+		{
+			var list = new List<T>();
+			for (int i = 0; i < array.Length; ++i)
+				if (array[i].gameObject.activeSelf)
+					list.Add(array[i]);
+			return list;
+		}
+
 		/// <summary> Get a unactive item, will actavate and rezise array if nessery. </summary>
 		public T Pull()
 		{

@@ -39,6 +39,8 @@ namespace TheCubers
 		private Pool<Energy> energys;
 
 		public System.Random Random { get; private set; }
+		private static bool pauseUser, pauseWait;
+		public static bool Paused { get { return pauseUser || pauseWait; } }
 
 		private int sizeX, sizeZ;
 		private int sizeXhalf, sizeZhalf;
@@ -56,6 +58,8 @@ namespace TheCubers
 
 		IEnumerator Start()
 		{
+			pauseUser = false;
+			pauseWait = true;
 			enabled = false;
 			Debug.Log("World Start");
 			// if no pools wait for them.
@@ -63,6 +67,15 @@ namespace TheCubers
 			{
 				Debug.Log("Waiting for PoolBase instance.");
 				while (!PoolBase.Instance)
+				{
+					yield return null;
+				}
+			}
+			// wait for UI.
+			if (!UIBase.Instance)
+			{
+				Debug.Log("Waiting for UIBase instance.");
+				while (!UIBase.Instance)
 				{
 					yield return null;
 				}
@@ -99,7 +112,7 @@ namespace TheCubers
 				Vector3 position;
 				if (FindGround(new Ray(new Vector3(-sizeXhalf + Random.Next(sizeX), 100f, -sizeZhalf + Random.Next(sizeZ)), Vector3.down), out position))
 				{
-					cubers.Pull().Init(position, --infected >= 0, Color.black);
+					cubers.Pull().Init(position, --infected >= 0, Random.Next(1, CuberGlobal.InitialLife - 1), Color.black);
 				}
 			}
 
@@ -109,10 +122,14 @@ namespace TheCubers
 				NewEnergy(EnergyMin, EnergyMax);
 			}
 			enabled = true;
+			pauseWait = false;
 		}
 
 		void Update()
 		{
+			if (World.Paused)
+				return;
+
 			UpdateScore();
 
 			// add more energy
@@ -136,14 +153,47 @@ namespace TheCubers
 		private int lastScore;
 		public void UpdateScore()
 		{
-			int score = 1000;
-			// ToDo  : math
+			int fourth = 1000;
+			float energy = 10f;
+			int life = 5;
 
-			if (UIBase.Instance && score != lastScore)
+			int score = 0;
+			int infected = 0;
+			int clean = 0;
+
+			score += fourths.Active() * fourth;
+
+			var c = cubers.GetActive();
+			int tmp;
+			for (int i = 0; i < c.Count; ++i)
+			{
+				tmp = 0;
+				tmp += c[i].Fourths * fourth;
+				tmp += 4 * fourth;
+				tmp += (int)(c[i].Energy * energy / 5f) * 5;
+				tmp += c[i].Life * life;
+
+				score += tmp * (c[i].Infected ? -1 : 1);
+				if (c[i].Infected)
+					++infected;
+				else
+					++clean;
+			}
+
+			if (score != lastScore)
 			{
 				lastScore = score;
-				UIGame gui = (UIGame)UIBase.Instance.GetMenu("Game");
-				gui.Score.text = score.ToString("N0");
+				UIGame menu = (UIGame)UIBase.Instance.GetMenu("Game");
+				menu.Score.text = score.ToString("N0");
+			}
+
+			if (clean == 0 || infected == 0)
+			{
+				UIGameOver menu = (UIGameOver)UIBase.Instance.GetMenu("Game Over");
+				menu.Fill(clean > infected, score);
+
+				UIBase.Instance.Go(menu);
+				pauseWait = true;
 			}
 		}
 
@@ -188,7 +238,7 @@ namespace TheCubers
 
 		public bool NewCuber(Vector3 position, bool infected, Color color)
 		{
-			cubers.Pull().Init(position, infected, color);
+			cubers.Pull().Init(position, infected, 1, color);
 			return true;
 		}
 

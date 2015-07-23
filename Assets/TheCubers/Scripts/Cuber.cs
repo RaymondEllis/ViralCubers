@@ -51,11 +51,11 @@ namespace TheCubers
 			world = World.Instance;
 		}
 
-		public void Init(Vector3 position, bool infected, Color color)
+		public void Init(Vector3 position, bool infected, int livedev, Color color)
 		{
 			Infected = infected;
 			Energy = world.CuberGlobal.InitialEnergy;
-			Life = world.CuberGlobal.InitialLife;
+			Life = world.CuberGlobal.InitialLife / livedev;
 			if (Infected)
 			{
 				Mesh.material = world.CuberGlobal.InfectedBodyMat;
@@ -82,6 +82,9 @@ namespace TheCubers
 
 		void Update()
 		{
+			if (World.Paused)
+				return;
+
 			if (dead)
 				return;
 			Energy -= world.CuberGlobal.EnergyConsistent * Time.deltaTime;

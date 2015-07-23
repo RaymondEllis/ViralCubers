@@ -15,6 +15,9 @@ namespace TheCubers
 
 		void Update()
 		{
+			if (World.Paused)
+				return;
+
 			Global g = World.Instance.EnergyGlobal;
 			Amount += g.Grow * Time.deltaTime;
 			if (Amount > g.Max)
