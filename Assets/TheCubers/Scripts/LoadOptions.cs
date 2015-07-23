@@ -1,10 +1,13 @@
 ﻿using UnityEngine;
 
-public class LoadOptions : MonoBehaviour
+namespace TheCubers
 {
-	void Start()
+	public class LoadOptions : MonoBehaviour
 	{
-		UIOptions.Load(null);
-		Destroy(gameObject);
+		void Start()
+		{
+			UIOptions.Load(null);
+			Destroy(gameObject);
+		}
 	}
 }

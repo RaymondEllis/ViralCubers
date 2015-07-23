@@ -7,7 +7,7 @@ namespace TheCubers
 	public class World : MonoBehaviour
 	{
 		public static World Instance { get { return instance; } }
-		public static World instance = null;
+		private static World instance = null;
 
 		public startupvar Startup = new startupvar();
 		[System.Serializable]
@@ -47,8 +47,8 @@ namespace TheCubers
 		{
 			if (instance)
 			{
-				DestroyImmediate(gameObject);
-				Debug.LogWarning("Two worlds, HA not anymore!");
+				Destroy(gameObject);
+				Debug.LogError("There is already a instance of this object, HA not anymore!");
 			}
 			else
 				instance = this;
@@ -113,6 +113,7 @@ namespace TheCubers
 
 		void Update()
 		{
+			UpdateScore();
 
 			// add more energy
 			timerEnergy += Time.deltaTime;
@@ -132,6 +133,19 @@ namespace TheCubers
 		}
 
 
+		private int lastScore;
+		public void UpdateScore()
+		{
+			int score = 1000;
+			// ToDo  : math
+
+			if (UIBase.Instance && score != lastScore)
+			{
+				lastScore = score;
+				UIGame gui = (UIGame)UIBase.Instance.GetMenu("Game");
+				gui.Score.text = score.ToString("N0");
+			}
+		}
 
 		// kill a cuber and spawn fourths
 		public void Kill(Cuber cuber)

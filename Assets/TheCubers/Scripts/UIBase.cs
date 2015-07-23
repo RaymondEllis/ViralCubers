@@ -5,6 +5,9 @@ namespace TheCubers
 {
 	public class UIBase : MonoBehaviour
 	{
+		public static UIBase Instance { get { return instance; } }
+		private static UIBase instance = null;
+
 		private List<UIMenu> menus;
 		private UIMenu back;
 		private bool backSize = false;
@@ -15,6 +18,14 @@ namespace TheCubers
 
 		void Awake()
 		{
+			if (instance)
+			{
+				Destroy(gameObject);
+				Debug.LogError("There is already a instance of this object, HA not anymore!");
+			}
+			else
+				instance = this;
+
 			// get all the menus
 			menus = new List<UIMenu>();
 			Transform child;
