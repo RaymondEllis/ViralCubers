@@ -38,6 +38,7 @@ namespace TheCubers
 		private static bool pauseUser, pauseWait;
 		public static bool Paused { get { return pauseUser || pauseWait; } }
 
+		public bool IsMenu = false;
 		public Transform Sun;
 
 		private Pool<Cuber> cubers;
@@ -155,6 +156,9 @@ namespace TheCubers
 		private int lastScore;
 		public void UpdateScore()
 		{
+			if (IsMenu)
+				return;
+
 			int fourth = 1000;
 			float energy = 10f;
 			int life = 5;
