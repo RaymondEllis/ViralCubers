@@ -8,6 +8,7 @@ namespace TheCubers
 	{
 		public static World Instance { get { return instance; } }
 		private static World instance = null;
+		public static IEnumerator WaitInstance() { if (!Instance) { while (!Instance) { yield return null; } } }
 
 		public startupvar Startup = new startupvar();
 		[System.Serializable]
@@ -64,7 +65,7 @@ namespace TheCubers
 			pauseUser = false;
 			pauseWait = true;
 			enabled = false;
-			Debug.Log("World Start");
+			Debug.Log("World begin start");
 			// if no pools wait for them.
 			if (!PoolBase.Instance)
 			{
@@ -75,14 +76,7 @@ namespace TheCubers
 				}
 			}
 			// wait for UI.
-			if (!UIBase.Instance)
-			{
-				Debug.Log("Waiting for UIBase instance.");
-				while (!UIBase.Instance)
-				{
-					yield return null;
-				}
-			}
+			yield return StartCoroutine(UIBase.WaitInstance());
 
 			Random = new System.Random(Startup.Seed);
 
@@ -126,6 +120,7 @@ namespace TheCubers
 			}
 			enabled = true;
 			pauseWait = false;
+			Debug.Log("World end start");
 		}
 
 		void Update()

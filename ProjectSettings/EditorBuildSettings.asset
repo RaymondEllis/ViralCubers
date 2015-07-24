@@ -6,8 +6,10 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/TheCubers/menu.unity
+    path: Assets/TheCubers/Scenes/startup.unity
   - enabled: 1
-    path: Assets/TheCubers/world.unity
+    path: Assets/TheCubers/Scenes/menu.unity
   - enabled: 1
-    path: Assets/TheCubers/base.unity
+    path: Assets/TheCubers/Scenes/base.unity
+  - enabled: 1
+    path: Assets/TheCubers/Scenes/world.unity

@@ -13,6 +13,12 @@ class BaseChecker : MonoBehaviour
 
 	IEnumerator Start()
 	{
+		yield return Check();
+		Destroy(this);
+	}
+
+	public static IEnumerator Check()
+	{
 		if (GameObject.Find(testObj) == null)
 		{
 			Debug.Log("Adding base level");
@@ -20,6 +26,5 @@ class BaseChecker : MonoBehaviour
 			yield return async;
 		}
 		done = true;
-		Destroy(this);
 	}
 }

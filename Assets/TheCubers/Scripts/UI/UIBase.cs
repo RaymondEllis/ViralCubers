@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using System.Collections;
 using System.Collections.Generic;
 
 namespace TheCubers
@@ -7,6 +8,15 @@ namespace TheCubers
 	{
 		public static UIBase Instance { get { return instance; } }
 		private static UIBase instance = null;
+		public static IEnumerator WaitInstance()
+		{
+			if (!Instance)
+			{
+				Debug.Log("Waiting for UIBase instance.");
+				while (!Instance)
+				{ yield return null; }
+			}
+		}
 
 		private List<UIMenu> menus;
 		private UIMenu back;
@@ -51,10 +61,7 @@ namespace TheCubers
 		{
 			DontDestroyOnLoad(gameObject);
 
-			if (Application.loadedLevelName == "menu" || Application.loadedLevelName == "base")
-				Go("Start");
-			else
-				Go("Game");
+			goDefaultMenu(Application.loadedLevelName);
 		}
 
 		void Update()
@@ -108,14 +115,32 @@ namespace TheCubers
 			}
 		}
 
+		private void goDefaultMenu(string levelName)
+		{
+			switch (levelName)
+			{
+				case "startup":
+					break;
+
+				case "menu":
+				case "base":
+					Go("Start");
+					break;
+
+				default:
+					Go("Game");
+					break;
+			}
+		}
+
 		public void LoadLevel(string level)
 		{
-			if (level == "menu" || level == "base")
-				Go("Start");
-			else
-				Go("Game");
-
-			Application.LoadLevelAsync(level);
+			StartCoroutine(loadLevel(level));
+		}
+		private IEnumerator loadLevel(string level)
+		{
+			yield return Application.LoadLevelAsync(level);
+			goDefaultMenu(level);
 		}
 
 		public void Exit()
