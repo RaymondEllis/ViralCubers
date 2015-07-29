@@ -4,6 +4,7 @@ using System.Collections;
 namespace TheCubers
 {
 	[RequireComponent(typeof(Rigidbody))]
+	[SelectionBase]
 	public class Fourth : Edible
 	{
 		public MeshRenderer Mesh;

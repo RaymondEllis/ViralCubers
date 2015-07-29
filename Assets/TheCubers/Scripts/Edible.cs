@@ -9,6 +9,7 @@ namespace TheCubers
 		int wanted;
 		bool canWant;
 		int consumed;
+		public int PortionsLeft { get { return count - consumed; } }
 
 
 		protected void initEdible(int count, bool canWant)
@@ -33,15 +34,15 @@ namespace TheCubers
 
 		public void Consume()
 		{
-			--wanted;
+			if (canWant)
+				--wanted;
 			++consumed;
+			//OnPortionConsumed();
 			if (consumed >= count)
 				OnConsumed();
-			else
-				OnPartialConsumed();
 		}
 
-		protected virtual void OnPartialConsumed() { }
+		//protected virtual void OnPortionConsumed() { }
 
 		protected virtual void OnConsumed()
 		{

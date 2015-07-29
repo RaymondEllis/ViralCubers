@@ -59,11 +59,11 @@ namespace TheCubers
 			world = World.Instance;
 		}
 
-		public void Init(Vector3 position, bool infected, int livedev, Color color)
+		public void Init(Vector3 position, bool infected, float lifeMul, Color color)
 		{
 			Infected = infected;
-			Energy = world.CuberGlobal.InitialEnergy;
-			Life = livedev;
+			Energy = world.CuberGlobal.InitialEnergy * lifeMul;
+			Life = (int)((float)world.CuberGlobal.InitialLife * lifeMul);
 			if (Infected)
 			{
 				Mesh.material = world.CuberGlobal.InfectedBodyMat;
@@ -159,7 +159,10 @@ namespace TheCubers
 
 		void OnDrawGizmosSelected()
 		{
-			findMoveEat(true);
+#if UNITY_EDITOR
+			if (UnityEditor.EditorApplication.isPlaying)
+				findMoveEat(true);
+#endif
 		}
 
 		private void findMoveEat(bool debug)
@@ -226,18 +229,6 @@ namespace TheCubers
 			// if we are close, eat it.
 			if (distance < 1.5f)
 			{
-				if (target is Fourth)
-				{
-					Fourths += 1;
-					Color color = ((Fourth)target).Color.gamma;
-					FourthsColor.r += color.r / 4f;
-					FourthsColor.g += color.g / 4f;
-					FourthsColor.b += color.b / 4f;
-				}
-				else
-				{
-					Energy += ((Energy)target).Amount;
-				}
 				targetFood = target;
 				animator.SetTrigger("Eat");
 
@@ -252,6 +243,22 @@ namespace TheCubers
 
 		public void FinishEating()
 		{
+			if (targetFood is Fourth)
+			{
+				Fourths += 1;
+				Color color = ((Fourth)targetFood).Color.gamma;
+				FourthsColor.r += color.r / 4f;
+				FourthsColor.g += color.g / 4f;
+				FourthsColor.b += color.b / 4f;
+			}
+			else if (targetFood is Energy)
+			{
+
+				Energy += ((Energy)targetFood).TakePortion();
+			}
+			else
+				Debug.LogWarning("Unknown edible: " + targetFood.GetType().Name);
+
 			targetFood.Consume();
 			targetFood = null;
 		}

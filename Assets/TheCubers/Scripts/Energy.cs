@@ -3,6 +3,7 @@ using System.Collections;
 
 namespace TheCubers
 {
+	[SelectionBase]
 	public class Energy : Edible
 	{
 		[System.Serializable]
@@ -34,9 +35,19 @@ namespace TheCubers
 			updateVisuals();
 		}
 
-		protected override void OnPartialConsumed()
+		public float TakePortion()
 		{
-			--Amount;
+			if (Amount > 1f && PortionsLeft > 1)
+			{
+				Amount -= 1f;
+				return 1f;
+			}
+			else
+			{
+				float result = Amount;
+				Amount = 0f;
+				return result;
+			}
 		}
 
 		protected override void OnUpdate()
@@ -52,7 +63,6 @@ namespace TheCubers
 			if (Amount != lastAmount)
 			{
 				lastAmount = Amount;
-				countEdible(1);
 				updateVisuals();
 			}
 		}

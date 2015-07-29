@@ -109,7 +109,7 @@ namespace TheCubers
 				Vector3 position;
 				if (FindGround(new Ray(new Vector3(-sizeXhalf + Random.Next(sizeX), 100f, -sizeZhalf + Random.Next(sizeZ)), Vector3.down), out position))
 				{
-					cubers.Pull().Init(position, --infected >= 0, Random.Next(1, CuberGlobal.InitialLife), Color.black);
+					cubers.Pull().Init(position, --infected >= 0, 0.2f + (float)Random.NextDouble() * 0.8f, Color.black);
 				}
 			}
 
@@ -239,14 +239,14 @@ namespace TheCubers
 
 		public bool NewCuber(Vector3 position, bool infected, Color color)
 		{
-			cubers.Pull().Init(position, infected, CuberGlobal.InitialLife, color);
+			cubers.Pull().Init(position, infected, 1f, color);
 			return true;
 		}
 
 		/// <summary> new random energy </summary>
 		public bool NewEnergy(float min, float max)
 		{
-			return NewEnergy(new Vector3(-sizeXhalf + (float)Random.NextDouble() * sizeX, 0f, -sizeZhalf + (float)Random.NextDouble() * sizeZ), min - (float)Random.NextDouble() * (max - min));
+			return NewEnergy(new Vector3(-sizeXhalf + (float)Random.NextDouble() * sizeX, 0f, -sizeZhalf + (float)Random.NextDouble() * sizeZ), min + (float)Random.NextDouble() * (max - min));
 		}
 		public bool NewEnergy(Vector3 position, float amount)
 		{
