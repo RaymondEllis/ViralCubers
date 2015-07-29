@@ -1,10 +1,10 @@
 ﻿using UnityEngine;
+using System.Collections;
 
 namespace TheCubers
 {
 	public class PlayerControl : MonoBehaviour
 	{
-		private static World world;
 		[Header("Camera")]
 		public Camera Camera;
 
@@ -25,18 +25,15 @@ namespace TheCubers
 
 		void Awake()
 		{
-
-			world = Object.FindObjectOfType<World>();
-
 			if (!Camera)
 				Camera = UnityEngine.Camera.main;
 			if (!Camera)
 				Debug.LogWarning("Unable to find camera to take control of!");
 		}
 
-		void Start()
+		IEnumerator Start()
 		{
-
+			yield return StartCoroutine(World.WaitInstance());
 		}
 
 		void LateUpdate()
@@ -56,7 +53,7 @@ namespace TheCubers
 					Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
 					if (World.FindGround(ray, out position))
 					{
-						world.NewEnergy(position, Energy);
+						World.Instance.NewEnergy(position, Energy);
 					}
 				}
 

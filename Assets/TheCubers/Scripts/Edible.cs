@@ -6,14 +6,16 @@ namespace TheCubers
 	public abstract class Edible : MonoBehaviour
 	{
 		int count;
-		int reserved;
+		int wanted;
+		bool canWant;
 		int consumed;
 
 
-		protected void initEdible(int count)
+		protected void initEdible(int count, bool canWant)
 		{
 			this.count = count;
-			reserved = 0;
+			this.canWant = canWant;
+			wanted = 1;
 			consumed = 0;
 		}
 
@@ -22,19 +24,16 @@ namespace TheCubers
 			this.count = count;
 		}
 
-		public bool CanReserve { get { return reserved + consumed < count; } }
-
-		public bool Reserve()
+		public int Wanted { get { return wanted; } }
+		public void Want()
 		{
-			if (!CanReserve)
-				return false;
-			++reserved;
-			return true;
+			if (canWant)
+				++wanted;
 		}
 
 		public void Consume()
 		{
-			--reserved;
+			--wanted;
 			++consumed;
 			if (consumed >= count)
 				OnConsumed();

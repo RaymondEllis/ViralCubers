@@ -57,7 +57,7 @@ MonoBehaviour:
     PrecentInfected: 10
   EnergyRate: .0500000007
   EnergyCount: 50
-  EnergyMin: .5
+  EnergyMin: .0500000007
   EnergyMax: 1
   CuberGlobal:
     Wait: 1
@@ -68,9 +68,31 @@ MonoBehaviour:
     InfectedBodyMat: {fileID: 2100000, guid: 57b373a9f80beba47b1a525ad0ee7af8, type: 2}
     EnergyConsistent: .00999999978
     EnergyHop: .100000001
+    WeightDistance: 1
+    WeightFourth: 6
+    WeightEnergy: 10
+    WeightCurrentEnergy: 1
+    WeightWanted: .5
   EnergyGlobal:
     Grow: .0500000007
     Max: 1.20000005
+    VisualCurve:
+      serializedVersion: 2
+      m_Curve:
+      - time: 0
+        value: 0
+        inSlope: 2
+        outSlope: 2
+        tangentMode: 0
+      - time: 1
+        value: 1
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 0
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+    VisualDevider: 5
+    VisualMax: 2
   IsMenu: 0
   Sun: {fileID: 0}
 --- !u!1001 &100100000

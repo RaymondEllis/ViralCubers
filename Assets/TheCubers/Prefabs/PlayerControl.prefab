@@ -47,7 +47,7 @@ MonoBehaviour:
   RotationSpeed: 100
   SmoothRotate: 1
   Target: {fileID: 0}
-  Energy: 2
+  Energy: 10
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1

@@ -25,6 +25,13 @@ namespace TheCubers
 			[Header("Energy costs")]
 			public float EnergyConsistent;
 			public float EnergyHop;
+
+			[Header("Need Weights")]
+			public float WeightDistance;
+			public float WeightFourth;
+			public float WeightEnergy;
+			public float WeightCurrentEnergy;
+			public float WeightWanted;
 		}
 
 		private World world;
@@ -147,10 +154,19 @@ namespace TheCubers
 				}
 			}
 
+			findMoveEat(false);
+		}
+
+		void OnDrawGizmosSelected()
+		{
+			findMoveEat(true);
+		}
+
+		private void findMoveEat(bool debug)
+		{
+			Global g = World.Instance.CuberGlobal;
 			// Find a target to go for.
-			Vector3 target = Vector3.zero;
-			Fourth fTarget = null;
-			Energy eTarget = null;
+			Edible target = null;
 			float distance = float.MaxValue;
 			float tmpDistance, tmpWeight;
 			float weight = 0f;
@@ -159,17 +175,21 @@ namespace TheCubers
 				var fourths = world.GetFourthsInView(transform.position);
 				for (int i = 0; i < fourths.Count; ++i)
 				{
-					if (!fourths[i].CanReserve)
-						continue;
-
 					tmpDistance = Vector3.Distance(transform.position, fourths[i].transform.position);
-					tmpWeight = 10f * ((float)Fourths + 1f) / tmpDistance;
+					tmpWeight = ((Fourths + 1) * g.WeightFourth) / (fourths[i].Wanted * g.WeightWanted) / (tmpDistance * g.WeightDistance);
+					if (debug)
+					{
+						Vector3 v = fourths[i].transform.position;
+						v.y += 2f + tmpWeight * 0.5f;
+						Gizmos.color = Color.blue;
+						Gizmos.DrawCube(v, new Vector3(0.2f, tmpWeight, 0.2f));
+					}
+
 					if (tmpWeight > weight)
 					{
 						distance = tmpDistance;
 						weight = tmpWeight;
-						fTarget = fourths[i];
-						target = fourths[i].transform.position;
+						target = fourths[i];
 					}
 				}
 			}
@@ -177,46 +197,48 @@ namespace TheCubers
 			var energy = world.GetEnergyInView(transform.position);
 			for (int i = 0; i < energy.Count; ++i)
 			{
-				if (!energy[i].CanReserve)
-					continue;
-
 				tmpDistance = Vector3.Distance(transform.position, energy[i].transform.position);
-				tmpWeight = (float)energy[i].Amount * 10f / Energy / tmpDistance;
+				tmpWeight = (energy[i].Amount * g.WeightEnergy) / (Energy * g.WeightCurrentEnergy) / (energy[i].Wanted * g.WeightWanted) / (tmpDistance * g.WeightDistance);
+				if (debug)
+				{
+					Vector3 v = energy[i].transform.position;
+					v.y += 2f + tmpWeight * 0.5f;
+					Gizmos.color = Color.yellow;
+					Gizmos.DrawCube(v, new Vector3(0.2f, tmpWeight, 0.2f));
+				}
+
 				if (tmpWeight > weight)
 				{
 					distance = tmpDistance;
 					weight = tmpWeight;
-					fTarget = null;
-					eTarget = energy[i];
-					target = energy[i].transform.position;
+					target = energy[i];
 				}
 			}
 
 			// no target return
-			if (distance == float.MaxValue)
+			if (!target || debug)
 				return;
 
-			target.y = transform.position.y;
-			transform.LookAt(target);
+			transform.LookAt(new Vector3(target.transform.position.x, transform.position.y, target.transform.position.z));
+
+			target.Want();
 
 			// if we are close, eat it.
-			if (distance < 2f)
+			if (distance < 1.5f)
 			{
-				if (fTarget)
+				if (target is Fourth)
 				{
 					Fourths += 1;
-					Color color = fTarget.Color.gamma;
+					Color color = ((Fourth)target).Color.gamma;
 					FourthsColor.r += color.r / 4f;
 					FourthsColor.g += color.g / 4f;
 					FourthsColor.b += color.b / 4f;
-					targetFood = fTarget;
 				}
 				else
 				{
-					Energy += eTarget.Amount;
-					targetFood = eTarget;
+					Energy += ((Energy)target).Amount;
 				}
-				targetFood.Reserve();
+				targetFood = target;
 				animator.SetTrigger("Eat");
 
 			} // else hop to it.
