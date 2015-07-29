@@ -78,8 +78,6 @@ namespace TheCubers
 			// wait for UI.
 			yield return StartCoroutine(UIBase.WaitInstance());
 
-			((UIGame)UIBase.Instance.GetMenu("Game")).Reset();
-
 			Random = new System.Random(Startup.Seed);
 
 			sizeX = (int)transform.localScale.x;
@@ -88,7 +86,7 @@ namespace TheCubers
 			sizeZhalf = sizeZ / 2;
 			if ((float)sizeX != transform.localScale.x || (float)sizeZ != transform.localScale.z)
 			{
-				Debug.LogWarning("World lcoal scale should be int.");
+				Debug.LogWarning("World local scale should be a interger.");
 			}
 
 			// get pools

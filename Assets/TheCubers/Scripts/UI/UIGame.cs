@@ -12,10 +12,13 @@ namespace TheCubers
 
 		private int deadLife = 0, deadEnergy = 0;
 
-		public void Reset()
+
+		protected override void OnOpenStart()
 		{
 			deadLife = 0;
 			deadEnergy = 0;
+
+			updateText();
 		}
 
 		public void CountDeath(float energy, int life)
@@ -24,6 +27,12 @@ namespace TheCubers
 				++deadLife;
 			else
 				++deadEnergy;
+
+			updateText();
+		}
+
+		private void updateText()
+		{
 
 			LifeValue.text = deadLife.ToString("N0");
 			EnergyValue.text = deadEnergy.ToString("N0");

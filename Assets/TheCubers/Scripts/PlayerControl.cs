@@ -44,21 +44,37 @@ namespace TheCubers
 			// ToDo  4: Touch and other input methods.
 			updateCamera();
 
-			if (Input.GetMouseButtonDown(0))
+			if (World.Paused)
 			{
-				Vector3 position;
-				Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-				if (World.FindGround(ray, out position))
-				{
-					world.NewEnergy(position, Energy);
-				}
-			}
-
-
-			if (Input.GetKeyDown(KeyCode.Alpha2))
-				Time.timeScale = 2f;
-			else if (Input.GetKeyUp(KeyCode.Alpha2))
 				Time.timeScale = 1f;
+			}
+			else
+			{
+				if (Input.GetMouseButtonDown(0))
+				{
+					Vector3 position;
+					Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+					if (World.FindGround(ray, out position))
+					{
+						world.NewEnergy(position, Energy);
+					}
+				}
+
+
+				if (Input.GetKeyDown(KeyCode.Alpha5))
+					Time.timeScale = 0.5f;
+				if (Input.GetKeyDown(KeyCode.Alpha1))
+					Time.timeScale = 1f;
+				if (Input.GetKeyDown(KeyCode.Alpha2))
+					Time.timeScale = 2f;
+				if (Input.GetKeyDown(KeyCode.Alpha3))
+					Time.timeScale = 3f;
+			}
+		}
+
+		void OnDestory()
+		{
+			Time.timeScale = 1f;
 		}
 
 		private void updateCamera()
