@@ -56,9 +56,9 @@ MonoBehaviour:
     Cubers: 50
     PrecentInfected: 10
   EnergyRate: .0500000007
-  EnergyCount: 100
-  EnergyMin: .0199999996
-  EnergyMax: .200000003
+  EnergyCount: 50
+  EnergyMin: .5
+  EnergyMax: 1
   CuberGlobal:
     Wait: 1
     View: 100
@@ -71,6 +71,8 @@ MonoBehaviour:
   EnergyGlobal:
     Grow: .0500000007
     Max: 1.20000005
+  IsMenu: 0
+  Sun: {fileID: 0}
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1

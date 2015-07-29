@@ -22,7 +22,7 @@ namespace TheCubers
 
 		public void Init(Color color)
 		{
-			initEdible();
+			initEdible(1);
 
 			Color = color;
 			Mat.color = Color;

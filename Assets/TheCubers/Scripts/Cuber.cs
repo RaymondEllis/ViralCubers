@@ -56,7 +56,7 @@ namespace TheCubers
 		{
 			Infected = infected;
 			Energy = world.CuberGlobal.InitialEnergy;
-			Life = world.CuberGlobal.InitialLife / livedev;
+			Life = livedev;
 			if (Infected)
 			{
 				Mesh.material = world.CuberGlobal.InfectedBodyMat;
@@ -159,7 +159,7 @@ namespace TheCubers
 				var fourths = world.GetFourthsInView(transform.position);
 				for (int i = 0; i < fourths.Count; ++i)
 				{
-					if (fourths[i].Eaten)
+					if (!fourths[i].CanReserve)
 						continue;
 
 					tmpDistance = Vector3.Distance(transform.position, fourths[i].transform.position);
@@ -177,7 +177,7 @@ namespace TheCubers
 			var energy = world.GetEnergyInView(transform.position);
 			for (int i = 0; i < energy.Count; ++i)
 			{
-				if (energy[i].Eaten)
+				if (!energy[i].CanReserve)
 					continue;
 
 				tmpDistance = Vector3.Distance(transform.position, energy[i].transform.position);
@@ -216,7 +216,7 @@ namespace TheCubers
 					Energy += eTarget.Amount;
 					targetFood = eTarget;
 				}
-				targetFood.Eaten = true;
+				targetFood.Reserve();
 				animator.SetTrigger("Eat");
 
 			} // else hop to it.
@@ -230,7 +230,7 @@ namespace TheCubers
 
 		public void FinishEating()
 		{
-			targetFood.gameObject.SetActive(false);
+			targetFood.Consume();
 			targetFood = null;
 		}
 
@@ -242,6 +242,9 @@ namespace TheCubers
 		}
 		public void EndDeath()
 		{
+			UIGame menu = (UIGame)UIBase.Instance.GetMenu("Game");
+			menu.CountDeath(Energy, Life);
+
 			world.Kill(this);
 		}
 

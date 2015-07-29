@@ -13,7 +13,7 @@ class BaseChecker : MonoBehaviour
 
 	IEnumerator Start()
 	{
-		yield return Check();
+		yield return StartCoroutine(Check());
 		Destroy(this);
 	}
 

@@ -18,12 +18,16 @@ namespace TheCubers
 
 		public void Init(float amount)
 		{
-			initEdible();
-
 			Amount = amount;
-			lastAmount = -1f;
+			lastAmount = Amount;
+			initEdible(1);
 
 			updateVisuals();
+		}
+
+		protected override void OnPartialConsumed()
+		{
+			--Amount;
 		}
 
 		protected override void OnUpdate()
@@ -36,6 +40,7 @@ namespace TheCubers
 			if (Amount != lastAmount)
 			{
 				lastAmount = Amount;
+				countEdible(1);
 				updateVisuals();
 			}
 		}

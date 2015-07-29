@@ -78,6 +78,8 @@ namespace TheCubers
 			// wait for UI.
 			yield return StartCoroutine(UIBase.WaitInstance());
 
+			((UIGame)UIBase.Instance.GetMenu("Game")).Reset();
+
 			Random = new System.Random(Startup.Seed);
 
 			sizeX = (int)transform.localScale.x;
@@ -109,7 +111,7 @@ namespace TheCubers
 				Vector3 position;
 				if (FindGround(new Ray(new Vector3(-sizeXhalf + Random.Next(sizeX), 100f, -sizeZhalf + Random.Next(sizeZ)), Vector3.down), out position))
 				{
-					cubers.Pull().Init(position, --infected >= 0, Random.Next(1, CuberGlobal.InitialLife - 1), Color.black);
+					cubers.Pull().Init(position, --infected >= 0, Random.Next(1, CuberGlobal.InitialLife), Color.black);
 				}
 			}
 
@@ -136,8 +138,8 @@ namespace TheCubers
 			{
 				timerEnergy = 0;
 				if (energys.Active() < EnergyCount)
-					if (!NewEnergy(EnergyMin, EnergyMax))
-						NewEnergy(EnergyMin, EnergyMax);
+					if (!NewEnergy(EnergyMin, EnergyMin))
+						NewEnergy(EnergyMin, EnergyMin);
 			}
 		}
 
@@ -239,7 +241,7 @@ namespace TheCubers
 
 		public bool NewCuber(Vector3 position, bool infected, Color color)
 		{
-			cubers.Pull().Init(position, infected, 1, color);
+			cubers.Pull().Init(position, infected, CuberGlobal.InitialLife, color);
 			return true;
 		}
 

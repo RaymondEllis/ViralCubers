@@ -53,6 +53,12 @@ namespace TheCubers
 					world.NewEnergy(position, Energy);
 				}
 			}
+
+
+			if (Input.GetKeyDown(KeyCode.Alpha2))
+				Time.timeScale = 2f;
+			else if (Input.GetKeyUp(KeyCode.Alpha2))
+				Time.timeScale = 1f;
 		}
 
 		private void updateCamera()
