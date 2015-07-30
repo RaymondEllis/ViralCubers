@@ -55,7 +55,7 @@ MonoBehaviour:
   m_Transition: 1
   m_Colors:
     m_NormalColor: {r: .320823491, g: .324880004, b: .908999979, a: 1}
-    m_HighlightedColor: {r: .389999986, g: .393696964, b: 1, a: 1}
+    m_HighlightedColor: {r: .539999962, g: .54278785, b: 1, a: 1}
     m_PressedColor: {r: .175411761, g: .177360773, b: .497000009, a: 1}
     m_DisabledColor: {r: .543893993, g: .545046151, b: .734000027, a: .634000003}
     m_ColorMultiplier: 1
@@ -215,11 +215,11 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: m_Colors.m_HighlightedColor.r
-      value: .389999986
+      value: .539999962
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: m_Colors.m_HighlightedColor.g
-      value: .393696964
+      value: .54278785
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: m_Colors.m_HighlightedColor.b

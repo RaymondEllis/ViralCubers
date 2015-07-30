@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.UI;
 using System.Collections;
 using System.Collections.Generic;
 
@@ -66,6 +67,7 @@ namespace TheCubers
 
 		void Update()
 		{
+			// update menus
 			for (int i = 0; i < menus.Count; ++i)
 				menus[i].UpdateUI();
 
@@ -76,6 +78,25 @@ namespace TheCubers
 				back.transform.sizeDelta = Vector2.Lerp(backFrom, active.transform.sizeDelta, active.SlideCurve.Evaluate(backPos));
 				if (back.transform.sizeDelta == active.transform.sizeDelta)
 					backSize = false;
+			}
+
+			// select up or down if tab or tab + shift
+			if (!(active is UIGame) && Input.GetKeyDown(KeyCode.Tab))
+			{
+				var e = UnityEngine.EventSystems.EventSystem.current;
+				Selectable s = e.currentSelectedGameObject.GetComponent<Selectable>();
+				if (s)
+				{
+					// ToDo 99: wrap around tab select.
+					Selectable next;
+					if (Input.GetKey(KeyCode.LeftShift) || Input.GetKey(KeyCode.RightShift))
+						next = s.FindSelectableOnUp();
+					else
+						next = s.FindSelectableOnDown();
+
+					if (next)
+						next.Select();
+				}
 			}
 		}
 
@@ -124,13 +145,24 @@ namespace TheCubers
 
 				case "menu":
 				case "base":
-					Go("Start");
+					{
+						UIProfiles menu = (UIProfiles)GetMenu("Profiles");
+						if (menu.HasCurrent)
+							Go("Start");
+						else
+							Go(menu);
+					}
 					break;
 
 				default:
 					Go("Game");
 					break;
 			}
+		}
+
+		public void ReloadLevel()
+		{
+			LoadLevel(Application.loadedLevelName);
 		}
 
 		public void LoadLevel(string level)

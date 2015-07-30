@@ -14,6 +14,8 @@ namespace TheCubers
 		private State state;
 		private bool needUpdate;
 
+		public Selectable FirstSelected;
+		public bool IgnoreFirstSelected = false;
 		public float speed;
 		public AnimationCurve SlideCurve;
 		private float position;
@@ -27,6 +29,9 @@ namespace TheCubers
 
 		public void Init()
 		{
+			if (!FirstSelected && !IgnoreFirstSelected)
+				Debug.LogError("Menu " + name + " missing FirstSelected!");
+
 			transform = GetComponent<RectTransform>();
 
 			gameObject.SetActive(false);
@@ -36,8 +41,10 @@ namespace TheCubers
 			needUpdate = false;
 
 			items = GetComponentsInChildren<Selectable>(true);
+			OnInit();
 		}
 
+		protected virtual void OnInit() { }
 
 		public void UpdateUI()
 		{
@@ -81,6 +88,8 @@ namespace TheCubers
 			state = State.Opened;
 			needUpdate = true;
 			position = 0f;
+			if (!IgnoreFirstSelected)
+				FirstSelected.Select();
 			OnOpenStart();
 		}
 

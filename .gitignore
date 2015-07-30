@@ -30,3 +30,4 @@ UnityVS.TheCubers.CSharp*.csproj
 UnityVS.TheCubers*.sln
 TheCubers-csharp.sln
 TheCubers.sln
+.vs/
