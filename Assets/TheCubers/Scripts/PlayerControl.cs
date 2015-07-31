@@ -47,7 +47,7 @@ namespace TheCubers
 			}
 			else
 			{
-				if (Input.GetMouseButtonDown(0))
+				if (Input.GetButtonDown("Fire1"))
 				{
 					Vector3 position;
 					Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);

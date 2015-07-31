@@ -5,17 +5,23 @@ namespace TheCubers
 {
 	public class InitialLoading : MonoBehaviour
 	{
-		IEnumerator Start()
+		public float Wait = 0.5f;
+
+		void Awake()
 		{
 			// Load and apply options
 			UIOptions.Load(null);
-			yield return new WaitForSeconds(0.25f);
+		}
 
+		IEnumerator Start()
+		{
 			// Load UI
 			yield return StartCoroutine(BaseChecker.Check());
 
 			// wait for UI.
 			yield return StartCoroutine(UIBase.WaitInstance());
+
+			yield return new WaitForSeconds(Wait);
 
 			// load menu level
 			UIBase.Instance.LoadLevel("menu");

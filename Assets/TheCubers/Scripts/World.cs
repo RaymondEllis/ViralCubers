@@ -38,6 +38,7 @@ namespace TheCubers
 		public System.Random Random { get; private set; }
 		private static bool pauseUser, pauseWait;
 		public static bool Paused { get { return pauseUser || pauseWait; } }
+		public static bool PauseUser { get { return pauseUser; } set { pauseUser = value; } }
 
 		public bool IsMenu = false;
 		public Transform Sun;

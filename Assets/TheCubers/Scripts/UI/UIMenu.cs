@@ -97,7 +97,6 @@ namespace TheCubers
 		{
 			if (state == State.Closed)
 				return;
-			//gameObject.SetActive(false);
 			interactableChildren(false);
 			state = State.Closed;
 			needUpdate = true;

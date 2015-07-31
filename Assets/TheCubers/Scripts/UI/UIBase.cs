@@ -19,6 +19,8 @@ namespace TheCubers
 			}
 		}
 
+		public static void Select(Selectable obj) { obj.Select(); }
+
 		private List<UIMenu> menus;
 		private UIMenu back;
 		private bool backSize = false;
@@ -26,6 +28,7 @@ namespace TheCubers
 		private Vector2 backFrom;
 
 		private UIMenu active = null;
+		private UIMenu last = null;
 
 		void Awake()
 		{
@@ -71,7 +74,7 @@ namespace TheCubers
 			for (int i = 0; i < menus.Count; ++i)
 				menus[i].UpdateUI();
 
-			// update background size
+			// background size transition
 			if (backSize)
 			{
 				backPos += active.speed * Time.deltaTime;
@@ -87,7 +90,7 @@ namespace TheCubers
 				Selectable s = e.currentSelectedGameObject.GetComponent<Selectable>();
 				if (s)
 				{
-					// ToDo 99: wrap around tab select.
+					// ToDo 99: wrap around tab select. Selectable.allSelectables looks usefull
 					Selectable next;
 					if (Input.GetKey(KeyCode.LeftShift) || Input.GetKey(KeyCode.RightShift))
 						next = s.FindSelectableOnUp();
@@ -97,6 +100,17 @@ namespace TheCubers
 					if (next)
 						next.Select();
 				}
+			}
+
+			// back or pause
+			if (Input.GetButtonDown("Cancel"))
+			{
+				if (active && active is UIGame)
+					Pause(true);
+				else if (World.PauseUser)
+					Pause(false);
+				else
+					GoBack();
 			}
 		}
 
@@ -123,17 +137,27 @@ namespace TheCubers
 		{
 			if (active)
 				active.Close();
+			last = active;
 			active = menu;
 			active.Open();
 
 			// show background and set size
-			back.Set(active.name != "Game");
+			back.Set(active is UIGame == false);
 			if (back.transform.sizeDelta != active.transform.sizeDelta)
 			{
 				backSize = true;
 				backPos = 0f;
 				backFrom = back.transform.sizeDelta;
 			}
+		}
+
+		/// <summary> Goes to last active, or default menu if no last. </summary>
+		public void GoBack()
+		{
+			if (last)
+				Go(last);
+			else
+				goDefaultMenu(Application.loadedLevelName);
 		}
 
 		private void goDefaultMenu(string levelName)
@@ -173,6 +197,17 @@ namespace TheCubers
 		{
 			yield return Application.LoadLevelAsync(level);
 			goDefaultMenu(level);
+		}
+
+		/// <summary> pause or unpause the game </summary>
+		public void Pause(bool pause)
+		{
+			World.PauseUser = pause;
+			if (pause)
+				Go("Paused");
+			else
+				Go("Game");
+
 		}
 
 		public void Exit()
