@@ -14,7 +14,6 @@ namespace TheCubers
 		public float MoveSpeed;
 		public float PositionSpeed;
 		public float RotationSpeed;
-		public bool SmoothRotate;
 
 		public Transform Target;
 		private Quaternion localRotation = Quaternion.identity;
@@ -26,7 +25,7 @@ namespace TheCubers
 		void Awake()
 		{
 			if (!Camera)
-				Camera = UnityEngine.Camera.main;
+				Camera = Camera.main;
 			if (!Camera)
 				Debug.LogWarning("Unable to find camera to take control of!");
 		}
@@ -34,6 +33,23 @@ namespace TheCubers
 		IEnumerator Start()
 		{
 			yield return StartCoroutine(World.WaitInstance());
+
+			yield return StartCoroutine(UIBase.WaitInstance());
+
+			InvokeRepeating("checkMouse", 1f, 1f);
+		}
+
+		void checkMouse()
+		{
+			if (World.Paused || UIBase.Instance.Active is UIGame == false)
+				UIBase.Instance.Crosshair.SetActive(false);
+			else
+				UIBase.Instance.Crosshair.SetActive(!testMouse());
+		}
+
+		private bool testMouse()
+		{
+			return Input.mousePresent && new Rect(0, 0, Screen.width, Screen.height).Contains(Input.mousePosition);
 		}
 
 		void LateUpdate()
@@ -47,10 +63,16 @@ namespace TheCubers
 			}
 			else
 			{
-				if (Input.GetButtonDown("Fire1"))
+				if (MyInput.GetDown(Inp.Spawn))
 				{
 					Vector3 position;
-					Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+					// use mouse if pressent and on window.
+					if (testMouse())
+						position = Input.mousePosition;
+					else
+						position = new Vector3(Screen.width, Screen.height) * 0.5f;
+
+					Ray ray = Camera.main.ScreenPointToRay(position);
 					if (World.FindGround(ray, out position))
 					{
 						World.Instance.NewEnergy(position, Energy);
@@ -77,20 +99,10 @@ namespace TheCubers
 		private void updateCamera()
 		{
 			// rotate camera
-			if (SmoothRotate)
-			{
-				if (Input.GetKey(KeyCode.Q))
-					localRotation *= Quaternion.Euler(0, RotationSpeed * Time.deltaTime, 0);
-				if (Input.GetKey(KeyCode.E))
-					localRotation *= Quaternion.Euler(0, -RotationSpeed * Time.deltaTime, 0);
-			}
-			else
-			{
-				if (Input.GetKeyDown(KeyCode.Q))
-					localRotation *= Quaternion.Euler(0, 90, 0);
-				if (Input.GetKeyDown(KeyCode.E))
-					localRotation *= Quaternion.Euler(0, -90, 0);
-			}
+			float val;
+			if (MyInput.Axis(Inp.CameraRotate, out val))
+				localRotation *= Quaternion.Euler(0, val * RotationSpeed * Time.deltaTime, 0);
+
 
 			// update transform based on target
 			if (Target)
@@ -104,19 +116,11 @@ namespace TheCubers
 			}
 
 			// move?
-			Vector3 move = Vector3.zero;
-			if (Input.GetKey(KeyCode.LeftArrow) || Input.GetKey(KeyCode.A))
-				move.z = -1;
-			if (Input.GetKey(KeyCode.RightArrow) || Input.GetKey(KeyCode.D))
-				move.z = 1;
-			if (Input.GetKey(KeyCode.UpArrow) || Input.GetKey(KeyCode.W))
-				move.x = -1;
-			if (Input.GetKey(KeyCode.DownArrow) || Input.GetKey(KeyCode.S))
-				move.x = 1;
+			Vector3 move = new Vector3(MyInput.Axis(Inp.CameraVertical), 0f, MyInput.Axis(Inp.CameraHorizontal));
 
 			if (move != Vector3.zero)
 			{
-				transform.position += transform.rotation * move.normalized * MoveSpeed * Time.deltaTime;
+				transform.position += transform.rotation * move * MoveSpeed * Time.deltaTime;
 
 				// move unlinks the target
 				Target = null;
@@ -127,7 +131,7 @@ namespace TheCubers
 			pos.y = Offset.y;
 			Vector3 look = transform.position + LookOffset;
 
-			Camera.transform.position = Vector3.Lerp(Camera.transform.position, pos, PositionSpeed * Time.deltaTime);
+			Camera.transform.position = pos; //Vector3.Lerp(Camera.transform.position, pos, PositionSpeed * Time.deltaTime);
 			Camera.transform.LookAt(look);
 
 

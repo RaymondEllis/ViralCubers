@@ -19,6 +19,8 @@ namespace TheCubers
 			}
 		}
 
+		public GameObject Crosshair;
+
 		public static void Select(Selectable obj) { obj.Select(); }
 
 		private List<UIMenu> menus;
@@ -28,6 +30,7 @@ namespace TheCubers
 		private Vector2 backFrom;
 
 		private UIMenu active = null;
+		public UIMenu Active { get { return active; } }
 		private UIMenu last = null;
 
 		void Awake()
@@ -103,7 +106,7 @@ namespace TheCubers
 			}
 
 			// back or pause
-			if (Input.GetButtonDown("Cancel"))
+			if (Input.GetButtonDown("Cancel") && active is UIGameOver == false)
 			{
 				if (active && active is UIGame)
 					Pause(true);
