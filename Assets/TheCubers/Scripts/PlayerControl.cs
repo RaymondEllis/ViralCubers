@@ -33,23 +33,6 @@ namespace TheCubers
 		IEnumerator Start()
 		{
 			yield return StartCoroutine(World.WaitInstance());
-
-			yield return StartCoroutine(UIBase.WaitInstance());
-
-			InvokeRepeating("checkMouse", 1f, 1f);
-		}
-
-		void checkMouse()
-		{
-			if (World.Paused || UIBase.Instance.Active is UIGame == false)
-				UIBase.Instance.Crosshair.SetActive(false);
-			else
-				UIBase.Instance.Crosshair.SetActive(!testMouse());
-		}
-
-		private bool testMouse()
-		{
-			return Input.mousePresent && new Rect(0, 0, Screen.width, Screen.height).Contains(Input.mousePosition);
 		}
 
 		void LateUpdate()
@@ -67,7 +50,7 @@ namespace TheCubers
 				{
 					Vector3 position;
 					// use mouse if pressent and on window.
-					if (testMouse())
+					if (UIBase.MouseInScreen())
 						position = Input.mousePosition;
 					else
 						position = new Vector3(Screen.width, Screen.height) * 0.5f;

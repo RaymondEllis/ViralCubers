@@ -115,6 +115,18 @@ namespace TheCubers
 				else
 					GoBack();
 			}
+
+			// show and hide the crosshair
+			if (World.Paused || active is UIGame == false)
+				Crosshair.SetActive(false);
+			else
+				Crosshair.SetActive(!MouseInScreen());
+
+		}
+
+		public static bool MouseInScreen()
+		{
+			return Input.mousePresent && new Rect(0, 0, Screen.width, Screen.height).Contains(Input.mousePosition);
 		}
 
 		/// <summary>
