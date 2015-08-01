@@ -11,6 +11,8 @@ namespace TheCubers
 
 		public void Fill(bool cubersWin, int score)
 		{
+			UIBase.Instance.GetMenu<UILeaderboards>().AddScore(score);
+
 			CubersWin.gameObject.SetActive(cubersWin);
 			VirusWin.gameObject.SetActive(!cubersWin);
 

@@ -140,6 +140,14 @@ namespace TheCubers
 			return null;
 		}
 
+		public T GetMenu<T>() where T : UIMenu
+		{
+			for (int i = 0; i < menus.Count; ++i)
+				if (menus[i] is T)
+					return (T)menus[i];
+			return default(T);
+		}
+
 		public void Go(string name)
 		{
 			UIMenu menu = GetMenu(name);
