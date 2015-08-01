@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
+using System;
 using System.IO;
 using System.Collections.Generic;
 
@@ -10,7 +11,7 @@ namespace TheCubers
 		public class Profile
 		{
 			public string Name;
-			public System.DateTime LastUsed;
+			public DateTime LastUsed;
 		}
 
 		private static string file { get { return Application.persistentDataPath + "/profiles.json"; } }
@@ -73,7 +74,12 @@ namespace TheCubers
 			NewInput.text = "";
 
 			if (profiles.Count > 0)
-				ProfileStarter.GetComponentInChildren<Button>().Select();
+			{
+				if (HasCurrent)
+					profilesUI[_current].GetComponentInChildren<Button>().Select();
+				else
+					profilesUI[0].GetComponentInChildren<Button>().Select();
+			}
 			else
 				NewInput.Select();
 		}
@@ -102,7 +108,7 @@ namespace TheCubers
 			if (profiles.Count == 0)
 				return false;
 
-			System.DateTime last = new System.DateTime(0);
+			DateTime last = new DateTime(0);
 			for (int i = 0; i < profiles.Count; ++i)
 			{
 				if (profiles[i].LastUsed > last)
@@ -166,6 +172,7 @@ namespace TheCubers
 			});
 
 			obj.transform.SetParent(ProfileParent);
+			obj.transform.localScale = Vector3.one;
 			obj.SetActive(true);
 			profilesUI.Add(obj);
 		}
@@ -174,7 +181,7 @@ namespace TheCubers
 		public void NewProfile(string name)
 		{
 			int index = profiles.Count;
-			profiles.Add(new Profile() { Name = name });
+			profiles.Add(new Profile() { Name = name, LastUsed = DateTime.Now });
 
 			GameObject obj;
 			if (profiles.Count == 0)
