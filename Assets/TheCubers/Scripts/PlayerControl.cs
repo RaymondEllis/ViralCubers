@@ -81,6 +81,9 @@ namespace TheCubers
 
 		private void updateCamera()
 		{
+			if (World.Paused)
+				return;
+
 			// rotate camera
 			float val;
 			if (MyInput.Axis(Inp.CameraRotate, out val))
