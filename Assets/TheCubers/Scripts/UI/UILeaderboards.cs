@@ -148,12 +148,12 @@ namespace TheCubers
 			{
 				if (level.Names != null && i < level.Names.Count)
 				{
-					items[i].Name.text = level.Names[i];
+					items[i].Name.text = string.Format("{0,2}: {1}", i + 1, level.Names[i]);
 					items[i].Score.text = level.Scores[i].ToString("N0");
 				}
 				else
 				{
-					items[i].Name.text = "None";
+					items[i].Name.text = string.Format("{0,2}: {1}", i + 1, "None");
 					items[i].Score.text = 0.ToString("N0");
 				}
 			}
