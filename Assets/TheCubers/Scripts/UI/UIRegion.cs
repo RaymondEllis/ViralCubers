@@ -34,18 +34,27 @@ namespace TheCubers
 			load();
 #endif
 
-			int completed = 1;
 			var pro = UIBase.Instance.GetMenu<UIProfiles>().Current;
-			if (pro != null)
-				completed = pro.Completed;
+			if (pro == null)
+			{
+				UIBase.Instance.Go<UIProfiles>();
+				return;
+			}
 
-			++completed;
 			for (int i = 0; i < Levels.Length; ++i)
 			{
-				buttons[i].interactable = i < completed + 1;
+				buttons[i].interactable = i <= pro.Completed + 1;
 				if (buttons[i].interactable)
 					FirstSelected = buttons[i];
 			}
+		}
+
+		public int GetLevelIndex(string level)
+		{
+			for (int i = 0; i < Levels.Length; ++i)
+				if (Levels[i].name == level)
+					return i;
+			return -1;
 		}
 
 		private void load()

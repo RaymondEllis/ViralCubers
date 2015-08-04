@@ -80,7 +80,7 @@ namespace TheCubers
 		{
 			if (HasCurrent)
 				profiles[_current].LastUsed = DateTime.Now.ToUniversalTime();
-			save();
+			SaveProfiles();
 		}
 
 		/// <summary> returns false if there is no profiles </summary>
@@ -103,7 +103,7 @@ namespace TheCubers
 			return true;
 		}
 
-		private void save()
+		public void SaveProfiles()
 		{
 			MyFiles.SaveProfiles(profiles);
 		}
