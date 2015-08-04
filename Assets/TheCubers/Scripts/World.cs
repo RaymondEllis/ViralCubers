@@ -102,7 +102,7 @@ namespace TheCubers
 			if (Startup.PrecentInfected > 0)
 			{
 				infected = (int)((float)Startup.Cubers * ((float)Startup.PrecentInfected / 100f));
-				if (infected < 0)
+				if (infected <= 0)
 					infected = 1;
 			}
 			for (int i = 0; i < Startup.Cubers; ++i)

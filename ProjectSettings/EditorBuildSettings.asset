@@ -12,6 +12,8 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/TheCubers/Scenes/base.unity
   - enabled: 1
-    path: Assets/TheCubers/Scenes/world.unity
+    path: Assets/TheCubers/Scenes/tut1.unity
   - enabled: 1
     path: Assets/TheCubers/Scenes/level1.unity
+  - enabled: 1
+    path: Assets/TheCubers/Scenes/world.unity
