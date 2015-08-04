@@ -76,9 +76,9 @@ namespace TheCubers
 			if (profiles.Count > 0)
 			{
 				if (HasCurrent)
-					profilesUI[_current].GetComponentInChildren<Button>().Select();
+					FirstSelected = profilesUI[_current].GetComponentInChildren<Button>();
 				else
-					profilesUI[0].GetComponentInChildren<Button>().Select();
+					FirstSelected = profilesUI[0].GetComponentInChildren<Button>();
 			}
 			else
 				NewInput.Select();
@@ -87,7 +87,7 @@ namespace TheCubers
 		protected override void OnCloseStart()
 		{
 			if (HasCurrent)
-				profiles[_current].LastUsed = System.DateTime.Now.ToUniversalTime();
+				profiles[_current].LastUsed = DateTime.Now.ToUniversalTime();
 			save();
 		}
 

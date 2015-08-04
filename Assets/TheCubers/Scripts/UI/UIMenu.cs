@@ -15,7 +15,9 @@ namespace TheCubers
 		private bool needUpdate;
 
 		public Selectable FirstSelected;
-		public bool IgnoreFirstSelected = false;
+		public bool IgnoreSelected = false;
+		[System.NonSerialized]
+		public Selectable LastSelected = null;
 		public float speed;
 		public AnimationCurve SlideCurve;
 		private float position;
@@ -29,9 +31,6 @@ namespace TheCubers
 
 		public void Init()
 		{
-			if (!FirstSelected && !IgnoreFirstSelected)
-				Debug.LogError("Menu " + name + " missing FirstSelected!");
-
 			transform = GetComponent<RectTransform>();
 
 			gameObject.SetActive(false);
@@ -40,8 +39,15 @@ namespace TheCubers
 			state = State.Closed;
 			needUpdate = false;
 
-			items = GetComponentsInChildren<Selectable>(true);
 			OnInit();
+
+			if (!IgnoreSelected)
+			{
+				if (!FirstSelected)
+					Debug.LogError("Menu " + name + " missing FirstSelected!");
+
+				items = GetComponentsInChildren<Selectable>(true);
+			}
 		}
 
 		protected virtual void OnInit() { }
@@ -76,6 +82,13 @@ namespace TheCubers
 				Close();
 		}
 
+		protected virtual void OnDoSelect()
+		{
+			if (LastSelected)
+				LastSelected.Select();
+			else
+				FirstSelected.Select();
+		}
 		protected virtual void OnOpenStart() { }
 		protected virtual void OnCloseStart() { }
 
@@ -84,24 +97,39 @@ namespace TheCubers
 			if (state == State.Opened)
 				return;
 			gameObject.SetActive(true);
-			interactableChildren(true);
+			if (!IgnoreSelected)
+				interactableChildren(true);
 			state = State.Opened;
 			needUpdate = true;
 			position = 0f;
-			if (!IgnoreFirstSelected)
-				FirstSelected.Select();
 			OnOpenStart();
+			if (!IgnoreSelected)
+				OnDoSelect();
 		}
 
 		public void Close()
 		{
 			if (state == State.Closed)
 				return;
-			interactableChildren(false);
+			if (!IgnoreSelected)
+			{
+				findLastSelected();
+				interactableChildren(false);
+			}
 			state = State.Closed;
 			needUpdate = true;
 			position = 0f;
 			OnCloseStart();
+		}
+
+		private void findLastSelected()
+		{
+			var obj = UnityEngine.EventSystems.EventSystem.current.currentSelectedGameObject;
+			if (!obj)
+				return;
+
+			var sel = obj.GetComponent<Selectable>();
+			LastSelected = sel;
 		}
 
 		private void interactableChildren(bool interactable)

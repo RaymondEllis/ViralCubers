@@ -1,0 +1,23 @@
+[
+  {
+    "Level": "tut1",
+    "Title": "Tutorial 1",
+    "Description": "Tutorial, try and get more than 10,000 score.",
+    "GoalType": 0,
+    "GoalScore": 100000
+  },
+  {
+    "Level": "level1",
+    "Title": "Level 1",
+    "Description": "",
+    "GoalType": 0,
+    "GoalScore": 100000
+  },
+  {
+    "Level": "world",
+    "Title": "Test level",
+    "Description": "A Test level",
+    "GoalType": 0,
+    "GoalScore": 100000
+  }
+]
