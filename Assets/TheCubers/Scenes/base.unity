@@ -1262,7 +1262,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 11433344, guid: 9d7a2773b81d94d4789b2230251c24ce, type: 2}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
-      value: 5
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 11433344, guid: 9d7a2773b81d94d4789b2230251c24ce, type: 2}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
@@ -1274,7 +1274,7 @@ Prefab:
       objectReference: {fileID: 1227223044}
     - target: {fileID: 11433344, guid: 9d7a2773b81d94d4789b2230251c24ce, type: 2}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: Go
+      value: EndGame
       objectReference: {fileID: 0}
     - target: {fileID: 11433344, guid: 9d7a2773b81d94d4789b2230251c24ce, type: 2}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName

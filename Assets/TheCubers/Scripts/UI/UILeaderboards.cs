@@ -1,19 +1,11 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
-using System.IO;
 using System.Collections.Generic;
 
 namespace TheCubers
 {
 	public class UILeaderboards : UIMenu
 	{
-		public struct Level
-		{
-			public string Name;
-			public List<string> Names;
-			public List<int> Scores;
-		}
-
 		private class itemUI
 		{
 			public Text Name;
@@ -29,8 +21,6 @@ namespace TheCubers
 				Score = txt[1];
 			}
 		}
-
-		public static string file { get { return Application.persistentDataPath + "/leaderboard.json"; } }
 
 		public Text Title;
 
@@ -59,28 +49,19 @@ namespace TheCubers
 			var menu = UIBase.Instance.GetMenu<UILevelInfo>();
 			string last = menu.Last;
 
-			if (File.Exists(file))
+			var levels = MyFiles.LoadLevelScores();
+			if (levels != null && levels.Count > 0)
 			{
-				var levels = open();
 				for (int i = 0; i < levels.Count; ++i)
 					if (levels[i].Name == last)
 						populate(levels[i]);
 			}
 			else
 			{
-				populate(new Level());
+				populate(new LevelScores());
 			}
 		}
 
-		private List<Level> open()
-		{
-			if (!File.Exists(file))
-				return null;
-
-			Debug.Log("Loading leaderboards: " + file);
-			string data = File.ReadAllText(file);
-			return LitJson.JsonMapper.ToObject<List<Level>>(data);
-		}
 
 		public void AddScore(int score)
 		{
@@ -88,7 +69,7 @@ namespace TheCubers
 			string name = UIBase.Instance.GetMenu<UIProfiles>().CurrentName;
 
 			// try open file
-			var levels = open();
+			var levels = MyFiles.LoadLevelScores();
 			if (levels != null)
 			{
 				bool added = false;
@@ -118,7 +99,7 @@ namespace TheCubers
 				}
 				if (!added)
 				{
-					levels.Add(new Level()
+					levels.Add(new LevelScores()
 					{
 						Name = last,
 						Names = new List<string>(new string[] { name }),
@@ -128,8 +109,8 @@ namespace TheCubers
 			}
 			else
 			{
-				levels = new List<Level>();
-				levels.Add(new Level()
+				levels = new List<LevelScores>();
+				levels.Add(new LevelScores()
 				{
 					Name = last,
 					Names = new List<string>(new string[] { name }),
@@ -137,12 +118,10 @@ namespace TheCubers
 				});
 			}
 
-			Debug.Log("Writing leaderboards: " + file);
-			string data = LitJson.JsonMapper.ToJson(levels);
-			File.WriteAllText(file, data);
+			MyFiles.SaveLevelScores(levels);
 		}
 
-		private void populate(Level level)
+		private void populate(LevelScores level)
 		{
 			for (int i = 0; i < items.Length; ++i)
 			{

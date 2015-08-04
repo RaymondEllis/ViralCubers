@@ -106,14 +106,18 @@ namespace TheCubers
 			}
 
 			// back or pause
-			if (Input.GetButtonDown("Cancel") && active is UIGameOver == false)
+			if (Input.GetButtonDown("Cancel"))
 			{
-				if (active && active is UIGame)
-					Pause(true);
-				else if (World.PauseUser)
-					Pause(false);
-				else
-					GoBack();
+				GoBack();
+
+				//if (active && active is UIRegion)
+				//	Go("Start");
+				//if (active && active is UIGame)
+				//	Pause(true);
+				//else if (World.PauseUser)
+				//	Pause(false);
+				//else
+				//	GoBack();
 			}
 
 			// show and hide the crosshair
@@ -129,35 +133,37 @@ namespace TheCubers
 			return Input.mousePresent && new Rect(0, 0, Screen.width, Screen.height).Contains(Input.mousePosition);
 		}
 
-		/// <summary>
-		/// Return menu given the name.
-		/// </summary>
+		/// <summary> Return menu given the name </summary>
 		public UIMenu GetMenu(string name)
 		{
 			for (int i = 0; i < menus.Count; ++i)
 				if (menus[i].name == name)
 					return menus[i];
+			Debug.LogWarning("Unable to find menu: " + name);
 			return null;
 		}
-
+		/// <summary> Return menu given type </summary>
 		public T GetMenu<T>() where T : UIMenu
 		{
 			for (int i = 0; i < menus.Count; ++i)
 				if (menus[i] is T)
 					return (T)menus[i];
+			Debug.LogWarning("Unable to find menu: <" + typeof(T).Name + ">");
 			return default(T);
 		}
 
 		public void Go(string name)
 		{
-			UIMenu menu = GetMenu(name);
-			if (menu)
-				Go(menu);
-			else
-				Debug.LogWarning("Unable to find menu: " + name);
+			Go(GetMenu(name));
+		}
+		public void Go<T>() where T : UIMenu
+		{
+			Go(GetMenu<T>());
 		}
 		public void Go(UIMenu menu)
 		{
+			if (!menu)
+				return;
 			if (active)
 				active.Close();
 			last = active;
@@ -177,6 +183,15 @@ namespace TheCubers
 		/// <summary> Goes to last active, or default menu if no last. </summary>
 		public void GoBack()
 		{
+			if (World.PauseUser)
+			{
+				Pause(false);
+				return;
+			}
+
+			if (active && active.GoBack())
+				return;
+
 			if (last)
 				Go(last);
 			else
@@ -193,7 +208,7 @@ namespace TheCubers
 				case "menu":
 				case "base":
 					{
-						UIProfiles menu = (UIProfiles)GetMenu("Profiles");
+						UIProfiles menu = GetMenu<UIProfiles>();
 						if (menu.HasCurrent)
 							Go("Start");
 						else
@@ -202,7 +217,7 @@ namespace TheCubers
 					break;
 
 				default:
-					Go("Game");
+					Go<UIGame>();
 					break;
 			}
 		}
@@ -229,8 +244,16 @@ namespace TheCubers
 			if (pause)
 				Go("Paused");
 			else
-				Go("Game");
+				Go<UIGame>();
 
+		}
+
+		public void EndGame()
+		{
+			World.PauseUser = false;
+			World.Instance.IsMenu = true;
+			Destroy(FindObjectOfType<PlayerControl>().gameObject);
+			Go<UIRegion>();
 		}
 
 		public void Exit()

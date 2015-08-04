@@ -17,20 +17,40 @@ namespace TheCubers
 			load();
 		}
 
-#if UNITY_EDITOR || DEBUG
+		public override bool GoBack()
+		{
+			UIBase.Instance.Go("Start");
+			return true;
+		}
+
 		protected override void OnOpenStart()
 		{
+#if UNITY_EDITOR || DEBUG
 			buttons = null;
 			for (int i = 0; i < Layout.childCount; ++i)
 				Destroy(Layout.GetChild(i).gameObject);
 
+			LastSelected = null;
 			load();
-		}
 #endif
+
+			int completed = 1;
+			var pro = UIBase.Instance.GetMenu<UIProfiles>().Current;
+			if (pro != null)
+				completed = pro.Completed;
+
+			++completed;
+			for (int i = 0; i < Levels.Length; ++i)
+			{
+				buttons[i].interactable = i < completed + 1;
+				if (buttons[i].interactable)
+					FirstSelected = buttons[i];
+			}
+		}
 
 		private void load()
 		{
-			var infos = UILevelInfo.Info.Get();
+			var infos = MyFiles.LoadLevelInfo();
 			buttons = new Button[infos.Length];
 
 			for (int i = 0; i < infos.Length; ++i)

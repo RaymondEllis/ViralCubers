@@ -27,8 +27,6 @@ namespace TheCubers
 		[HideInInspector]
 		public new RectTransform transform;
 
-		private Selectable[] items;
-
 		public void Init()
 		{
 			transform = GetComponent<RectTransform>();
@@ -41,13 +39,9 @@ namespace TheCubers
 
 			OnInit();
 
-			if (!IgnoreSelected)
-			{
-				if (!FirstSelected)
-					Debug.LogError("Menu " + name + " missing FirstSelected!");
+			if (!IgnoreSelected && !FirstSelected)
+				Debug.LogError("Menu " + name + " missing FirstSelected!");
 
-				items = GetComponentsInChildren<Selectable>(true);
-			}
 		}
 
 		protected virtual void OnInit() { }
@@ -82,12 +76,20 @@ namespace TheCubers
 				Close();
 		}
 
+		/// <summary> Return true if handled </summary>
+		public virtual bool GoBack()
+		{
+			return false;
+		}
+
 		protected virtual void OnDoSelect()
 		{
 			if (LastSelected)
 				LastSelected.Select();
-			else
+			else if (FirstSelected)
 				FirstSelected.Select();
+			else
+				Debug.LogError("Nothing to select!");
 		}
 		protected virtual void OnOpenStart() { }
 		protected virtual void OnCloseStart() { }
@@ -126,14 +128,17 @@ namespace TheCubers
 		{
 			var obj = UnityEngine.EventSystems.EventSystem.current.currentSelectedGameObject;
 			if (!obj)
+			{
+				LastSelected = null;
 				return;
-
+			}
 			var sel = obj.GetComponent<Selectable>();
 			LastSelected = sel;
 		}
 
 		private void interactableChildren(bool interactable)
 		{
+			var items = GetComponentsInChildren<Selectable>(true);
 			for (int i = 0; i < items.Length; ++i)
 				if (items[i])
 					items[i].interactable = interactable;

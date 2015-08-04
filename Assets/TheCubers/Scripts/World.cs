@@ -191,10 +191,11 @@ namespace TheCubers
 
 			if (clean == 0 || infected == 0)
 			{
-				UIGameOver menu = (UIGameOver)UIBase.Instance.GetMenu("Game Over");
+				UIGameOver menu = UIBase.Instance.GetMenu<UIGameOver>();
 				menu.Fill(clean > infected, score);
 
 				UIBase.Instance.Go(menu);
+				pauseUser = false;
 				pauseWait = true;
 			}
 		}

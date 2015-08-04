@@ -21,6 +21,12 @@ namespace TheCubers
 			updateText();
 		}
 
+		public override bool GoBack()
+		{
+			UIBase.Instance.Pause(true);
+			return true;
+		}
+
 		public void CountDeath(float energy, int life)
 		{
 			if (life <= 0 || life < energy)

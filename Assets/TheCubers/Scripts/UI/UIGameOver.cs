@@ -9,6 +9,11 @@ namespace TheCubers
 		public Text VirusWin;
 		public Text Score;
 
+		public override bool GoBack()
+		{
+			return true;
+		}
+
 		public void Fill(bool cubersWin, int score)
 		{
 			UIBase.Instance.GetMenu<UILeaderboards>().AddScore(score);

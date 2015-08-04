@@ -1,21 +1,12 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
 using System;
-using System.IO;
 using System.Collections.Generic;
 
 namespace TheCubers
 {
 	public class UIProfiles : UIMenu
 	{
-		public class Profile
-		{
-			public string Name;
-			public DateTime LastUsed;
-		}
-
-		private static string file { get { return Application.persistentDataPath + "/profiles.json"; } }
-
 		public Text Title;
 		public InputField NewInput;
 		public Button Cancel;
@@ -38,6 +29,7 @@ namespace TheCubers
 					return "N/A";
 			}
 		}
+		public Profile Current { get { if (!HasCurrent) return null; return profiles[_current]; } }
 
 		protected override void OnInit()
 		{
@@ -94,16 +86,7 @@ namespace TheCubers
 		/// <summary> returns false if there is no profiles </summary>
 		private bool load()
 		{
-			if (!File.Exists(file))
-				return false;
-
-			Debug.Log("Loading profiles from: " + file);
-			string jsonData;
-			using (var r = new StreamReader(file))
-			{
-				jsonData = r.ReadToEnd();
-			}
-			profiles = new List<Profile>(LitJson.JsonMapper.ToObject<Profile[]>(jsonData));
+			profiles = MyFiles.LoadProfiles();
 
 			if (profiles.Count == 0)
 				return false;
@@ -122,12 +105,7 @@ namespace TheCubers
 
 		private void save()
 		{
-			string jsonData;
-			jsonData = LitJson.JsonMapper.ToJson(profiles);
-			using (var w = new StreamWriter(file, false))
-			{
-				w.Write(jsonData);
-			}
+			MyFiles.SaveProfiles(profiles);
 		}
 
 		private void addProfileUI(GameObject obj, int index)
