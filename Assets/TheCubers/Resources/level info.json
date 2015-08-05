@@ -2,7 +2,14 @@
   {
     "Level": "tut1",
     "Title": "Tutorial 1",
-    "Description": "Tutorial, .",
+    "Description": "Tutorial, learn about controlling the game.",
+    "GoalType": 1,
+    "GoalScore": 0
+  },
+  {
+    "Level": "tut2",
+    "Title": "Tutorial 2",
+    "Description": "Tutorial, learn basic gameplay.",
     "GoalType": 1,
     "GoalScore": 0
   },
