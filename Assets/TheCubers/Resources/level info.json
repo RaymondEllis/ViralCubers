@@ -3,21 +3,21 @@
     "Level": "tut1",
     "Title": "Tutorial 1",
     "Description": "Tutorial, try and get more than 10,000 score.",
-    "GoalType": 0,
+    "GoalType": 1,
     "GoalScore": 0
   },
   {
     "Level": "level1",
     "Title": "Level 1",
     "Description": "Get a score grater than 10,000",
-    "GoalType": 0,
+    "GoalType": 1,
     "GoalScore": 10000
   },
   {
     "Level": "world",
     "Title": "Test level",
     "Description": "A Test level \nGet a score grater than 100,000",
-    "GoalType": 0,
+    "GoalType": 1,
     "GoalScore": 100000
   }
 ]

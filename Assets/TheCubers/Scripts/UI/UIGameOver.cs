@@ -26,35 +26,30 @@ namespace TheCubers
 			int level = ui.GetMenu<UIRegion>().GetLevelIndex(last);
 			if (level == pro.Completed + 1)
 			{
-				var infos = MyFiles.LoadLevelInfo();
-				for (int i = 0; i < infos.Length; ++i)
+				var info = MyFiles.LoadLevelInfo(last);
+				bool flag = false;
+				switch (info.GoalType)
 				{
-					var info = infos[i];
-					if (info.Level == last)
-					{
-						bool flag = false;
-						switch (info.GoalType)
-						{
-							case 0: // more
-								if (score > info.GoalScore)
-									flag = true;
-								break;
-							case 1: // equal
-								if (score == info.GoalScore)
-									flag = true;
-								break;
-							case 2: // less
-								if (score < info.GoalScore)
-									flag = true;
-								break;
-						}
-						if (flag)
-						{
-							pro.Completed = level;
-							ui.GetMenu<UIProfiles>().SaveProfiles();
-						}
+					case 0:
+						Debug.LogError("Did not find level info? " + last);
 						break;
-					}
+					case 1: // more
+						if (score > info.GoalScore)
+							flag = true;
+						break;
+					case 2: // equal
+						if (score == info.GoalScore)
+							flag = true;
+						break;
+					case 3: // less
+						if (score < info.GoalScore)
+							flag = true;
+						break;
+				}
+				if (flag)
+				{
+					pro.Completed = level;
+					ui.GetMenu<UIProfiles>().SaveProfiles();
 				}
 			}
 

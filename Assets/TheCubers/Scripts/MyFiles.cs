@@ -33,6 +33,9 @@ namespace TheCubers
 		private static string profileFile { get { return Application.persistentDataPath + "/profiles.json"; } }
 		private static string scoresFile { get { return Application.persistentDataPath + "/leaderboard.json"; } }
 
+		private static LevelInfo[] levelInfo = null;
+
+
 		// Profiles
 		public static List<Profile> LoadProfiles()
 		{
@@ -58,10 +61,30 @@ namespace TheCubers
 		}
 
 		// Level Info
-		public static LevelInfo[] LoadLevelInfo()
+		public static LevelInfo LoadLevelInfo(string level)
 		{
-			var infoFile = Resources.Load<TextAsset>("level info");
-			return LitJson.JsonMapper.ToObject<LevelInfo[]>(infoFile.text);
+#if UNITY_EDITOR || DEBUG
+			levelInfo = null;
+#endif
+			if (levelInfo == null)
+				LoadLevelInfos();
+			for (int i = 0; i < levelInfo.Length; ++i)
+				if (levelInfo[i].Level == level)
+					return levelInfo[i];
+			return new LevelInfo();
+		}
+		public static LevelInfo[] LoadLevelInfos()
+		{
+#if UNITY_EDITOR || DEBUG
+			levelInfo = null;
+#endif
+			if (levelInfo == null)
+			{
+				Debug.Log("Loading level info");
+				var infoFile = Resources.Load<TextAsset>("level info");
+				levelInfo = LitJson.JsonMapper.ToObject<LevelInfo[]>(infoFile.text);
+			}
+			return levelInfo;
 		}
 
 		// Level Scores

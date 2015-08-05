@@ -20,17 +20,7 @@ namespace TheCubers
 		{
 			Last = level;
 
-			var infos = MyFiles.LoadLevelInfo();
-
-			LevelInfo info = new LevelInfo();
-			for (int i = 0; i < infos.Length; ++i)
-			{
-				if (infos[i].Level == Last)
-				{
-					info = infos[i];
-					break;
-				}
-			}
+			var info = MyFiles.LoadLevelInfo(Last);
 
 			Title.text = info.Title;
 			Text.text = info.Description;

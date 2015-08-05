@@ -59,7 +59,7 @@ namespace TheCubers
 
 		private void load()
 		{
-			var infos = MyFiles.LoadLevelInfo();
+			var infos = MyFiles.LoadLevelInfos();
 			buttons = new Button[infos.Length];
 
 			for (int i = 0; i < infos.Length; ++i)

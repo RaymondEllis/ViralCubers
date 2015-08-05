@@ -12,6 +12,8 @@ public class ThumbGen : Editor
 		if (GUILayout.Button("Generate Thumb"))
 		{
 			Camera cam = (Camera)target;
+			CameraClearFlags clearFlags = cam.clearFlags;
+			cam.clearFlags = CameraClearFlags.Depth;
 
 			RenderTexture renTex = new RenderTexture(size, size, 1);
 			cam.targetTexture = renTex;
@@ -31,6 +33,8 @@ public class ThumbGen : Editor
 			string file = scenePath + "/Thumbnails/" + sceneName + ".png";
 			File.WriteAllBytes(file, data);
 			Debug.Log("Thumbnail saved to: " + file);
+
+			cam.clearFlags = clearFlags;
 		}
 
 		base.OnInspectorGUI();
