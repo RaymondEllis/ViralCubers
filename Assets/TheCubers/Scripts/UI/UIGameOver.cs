@@ -8,6 +8,7 @@ namespace TheCubers
 		public Text CubersWin;
 		public Text VirusWin;
 		public Text Score;
+		public Text EndText;
 
 		public override bool GoBack()
 		{
@@ -22,36 +23,22 @@ namespace TheCubers
 
 			// update current profile if we compleated the goal.
 			var last = ui.GetMenu<UILevelInfo>().Last;
-			Profile pro = ui.GetMenu<UIProfiles>().Current;
-			int level = ui.GetMenu<UIRegion>().GetLevelIndex(last);
-			if (level == pro.Completed + 1)
+
+			if (ScoreInfo.Test(last, score))
 			{
-				var info = MyFiles.LoadLevelInfo(last);
-				bool flag = false;
-				switch (info.GoalType)
-				{
-					case 0:
-						Debug.LogError("Did not find level info? " + last);
-						break;
-					case 1: // more
-						if (score > info.GoalScore)
-							flag = true;
-						break;
-					case 2: // equal
-						if (score == info.GoalScore)
-							flag = true;
-						break;
-					case 3: // less
-						if (score < info.GoalScore)
-							flag = true;
-						break;
-				}
-				if (flag)
+				Profile pro = ui.GetMenu<UIProfiles>().Current;
+				int level = ui.GetMenu<UIRegion>().GetLevelIndex(last);
+				if (level == pro.Completed + 1)
 				{
 					pro.Completed = level;
 					ui.GetMenu<UIProfiles>().SaveProfiles();
+					EndText.text = "Congratulations you unlocked a new level!";
 				}
+				else
+					EndText.text = "Congratulations you finished!";
 			}
+			else
+				EndText.text = ScoreInfo.FailText(last, score);
 
 
 			// fill the text boxes.

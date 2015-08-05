@@ -7,6 +7,7 @@ namespace TheCubers
 	{
 		public Text Title;
 		public Text Text;
+		public Text GoalText;
 
 		// the last known level.
 		public string Last { get; private set; }
@@ -24,6 +25,7 @@ namespace TheCubers
 
 			Title.text = info.Title;
 			Text.text = info.Description;
+			GoalText.text = ScoreInfo.GoalText(Last);
 
 			UIBase.Instance.Go(this);
 		}
