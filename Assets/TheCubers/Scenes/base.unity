@@ -4020,23 +4020,23 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 22443968, guid: 453e96bfe2b8e7a408148038e278381f, type: 2}
       propertyPath: m_AnchorMax.x
-      value: 0
+      value: .600000024
       objectReference: {fileID: 0}
     - target: {fileID: 22443968, guid: 453e96bfe2b8e7a408148038e278381f, type: 2}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 22466334, guid: 453e96bfe2b8e7a408148038e278381f, type: 2}
       propertyPath: m_AnchorMin.x
-      value: 0
+      value: .600000024
       objectReference: {fileID: 0}
     - target: {fileID: 22466334, guid: 453e96bfe2b8e7a408148038e278381f, type: 2}
       propertyPath: m_AnchorMax.x
-      value: 0
+      value: .600000024
       objectReference: {fileID: 0}
     - target: {fileID: 22466334, guid: 453e96bfe2b8e7a408148038e278381f, type: 2}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 453e96bfe2b8e7a408148038e278381f, type: 2}
@@ -4376,7 +4376,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 22443968, guid: 453e96bfe2b8e7a408148038e278381f, type: 2}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 22466334, guid: 453e96bfe2b8e7a408148038e278381f, type: 2}
       propertyPath: m_AnchorMin.x
@@ -4388,7 +4388,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 22466334, guid: 453e96bfe2b8e7a408148038e278381f, type: 2}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 11461176, guid: 453e96bfe2b8e7a408148038e278381f, type: 2}
       propertyPath: m_Colors.m_ColorMultiplier

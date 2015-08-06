@@ -1,0 +1,213 @@
+fileFormatVersion: 2
+guid: 90847a9614ea4ed4ebcaf51052d1c916
+timeCreated: 1438845008
+licenseType: Free
+ModelImporter:
+  serializedVersion: 18
+  fileIDToRecycleName:
+    100000: Key
+    100002: //RootNode
+    100004: Text
+    100006: KeyS
+    100008: KeyS_001
+    100010: KeyS_002
+    100012: KeyS_003
+    100014: KeyS_004
+    100016: TextS
+    100018: TextS_001
+    100020: TextS_002
+    100022: TextS_003
+    100024: TextS_004
+    100026: KeyA
+    100028: KeyD
+    100030: KeyE
+    100032: KeyQ
+    100034: KeyW
+    100036: TextA
+    100038: TextD
+    100040: TextE
+    100042: TextQ
+    100044: Mouse
+    100046: Plane
+    100048: TextMove
+    100050: TextW
+    100052: TextPlace
+    100054: TextRotate
+    100056: Lines
+    400000: Key
+    400002: //RootNode
+    400004: Text
+    400006: KeyS
+    400008: KeyS_001
+    400010: KeyS_002
+    400012: KeyS_003
+    400014: KeyS_004
+    400016: TextS
+    400018: TextS_001
+    400020: TextS_002
+    400022: TextS_003
+    400024: TextS_004
+    400026: KeyA
+    400028: KeyD
+    400030: KeyE
+    400032: KeyQ
+    400034: KeyW
+    400036: TextA
+    400038: TextD
+    400040: TextE
+    400042: TextQ
+    400044: Mouse
+    400046: Plane
+    400048: TextMove
+    400050: TextW
+    400052: TextPlace
+    400054: TextRotate
+    400056: Lines
+    2300000: Key
+    2300002: Text
+    2300004: KeyS
+    2300006: KeyS_001
+    2300008: KeyS_002
+    2300010: KeyS_003
+    2300012: KeyS_004
+    2300014: TextS
+    2300016: TextS_001
+    2300018: TextS_002
+    2300020: TextS_003
+    2300022: TextS_004
+    2300024: KeyA
+    2300026: KeyD
+    2300028: KeyE
+    2300030: KeyQ
+    2300032: KeyW
+    2300034: TextA
+    2300036: TextD
+    2300038: TextE
+    2300040: TextQ
+    2300042: Mouse
+    2300044: Plane
+    2300046: TextMove
+    2300048: TextW
+    2300050: TextPlace
+    2300052: TextRotate
+    2300054: Lines
+    3300000: Key
+    3300002: Text
+    3300004: KeyS
+    3300006: KeyS_001
+    3300008: KeyS_002
+    3300010: KeyS_003
+    3300012: KeyS_004
+    3300014: TextS
+    3300016: TextS_001
+    3300018: TextS_002
+    3300020: TextS_003
+    3300022: TextS_004
+    3300024: KeyA
+    3300026: KeyD
+    3300028: KeyE
+    3300030: KeyQ
+    3300032: KeyW
+    3300034: TextA
+    3300036: TextD
+    3300038: TextE
+    3300040: TextQ
+    3300042: Mouse
+    3300044: Plane
+    3300046: TextMove
+    3300048: TextW
+    3300050: TextPlace
+    3300052: TextRotate
+    3300054: Lines
+    4300000: Text
+    4300002: Key
+    4300004: TextS_004
+    4300006: KeyS_004
+    4300008: KeyS_003
+    4300010: TextS_003
+    4300012: TextS_002
+    4300014: KeyS_002
+    4300016: KeyS_001
+    4300018: TextS_001
+    4300020: TextS
+    4300022: KeyS
+    4300024: KeyE
+    4300026: TextE
+    4300028: KeyQ
+    4300030: TextQ
+    4300032: KeyA
+    4300034: TextA
+    4300036: KeyD
+    4300038: TextD
+    4300040: KeyW
+    4300042: Mouse
+    4300044: Plane
+    4300046: TextMove
+    4300048: TextW
+    4300050: TextPlace
+    4300052: TextRotate
+    4300054: Lines
+    7400000: Default Take
+    9500000: //RootNode
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    optimizeGameObjects: 0
+    motionNodeName: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    animationCompression: 1
+    animationRotationError: .5
+    animationPositionError: .5
+    animationScaleError: .5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    clipAnimations: []
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    importBlendShapes: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+  tangentSpace:
+    normalSmoothAngle: 60
+    splitTangentsAcrossUV: 1
+    normalImportMode: 0
+    tangentImportMode: 1
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    human: []
+    skeleton: []
+    armTwist: .5
+    foreArmTwist: .5
+    upperLegTwist: .5
+    legTwist: .5
+    armStretch: .0500000007
+    legStretch: .0500000007
+    feetSpacing: 0
+    rootMotionBoneName: 
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 0
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

@@ -84,7 +84,7 @@ namespace TheCubers
 				,new virtualInp(Inp.CameraVertical, KeyCode.UpArrow, KeyCode.DownArrow)
 				,new virtualInp(Inp.CameraVertical, "Vertical", true)
 
-				,new virtualInp(Inp.CameraRotate, KeyCode.Q, KeyCode.E)
+				,new virtualInp(Inp.CameraRotate, KeyCode.E, KeyCode.Q)
 				,new virtualInp(Inp.CameraRotate, "Horizontal2")
 
 				,new virtualInp(Inp.Spawn, KeyCode.Mouse0)

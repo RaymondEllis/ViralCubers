@@ -30,7 +30,7 @@ namespace TheCubers
 			{
 				case 0:
 					Debug.LogError("Did not find level info? " + level);
-					break;
+					break;// ToDo  1: Fix format to format 1,000 proper.
 				case 1: // more
 					return string.Format("You needed {0:0} or more points to finish.", info.GoalScore - score);
 				case 2: // equal

@@ -10,7 +10,19 @@ namespace TheCubers
 		public Text GoalText;
 
 		// the last known level.
-		public string Last { get; private set; }
+		private string last;
+		public string Last
+		{
+			get
+			{
+				if (last == null || last.Length == 0)
+				{
+					last = Application.loadedLevelName;
+					Debug.Log("Empty last level, got level from Applcation.loadedLevelName :" + last);
+				}
+				return last;
+			}
+		}
 
 		public void Play()
 		{
@@ -19,7 +31,7 @@ namespace TheCubers
 
 		public void GoMe(string level)
 		{
-			Last = level;
+			last = level;
 
 			var info = MyFiles.LoadLevelInfo(Last);
 
