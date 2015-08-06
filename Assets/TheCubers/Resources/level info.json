@@ -21,10 +21,73 @@
     "GoalScore": 10000
   },
   {
+    "Level": "level2",
+    "Title": "Level 2",
+    "Description": "",
+    "GoalType": 11,
+    "GoalScore": 10000
+  },
+  {
+    "Level": "level3",
+    "Title": "Level 3",
+    "Description": "",
+    "GoalType": 11,
+    "GoalScore": 10000
+  },
+  {
+    "Level": "level4",
+    "Title": "Level 4",
+    "Description": "",
+    "GoalType": 11,
+    "GoalScore": 10000
+  },
+  {
+    "Level": "level5",
+    "Title": "Level 5",
+    "Description": "",
+    "GoalType": 11,
+    "GoalScore": 10000
+  },
+  {
+    "Level": "level6",
+    "Title": "Level 6",
+    "Description": "",
+    "GoalType": 11,
+    "GoalScore": 10000
+  },
+  {
+    "Level": "level7",
+    "Title": "Level 7",
+    "Description": "",
+    "GoalType": 11,
+    "GoalScore": 10000
+  },
+  {
+    "Level": "level8",
+    "Title": "Level 8",
+    "Description": "",
+    "GoalType": 11,
+    "GoalScore": 10000
+  },
+  {
+    "Level": "level9",
+    "Title": "Level 9",
+    "Description": "",
+    "GoalType": 11,
+    "GoalScore": 10000
+  },
+  {
+    "Level": "level10",
+    "Title": "Level 10",
+    "Description": "",
+    "GoalType": 11,
+    "GoalScore": 10000
+  } /*,
+  {
     "Level": "world",
     "Title": "Test level",
     "Description": "A Test level",
     "GoalType": 11,
     "GoalScore": 100000
-  }
+  }*/
 ]

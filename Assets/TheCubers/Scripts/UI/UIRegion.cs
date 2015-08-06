@@ -8,9 +8,8 @@ namespace TheCubers
 		public Transform Layout;
 		public GameObject Button;
 
-		//public string[] Levels;
 		public Sprite[] Levels;
-		private Button[] buttons;
+		private ButtonLevel[] buttons;
 
 		protected override void OnInit()
 		{
@@ -42,14 +41,12 @@ namespace TheCubers
 			}
 
 			bool interact;
-			for (int i = 0; i < Levels.Length; ++i)
+			for (int i = 0; i < buttons.Length; ++i)
 			{
 				interact = i <= pro.Completed + 1;
-				buttons[i].interactable = interact;
-				buttons[i].GetComponentsInChildren<Text>(true)[0].enabled = interact;
-				buttons[i].GetComponentsInChildren<Image>(true)[1].enabled = !interact;
+				buttons[i].Setinteractable(interact);
 				if (interact)
-					FirstSelected = buttons[i];
+					FirstSelected = buttons[i].Button;
 			}
 		}
 
@@ -66,7 +63,7 @@ namespace TheCubers
 		private void load()
 		{
 			var infos = MyFiles.LoadLevelInfos();
-			buttons = new Button[infos.Length];
+			buttons = new ButtonLevel[infos.Length];
 
 			for (int i = 0; i < infos.Length; ++i)
 			{
@@ -77,24 +74,24 @@ namespace TheCubers
 				obj.transform.SetParent(Layout);
 				obj.transform.localScale = Vector3.one;
 
+				var btn = obj.GetComponent<ButtonLevel>();
+				buttons[i] = btn;
+
 				// find and set sprite
 				for (int j = 0; j < Levels.Length; ++j)
 				{
 					if (Levels[j].name == info.Level)
 					{
-						var sp = obj.GetComponent<Image>();
-						sp.sprite = Levels[j];
+						btn.Image.sprite = Levels[j];
 						break;
 					}
 				}
 
 				// set button text
-				obj.GetComponentsInChildren<Text>(true)[0].text = info.Title;
+				btn.text = info.Title;
 
 				// button on click
-				var btn = obj.GetComponent<Button>();
-				buttons[i] = btn;
-				btn.onClick.AddListener(() =>
+				btn.Button.onClick.AddListener(() =>
 				{
 					var menu = UIBase.Instance.GetMenu<UILevelInfo>();
 					menu.GoMe(info.Level);
