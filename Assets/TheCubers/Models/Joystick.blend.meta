@@ -18,6 +18,7 @@ ModelImporter:
     100020: TextRotate
     100022: TextPause
     100024: TextPlace
+    100026: TextSpeed
     400000: Body
     400002: Buttons
     400004: //RootNode
@@ -31,6 +32,7 @@ ModelImporter:
     400020: TextRotate
     400022: TextPause
     400024: TextPlace
+    400026: TextSpeed
     2300000: Body
     2300002: Buttons
     2300004: LStick
@@ -43,6 +45,7 @@ ModelImporter:
     2300018: TextRotate
     2300020: TextPause
     2300022: TextPlace
+    2300024: TextSpeed
     3300000: Body
     3300002: Buttons
     3300004: LStick
@@ -55,6 +58,7 @@ ModelImporter:
     3300018: TextRotate
     3300020: TextPause
     3300022: TextPlace
+    3300024: TextSpeed
     4300000: RStick
     4300002: LStick
     4300004: Buttons
@@ -67,6 +71,7 @@ ModelImporter:
     4300018: TextMove
     4300020: TextPause
     4300022: TextPlace
+    4300024: TextSpeed
     7400000: Default Take
     9500000: //RootNode
   materials:

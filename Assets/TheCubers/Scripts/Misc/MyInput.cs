@@ -8,6 +8,7 @@ namespace TheCubers
 	{
 		Spawn,
 		Pause,
+		Speed2x,
 
 		CameraVertical,
 		CameraHorizontal,
@@ -95,6 +96,9 @@ namespace TheCubers
 				,new virtualInp(Inp.Pause, KeyCode.Escape)
 				,new virtualInp(Inp.Pause, KeyCode.Pause)
 				,new virtualInp(Inp.Pause, KeyCode.JoystickButton7)
+
+				,new virtualInp(Inp.Speed2x, KeyCode.Alpha2)
+				,new virtualInp(Inp.Speed2x, KeyCode.JoystickButton3)
 			};
 		}
 

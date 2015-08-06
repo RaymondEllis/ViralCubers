@@ -63,15 +63,20 @@ namespace TheCubers
 					}
 				}
 
+				// speed 2x
+				if (MyInput.GetDown(Inp.Speed2x))
+				{
+					if (Time.timeScale == 1f)
+						Time.timeScale = 2f;
+					else
+						Time.timeScale = 1f;
+					UIBase.Instance.Speed2x.SetActive(Time.timeScale == 2f);
+				}
 
 				if (Input.GetKeyDown(KeyCode.Alpha5))
 					Time.timeScale = 0.5f;
-				if (Input.GetKeyDown(KeyCode.Alpha1))
-					Time.timeScale = 1f;
-				if (Input.GetKeyDown(KeyCode.Alpha2))
-					Time.timeScale = 2f;
-				if (Input.GetKeyDown(KeyCode.Alpha3))
-					Time.timeScale = 3f;
+				if (Input.GetKeyDown(KeyCode.Alpha4))
+					Time.timeScale = 4f;
 			}
 		}
 
@@ -85,10 +90,12 @@ namespace TheCubers
 			if (World.Paused)
 				return;
 
+			float deltaTime = Time.deltaTime / Time.timeScale;
+
 			// rotate camera
 			float val;
 			if (MyInput.Axis(Inp.CameraRotate, out val))
-				localRotation *= Quaternion.Euler(0, val * RotationSpeed * Time.deltaTime, 0);
+				localRotation *= Quaternion.Euler(0, val * RotationSpeed * deltaTime, 0);
 
 
 			// update transform based on target
@@ -107,7 +114,7 @@ namespace TheCubers
 
 			if (move != Vector3.zero)
 			{
-				transform.position += transform.rotation * move * MoveSpeed * Time.deltaTime;
+				transform.position += transform.rotation * move * MoveSpeed * deltaTime;
 
 				// move unlinks the target
 				Target = null;

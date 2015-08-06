@@ -20,6 +20,7 @@ namespace TheCubers
 		}
 
 		public GameObject Crosshair;
+		public GameObject Speed2x;
 
 		public static void Select(Selectable obj) { obj.Select(); }
 
