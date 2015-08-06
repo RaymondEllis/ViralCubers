@@ -23,7 +23,6 @@ namespace TheCubers
 
 		public override bool GoBack()
 		{
-			UIBase.Instance.Pause(true);
 			return true;
 		}
 

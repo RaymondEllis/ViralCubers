@@ -7,6 +7,7 @@ namespace TheCubers
 	public enum Inp
 	{
 		Spawn,
+		Pause,
 
 		CameraVertical,
 		CameraHorizontal,
@@ -88,13 +89,19 @@ namespace TheCubers
 
 				,new virtualInp(Inp.Spawn, KeyCode.Mouse0)
 				,new virtualInp(Inp.Spawn, KeyCode.JoystickButton0)
+				,new virtualInp(Inp.Spawn, KeyCode.JoystickButton4)
+				,new virtualInp(Inp.Spawn, KeyCode.JoystickButton5)
+
+				,new virtualInp(Inp.Pause, KeyCode.Escape)
+				,new virtualInp(Inp.Pause, KeyCode.Pause)
+				,new virtualInp(Inp.Pause, KeyCode.JoystickButton7)
 			};
 		}
 
 		public static bool GetDown(Inp inp)
 		{
 			for (int i = 0; i < virtuals.Length; ++i)
-				if (virtuals[i].GetDown())
+				if (virtuals[i].MapTo == inp && virtuals[i].GetDown())
 					return true;
 			return false;
 		}

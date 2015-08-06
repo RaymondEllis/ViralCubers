@@ -13,6 +13,11 @@ ModelImporter:
     100010: Text
     100012: Text_001
     100014: Lines
+    100016: Text_002
+    100018: TextMove
+    100020: TextRotate
+    100022: TextPause
+    100024: TextPlace
     400000: Body
     400002: Buttons
     400004: //RootNode
@@ -21,6 +26,11 @@ ModelImporter:
     400010: Text
     400012: Text_001
     400014: Lines
+    400016: Text_002
+    400018: TextMove
+    400020: TextRotate
+    400022: TextPause
+    400024: TextPlace
     2300000: Body
     2300002: Buttons
     2300004: LStick
@@ -28,6 +38,11 @@ ModelImporter:
     2300008: Text
     2300010: Text_001
     2300012: Lines
+    2300014: Text_002
+    2300016: TextMove
+    2300018: TextRotate
+    2300020: TextPause
+    2300022: TextPlace
     3300000: Body
     3300002: Buttons
     3300004: LStick
@@ -35,6 +50,11 @@ ModelImporter:
     3300008: Text
     3300010: Text_001
     3300012: Lines
+    3300014: Text_002
+    3300016: TextMove
+    3300018: TextRotate
+    3300020: TextPause
+    3300022: TextPlace
     4300000: RStick
     4300002: LStick
     4300004: Buttons
@@ -42,6 +62,11 @@ ModelImporter:
     4300008: Text
     4300010: Text_001
     4300012: Lines
+    4300014: Text_002
+    4300016: TextRotate
+    4300018: TextMove
+    4300020: TextPause
+    4300022: TextPlace
     7400000: Default Take
     9500000: //RootNode
   materials:

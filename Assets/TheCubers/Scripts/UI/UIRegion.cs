@@ -54,6 +54,7 @@ namespace TheCubers
 			for (int i = 0; i < Levels.Length; ++i)
 				if (Levels[i].name == level)
 					return i;
+			Debug.LogError("Unable to find index for level: " + level);
 			return -1;
 		}
 

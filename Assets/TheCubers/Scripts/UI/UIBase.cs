@@ -105,7 +105,13 @@ namespace TheCubers
 				}
 			}
 
-			// back or pause
+			// pause
+			if (MyInput.GetDown(Inp.Pause))
+			{
+				Pause(!World.PauseUser);
+			}
+
+			// back
 			if (Input.GetButtonDown("Cancel"))
 			{
 				GoBack();
@@ -240,6 +246,9 @@ namespace TheCubers
 		/// <summary> pause or unpause the game </summary>
 		public void Pause(bool pause)
 		{
+			if (!(active is UIGame || World.PauseUser))
+				return;
+
 			World.PauseUser = pause;
 			if (pause)
 				Go("Paused");
