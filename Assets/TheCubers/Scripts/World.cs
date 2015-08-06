@@ -262,12 +262,12 @@ namespace TheCubers
 			return true;
 		}
 
-		/// <summary> new random energy </summary>
+		/// <summary> new random non special energy </summary>
 		public bool NewEnergy(float min, float max)
 		{
-			return NewEnergy(new Vector3(-sizeXhalf + (float)Random.NextDouble() * sizeX, 0f, -sizeZhalf + (float)Random.NextDouble() * sizeZ), min + (float)Random.NextDouble() * (max - min));
+			return NewEnergy(new Vector3(-sizeXhalf + (float)Random.NextDouble() * sizeX, 0f, -sizeZhalf + (float)Random.NextDouble() * sizeZ), min + (float)Random.NextDouble() * (max - min), false);
 		}
-		public bool NewEnergy(Vector3 position, float amount)
+		public bool NewEnergy(Vector3 position, float amount, bool special)
 		{
 			// check if there is already energy around here.
 			if (amount < 0.001f || energys.CheckDistance(position, 0.8f))
@@ -275,7 +275,7 @@ namespace TheCubers
 
 			var e = energys.Pull();
 			e.transform.position = position;
-			e.Init(amount);
+			e.Init(amount, special);
 			return true;
 		}
 

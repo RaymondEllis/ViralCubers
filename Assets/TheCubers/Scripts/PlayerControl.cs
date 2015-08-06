@@ -58,7 +58,7 @@ namespace TheCubers
 					Ray ray = Camera.main.ScreenPointToRay(position);
 					if (World.FindGround(ray, out position))
 					{
-						if (World.Instance.NewEnergy(position, Energy))
+						if (World.Instance.NewEnergy(position, Energy, true))
 							--World.Instance.UserEnergy;
 					}
 				}

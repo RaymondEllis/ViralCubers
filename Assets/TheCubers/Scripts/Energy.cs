@@ -21,11 +21,11 @@ namespace TheCubers
 
 		public Transform LookAtSun;
 
-		public void Init(float amount)
+		public void Init(float amount, bool special)
 		{
 			Amount = amount;
 			lastAmount = Amount;
-			special = amount == 10f;
+			this.special = special;
 
 			if (special)
 				initEdible(10, false);
