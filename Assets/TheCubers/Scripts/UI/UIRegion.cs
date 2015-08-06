@@ -41,10 +41,14 @@ namespace TheCubers
 				return;
 			}
 
+			bool interact;
 			for (int i = 0; i < Levels.Length; ++i)
 			{
-				buttons[i].interactable = i <= pro.Completed + 1;
-				if (buttons[i].interactable)
+				interact = i <= pro.Completed + 1;
+				buttons[i].interactable = interact;
+				buttons[i].GetComponentsInChildren<Text>(true)[0].enabled = interact;
+				buttons[i].GetComponentsInChildren<Image>(true)[1].enabled = !interact;
+				if (interact)
 					FirstSelected = buttons[i];
 			}
 		}

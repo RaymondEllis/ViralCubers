@@ -24,7 +24,7 @@ namespace TheCubers
 			// update current profile if we compleated the goal.
 			var last = ui.GetMenu<UILevelInfo>().Last;
 
-			if (ScoreInfo.Test(last, score))
+			if (ScoreInfo.Test(last, cubersWin, score))
 			{
 				Profile pro = ui.GetMenu<UIProfiles>().Current;
 				int level = ui.GetMenu<UIRegion>().GetLevelIndex(last);
@@ -38,7 +38,7 @@ namespace TheCubers
 					EndText.text = "Congratulations you finished!";
 			}
 			else
-				EndText.text = ScoreInfo.FailText(last, score);
+				EndText.text = ScoreInfo.FailText(last, cubersWin, score);
 
 
 			// fill the text boxes.
