@@ -160,7 +160,7 @@ namespace TheCubers
 		void OnDrawGizmosSelected()
 		{
 #if UNITY_EDITOR
-			if (UnityEditor.EditorApplication.isPlaying)
+			if (UnityEditor.EditorApplication.isPlaying && enabled)
 				findMoveEat(true);
 #endif
 		}
