@@ -9,6 +9,7 @@ namespace TheCubers
 
 		public Text LifeValue;
 		public Text EnergyValue;
+		public Text UserEnergy;
 
 		private int deadLife = 0, deadEnergy = 0;
 

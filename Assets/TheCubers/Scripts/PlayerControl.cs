@@ -46,7 +46,7 @@ namespace TheCubers
 			}
 			else
 			{
-				if (MyInput.GetDown(Inp.Spawn))
+				if (MyInput.GetDown(Inp.Spawn) && World.Instance.UserEnergy > 0)
 				{
 					Vector3 position;
 					// use mouse if pressent and on window.
@@ -58,7 +58,8 @@ namespace TheCubers
 					Ray ray = Camera.main.ScreenPointToRay(position);
 					if (World.FindGround(ray, out position))
 					{
-						World.Instance.NewEnergy(position, Energy);
+						if (World.Instance.NewEnergy(position, Energy))
+							--World.Instance.UserEnergy;
 					}
 				}
 

@@ -315,7 +315,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 481888, guid: c1cc3a41f646ac54b83f7f94cd08949d, type: 2}
       propertyPath: m_RootOrder
-      value: 7
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 11461210, guid: c1cc3a41f646ac54b83f7f94cd08949d, type: 2}
       propertyPath: Sun

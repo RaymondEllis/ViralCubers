@@ -51,8 +51,9 @@ namespace TheCubers
 
 		public int GetLevelIndex(string level)
 		{
-			for (int i = 0; i < Levels.Length; ++i)
-				if (Levels[i].name == level)
+			var infos = MyFiles.LoadLevelInfos();
+			for (int i = 0; i < infos.Length; ++i)
+				if (infos[i].Level == level)
 					return i;
 			Debug.LogError("Unable to find index for level: " + level);
 			return -1;

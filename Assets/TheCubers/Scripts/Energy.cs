@@ -67,6 +67,13 @@ namespace TheCubers
 			}
 		}
 
+		protected override void OnConsumed()
+		{
+			if (special)
+				++World.Instance.UserEnergy;
+			base.OnConsumed();
+		}
+
 		private void updateVisuals()
 		{
 			Global g = World.Instance.EnergyGlobal;

@@ -21,6 +21,21 @@ namespace TheCubers
 			public int PrecentInfected;
 		}
 
+		public int TotalUserEnergy;
+		private int _userEnergy;
+		public int UserEnergy
+		{
+			get { return _userEnergy; }
+			set
+			{
+				if (value == _userEnergy)
+					return;
+				_userEnergy = value;
+				UIBase.Instance.GetMenu<UIGame>().UserEnergy.text = value.ToString("N0");
+			}
+		}
+
+
 		[Header("Energy spawn")]
 		[Range(0.01f, 1f)]
 		public float EnergyRate;
@@ -78,6 +93,8 @@ namespace TheCubers
 			}
 			// wait for UI.
 			yield return StartCoroutine(UIBase.WaitInstance());
+
+			UserEnergy = TotalUserEnergy;
 
 			Random = new System.Random(Startup.Seed);
 

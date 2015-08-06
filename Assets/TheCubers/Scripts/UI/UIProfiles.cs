@@ -159,7 +159,7 @@ namespace TheCubers
 		public void NewProfile(string name)
 		{
 			int index = profiles.Count;
-			profiles.Add(new Profile() { Name = name, LastUsed = DateTime.Now });
+			profiles.Add(new Profile() { Name = name, LastUsed = DateTime.Now, Completed = 1 });
 
 			GameObject obj;
 			if (profiles.Count == 0)
