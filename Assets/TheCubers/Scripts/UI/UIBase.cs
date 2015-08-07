@@ -133,6 +133,10 @@ namespace TheCubers
 			else
 				Crosshair.SetActive(!MouseInScreen());
 
+
+			if (Speed2x.activeSelf != (Time.timeScale == 2f))
+				Speed2x.SetActive(Time.timeScale == 2f);
+
 		}
 
 		public static bool MouseInScreen()

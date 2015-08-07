@@ -1,7 +1,6 @@
 /*
 
   Rename energy to solar flower
-  Fix special energy not comeing back
   Smile to frown based on energy level
   Word the tutorial to make a better understanding of the gameplay
 
@@ -35,7 +34,7 @@
   {
     "Level": "level2",
     "Title": "Green Vally 2",
-    "Description": "The virus is still spreading!",
+    "Description": "The virus is still growing!",
     "GoalType": 11,
     "GoalScore": 10000
   },
@@ -56,7 +55,7 @@
   {
     "Level": "level5",
     "Title": "Vally Street 1",
-    "Description": "",
+    "Description": "Stop the virus from making it firther down the street.",
     "GoalType": 11,
     "GoalScore": 10000
   },
@@ -92,7 +91,7 @@
   {
     "Level": "level10",
     "Title": "Town 2",
-    "Description": "",
+    "Description": "Save the last town.",
     "GoalType": 11,
     "GoalScore": 10000
   } /*,

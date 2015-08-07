@@ -71,7 +71,6 @@ namespace TheCubers
 						Time.timeScale = 2f;
 					else
 						Time.timeScale = 1f;
-					UIBase.Instance.Speed2x.SetActive(Time.timeScale == 2f);
 				}
 
 				if (Input.GetKeyDown(KeyCode.Alpha5))
