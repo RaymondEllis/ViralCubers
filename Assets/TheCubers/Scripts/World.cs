@@ -127,7 +127,7 @@ namespace TheCubers
 				Vector3 position;
 				if (FindGround(new Ray(new Vector3(-sizeXhalf + Random.Next(sizeX), 100f, -sizeZhalf + Random.Next(sizeZ)), Vector3.down), out position))
 				{
-					cubers.Pull().Init(position, --infected >= 0, 0.2f + (float)Random.NextDouble() * 0.8f);//, Color.black);
+					cubers.Pull().Init(position, --infected >= 0, 0.5f + (float)Random.NextDouble() * 0.6f);//, Color.black);
 				}
 			}
 
@@ -249,8 +249,9 @@ namespace TheCubers
 			Fourth f = fourths.Pull();
 			f.transform.position = cuber.transform.position + position;
 			f.transform.rotation = cuber.transform.rotation * rotation;
-			f.Rigidbody.AddForceAtPosition(Vector3.up * 2f, cuber.transform.position, ForceMode.Impulse);
+			//f.Rigidbody.AddForceAtPosition(Vector3.up * 2f, cuber.transform.position, ForceMode.Impulse);
 
+			f.Init();
 			//if (cuber.Infected)
 			//	f.Init(Color.white);
 			//else

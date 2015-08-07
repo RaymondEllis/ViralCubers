@@ -10,7 +10,7 @@ namespace TheCubers
 		bool canWant;
 		int consumed;
 		public int PortionsLeft { get { return count - consumed; } }
-
+		public bool Consumed { get { return PortionsLeft <= 0; } }
 
 		protected void initEdible(int count, bool canWant)
 		{

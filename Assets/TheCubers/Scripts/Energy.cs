@@ -46,6 +46,7 @@ namespace TheCubers
 			{
 				float result = Amount;
 				Amount = 0f;
+				countEdible(0);
 				return result;
 			}
 		}
@@ -62,6 +63,9 @@ namespace TheCubers
 
 			if (Amount != lastAmount)
 			{
+				if (!special)
+					countEdible(Mathf.CeilToInt(Amount));
+
 				lastAmount = Amount;
 				updateVisuals();
 			}

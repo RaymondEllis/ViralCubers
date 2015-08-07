@@ -63,6 +63,7 @@ namespace TheCubers
 
 		public void Init(Vector3 position, bool infected, float lifeMul)//, Color color)
 		{
+			lifeMul = Mathf.Clamp01(lifeMul);
 			Infected = infected;
 			Energy = world.CuberGlobal.InitialEnergy * lifeMul;
 			Life = (int)((float)world.CuberGlobal.InitialLife * lifeMul);
@@ -247,6 +248,12 @@ namespace TheCubers
 
 		public void FinishEating()
 		{
+			if (targetFood.Consumed)
+			{
+				targetFood = null;
+				return;
+			}
+
 			if (targetFood is Fourth)
 			{
 				Fourths += 1;
@@ -275,7 +282,7 @@ namespace TheCubers
 		}
 		public void EndDeath()
 		{
-			UIGame menu = (UIGame)UIBase.Instance.GetMenu("Game");
+			UIGame menu = UIBase.Instance.GetMenu<UIGame>();
 			menu.CountDeath(Energy, Life);
 
 			world.Kill(this);
@@ -283,6 +290,12 @@ namespace TheCubers
 
 		public void GiveBirth()
 		{
+			if (Fourths < 4)
+			{
+				Debug.LogError("Tried to give birth with only " + Fourths + " fourths.");
+				return;
+			}
+
 			Vector3 position;
 			World.FindGround(new Ray(transform.position + Vector3.up, Vector3.down), out position);
 			world.NewCuber(position, Infected, FourthsColor.linear);
