@@ -127,7 +127,7 @@ namespace TheCubers
 				Vector3 position;
 				if (FindGround(new Ray(new Vector3(-sizeXhalf + Random.Next(sizeX), 100f, -sizeZhalf + Random.Next(sizeZ)), Vector3.down), out position))
 				{
-					cubers.Pull().Init(position, --infected >= 0, 0.2f + (float)Random.NextDouble() * 0.8f, Color.black);
+					cubers.Pull().Init(position, --infected >= 0, 0.2f + (float)Random.NextDouble() * 0.8f);//, Color.black);
 				}
 			}
 
@@ -249,16 +249,17 @@ namespace TheCubers
 			Fourth f = fourths.Pull();
 			f.transform.position = cuber.transform.position + position;
 			f.transform.rotation = cuber.transform.rotation * rotation;
+			f.Rigidbody.AddForceAtPosition(Vector3.up * 2f, cuber.transform.position, ForceMode.Impulse);
 
-			if (cuber.Infected)
-				f.Init(Color.white);
-			else
-				f.Init(cuber.Mesh.material.color);
+			//if (cuber.Infected)
+			//	f.Init(Color.white);
+			//else
+			//	f.Init(cuber.Mesh.material.color);
 		}
 
 		public bool NewCuber(Vector3 position, bool infected, Color color)
 		{
-			cubers.Pull().Init(position, infected, 1f, color);
+			cubers.Pull().Init(position, infected, 1f);//, color);
 			return true;
 		}
 
@@ -303,6 +304,37 @@ namespace TheCubers
 			point = Vector3.zero;
 			Debug.LogWarning("Unable to find ground!");
 			return false;
+		}
+
+		public Material GetCuberMat(bool infected, int age)
+		{
+			Color c2 = CuberGlobal.ColorOld;
+			// ToDo : Cache materials.
+			Material mat;
+			int max = CuberGlobal.InitialLife;
+			if (infected)
+			{
+				mat = new Material(CuberGlobal.InfectedBodyMat);
+				c2 = CuberGlobal.ColorOldInfected;
+				max *= 2;
+			}
+			else
+				mat = new Material(CuberGlobal.BodyMat);
+
+			float val = 1f - (float)(age) / max;
+			if (val > 1f) val = 1f;
+			if (val < 0f) val = 0f;
+
+			Color c = mat.color;
+			//c.r = Mathf.Clamp(c.r + val, 0f, 1f);
+			//c.g = Mathf.Clamp(c.g + val, 0f, 1f);
+			//c.b = Mathf.Clamp(c.b + val, 0f, 1f);
+			c.r = Mathf.Lerp(c.r, c2.r, val);
+			c.g = Mathf.Lerp(c.g, c2.g, val);
+			c.b = Mathf.Lerp(c.b, c2.b, val);
+			mat.color = c;
+
+			return mat;
 		}
 	}
 }

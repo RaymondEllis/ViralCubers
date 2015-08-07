@@ -21,6 +21,8 @@ namespace TheCubers
 			[Header("Body materials")]
 			public Material BodyMat;
 			public Material InfectedBodyMat;
+			public Color ColorOld;
+			public Color ColorOldInfected;
 
 			[Header("Energy costs")]
 			public float EnergyConsistent;
@@ -59,23 +61,24 @@ namespace TheCubers
 			world = World.Instance;
 		}
 
-		public void Init(Vector3 position, bool infected, float lifeMul, Color color)
+		public void Init(Vector3 position, bool infected, float lifeMul)//, Color color)
 		{
 			Infected = infected;
 			Energy = world.CuberGlobal.InitialEnergy * lifeMul;
 			Life = (int)((float)world.CuberGlobal.InitialLife * lifeMul);
 			if (Infected)
 			{
-				Mesh.material = world.CuberGlobal.InfectedBodyMat;
+				//Mesh.material = world.CuberGlobal.InfectedBodyMat;
 				Energy *= 2f;
 				Life *= 2;
 			}
-			else
-			{
-				Mesh.material = world.CuberGlobal.BodyMat;
-				if (color != Color.black)
-					Mesh.material.color = color;
-			}
+			//else
+			//{
+			//	Mesh.material = world.CuberGlobal.BodyMat;
+			//	if (color != Color.black)
+			//		Mesh.material.color = color;
+			//}
+			Mesh.material = world.GetCuberMat(infected, Life);
 			Fourths = 0;
 			FourthsColor = Color.black.gamma;
 
@@ -119,6 +122,7 @@ namespace TheCubers
 				BeginDeath();
 				return;
 			}
+			Mesh.material = world.GetCuberMat(Infected, Life);
 
 			if (targetFood)
 			{
@@ -179,7 +183,7 @@ namespace TheCubers
 				for (int i = 0; i < fourths.Count; ++i)
 				{
 					tmpDistance = Vector3.Distance(transform.position, fourths[i].transform.position);
-					tmpWeight = ((Fourths + 1) * g.WeightFourth) / (fourths[i].Wanted * g.WeightWanted) / (tmpDistance * g.WeightDistance);
+					tmpWeight = ((Fourths + 1) * g.WeightFourth) / (1 + fourths[i].Wanted * g.WeightWanted) / (1 + tmpDistance * g.WeightDistance);
 					if (debug)
 					{
 						Vector3 v = fourths[i].transform.position;
@@ -201,7 +205,7 @@ namespace TheCubers
 			for (int i = 0; i < energy.Count; ++i)
 			{
 				tmpDistance = Vector3.Distance(transform.position, energy[i].transform.position);
-				tmpWeight = (energy[i].Amount * g.WeightEnergy) / (Energy * g.WeightCurrentEnergy) / (energy[i].Wanted * g.WeightWanted) / (tmpDistance * g.WeightDistance);
+				tmpWeight = (energy[i].Amount * g.WeightEnergy) / (1 + Energy * g.WeightCurrentEnergy) / (1 + energy[i].Wanted * g.WeightWanted) / (1 + tmpDistance * g.WeightDistance);
 				if (debug)
 				{
 					Vector3 v = energy[i].transform.position;
@@ -246,10 +250,10 @@ namespace TheCubers
 			if (targetFood is Fourth)
 			{
 				Fourths += 1;
-				Color color = ((Fourth)targetFood).Color.gamma;
-				FourthsColor.r += color.r / 4f;
-				FourthsColor.g += color.g / 4f;
-				FourthsColor.b += color.b / 4f;
+				//Color color = ((Fourth)targetFood).Color.gamma;
+				//FourthsColor.r += color.r / 4f;
+				//FourthsColor.g += color.g / 4f;
+				//FourthsColor.b += color.b / 4f;
 			}
 			else if (targetFood is Energy)
 			{

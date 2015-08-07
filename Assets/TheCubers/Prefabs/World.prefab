@@ -67,13 +67,15 @@ MonoBehaviour:
     InitialEnergy: .300000012
     BodyMat: {fileID: 2100000, guid: 271d84904695dae43b548c610cad2460, type: 2}
     InfectedBodyMat: {fileID: 2100000, guid: 57b373a9f80beba47b1a525ad0ee7af8, type: 2}
+    ColorOld: {r: .796999991, g: .907600045, b: 1, a: 1}
+    ColorOldInfected: {r: 1, g: .884000003, b: .884000003, a: 1}
     EnergyConsistent: .00999999978
     EnergyHop: .100000001
     WeightDistance: 3
-    WeightFourth: 6
+    WeightFourth: 8
     WeightEnergy: 10
     WeightCurrentEnergy: 1
-    WeightWanted: .5
+    WeightWanted: 10
   EnergyGlobal:
     Grow: .0500000007
     Max: 1.20000005
@@ -109,6 +111,46 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: TotalUserEnergy
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: CuberGlobal.ColorOld.r
+      value: .796999991
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: CuberGlobal.ColorOld.g
+      value: .907600045
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: CuberGlobal.ColorOld.b
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: CuberGlobal.ColorOldInfected.r
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: CuberGlobal.ColorOldInfected.g
+      value: .884000003
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: CuberGlobal.ColorOldInfected.b
+      value: .884000003
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: CuberGlobal.ColorOld.a
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: CuberGlobal.ColorOldInfected.a
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: CuberGlobal.WeightFourth
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: CuberGlobal.WeightWanted
       value: 10
       objectReference: {fileID: 0}
     m_RemovedComponents: []

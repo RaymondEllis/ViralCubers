@@ -112,9 +112,22 @@ namespace TheCubers
 			// move?
 			Vector3 move = new Vector3(MyInput.Axis(Inp.CameraVertical), 0f, MyInput.Axis(Inp.CameraHorizontal));
 
-			if (move != Vector3.zero)
+			if (move != Vector3.zero && World.Instance)
 			{
-				transform.position += transform.rotation * move * MoveSpeed * deltaTime;
+				Vector3 newPos = transform.position + transform.rotation * move * MoveSpeed * deltaTime;
+				Vector3 size = World.Instance.transform.localScale * 1.5f;
+
+				if (newPos.x > size.x)
+					newPos.x = size.x;
+				else if (newPos.x < -size.x)
+					newPos.x = -size.x;
+
+				if (newPos.z > size.z)
+					newPos.z = size.z;
+				else if (newPos.z < -size.z)
+					newPos.z = -size.z;
+
+				transform.position = newPos;
 
 				// move unlinks the target
 				Target = null;
