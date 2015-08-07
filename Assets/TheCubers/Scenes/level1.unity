@@ -343,7 +343,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 11461210, guid: c1cc3a41f646ac54b83f7f94cd08949d, type: 2}
       propertyPath: EnergyCount
-      value: 25
+      value: 10
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: c1cc3a41f646ac54b83f7f94cd08949d, type: 2}
