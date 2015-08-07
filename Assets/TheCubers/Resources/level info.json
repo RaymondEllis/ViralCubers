@@ -63,17 +63,17 @@
   {
     "Level": "level6",
     "Title": "Solar Field 1",
-    "Description": "It looks like the virus is in solar field!\nWe need the energy, don't let it take over!",
+    "Description": "It looks like the virus is the solar field!\nWe need the energy, don't let it take over!",
     /*" Length  ": "A virus has broken out in Green Vally!\nTake control over sector 11 and stop it from spreading! aaaaaaaaaaaaa aaaaaaaa aaaaaaaaaaa aaaaaa 2234567421 4121 24421 2132 415 122",*/
     "GoalType": 11,
-    "GoalScore": 10000
+    "GoalScore": 15000
   },
   {
     "Level": "level7",
     "Title": "Solar Field 2",
     "Description": "",
     "GoalType": 11,
-    "GoalScore": 10000
+    "GoalScore": 20000
   },
   {
     "Level": "level8",

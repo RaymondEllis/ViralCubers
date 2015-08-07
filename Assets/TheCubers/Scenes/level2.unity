@@ -385,15 +385,23 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 11461210, guid: c1cc3a41f646ac54b83f7f94cd08949d, type: 2}
       propertyPath: Startup.Seed
-      value: 22
+      value: 23
       objectReference: {fileID: 0}
     - target: {fileID: 11461210, guid: c1cc3a41f646ac54b83f7f94cd08949d, type: 2}
       propertyPath: Startup.Cubers
-      value: 10
+      value: 20
       objectReference: {fileID: 0}
     - target: {fileID: 11461210, guid: c1cc3a41f646ac54b83f7f94cd08949d, type: 2}
       propertyPath: Startup.PrecentInfected
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 11461210, guid: c1cc3a41f646ac54b83f7f94cd08949d, type: 2}
+      propertyPath: EnergyCount
       value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 11461210, guid: c1cc3a41f646ac54b83f7f94cd08949d, type: 2}
+      propertyPath: CuberGlobal.InitialEnergy
+      value: .800000012
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: c1cc3a41f646ac54b83f7f94cd08949d, type: 2}
