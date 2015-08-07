@@ -11,6 +11,8 @@ EditorBuildSettings:
     path: Assets/TheCubers/Scenes/menu.unity
   - enabled: 1
     path: Assets/TheCubers/Scenes/base.unity
+  - enabled: 0
+    path: Assets/TheCubers/Scenes/world.unity
   - enabled: 1
     path: Assets/TheCubers/Scenes/tut1.unity
   - enabled: 1
@@ -18,4 +20,20 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/TheCubers/Scenes/level1.unity
   - enabled: 1
-    path: Assets/TheCubers/Scenes/world.unity
+    path: Assets/TheCubers/Scenes/level2.unity
+  - enabled: 1
+    path: Assets/TheCubers/Scenes/level3.unity
+  - enabled: 1
+    path: Assets/TheCubers/Scenes/level4.unity
+  - enabled: 1
+    path: Assets/TheCubers/Scenes/level5.unity
+  - enabled: 1
+    path: Assets/TheCubers/Scenes/level6.unity
+  - enabled: 1
+    path: Assets/TheCubers/Scenes/level7.unity
+  - enabled: 1
+    path: Assets/TheCubers/Scenes/level8.unity
+  - enabled: 1
+    path: Assets/TheCubers/Scenes/level9.unity
+  - enabled: 1
+    path: Assets/TheCubers/Scenes/level10.unity
