@@ -241,15 +241,23 @@ namespace TheCubers
 		private IEnumerator loadLevel(string level)
 		{
 			yield return Application.LoadLevelAsync(level);
+			//if (Application.isLoadingLevel)
+			//	goDefaultMenu(level);
+			//else
+			//	Go("Start");
 			goDefaultMenu(level);
 		}
 
+		private int lastPause = 0;
 		/// <summary> pause or unpause the game </summary>
 		public void Pause(bool pause)
 		{
-			if (!(active is UIGame || World.PauseUser))
+			int diff = System.Math.Abs(Time.frameCount - lastPause);
+
+			if (diff < 3 || !(active is UIGame || World.PauseUser))
 				return;
 
+			lastPause = Time.frameCount;
 			World.PauseUser = pause;
 			if (pause)
 				Go("Paused");
