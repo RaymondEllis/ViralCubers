@@ -1,71 +1,72 @@
 [
   {
     "Level": "tut1",
-    "Title": "Tutorial 1",
+    "Title": "Tutorial Controls",
     "Description": "Tutorial, learn about controlling the game.",
     "GoalType": 1,
     "GoalScore": 0
   },
   {
     "Level": "tut2",
-    "Title": "Tutorial 2",
+    "Title": "Tutorial Gameplay",
     "Description": "Tutorial, learn basic gameplay.",
     "GoalType": 11,
     "GoalScore": 5000
   },
   {
     "Level": "level1",
-    "Title": "Level 1",
-    "Description": "",
+    "Title": "Sector 11",
+    "Description": "A virus has broken out in Green Vally!\nTake control over sector 11 and stop it from spreading!",
     "GoalType": 11,
     "GoalScore": 10000
   },
   {
     "Level": "level2",
-    "Title": "Level 2",
-    "Description": "",
+    "Title": "Sector 7",
+    "Description": "The virus is still spreading!\nTake over sector 7!",
     "GoalType": 11,
     "GoalScore": 10000
   },
   {
     "Level": "level3",
-    "Title": "Level 3",
-    "Description": "",
+    "Title": "Field #2",
+    "Description": "It looks like it's headed towards Energy Farm!\nCheck out field #2.",
     "GoalType": 11,
     "GoalScore": 10000
   },
   {
     "Level": "level4",
-    "Title": "Level 4",
-    "Description": "",
-    "GoalType": 11,
+    "Title": "Lab 330",
+    "Description": "Help Dr Scientist run some simulations with the virus. We need to know more about it.\nLet the virus take over.",
+    "GoalType": 33,
     "GoalScore": 10000
   },
   {
     "Level": "level5",
-    "Title": "Level 5",
-    "Description": "",
+    "Title": "Field #3",
+    "Description": "Dr Scientist has identified the virus as 0f2, when infected Cubers seem to have double the life and energy.\nHead over to field #3.",
     "GoalType": 11,
     "GoalScore": 10000
   },
   {
     "Level": "level6",
-    "Title": "Level 6",
-    "Description": "",
+    "Title": "Sector 6",
+    "Description": "Energy Farm looks clear. We almost have the vally cleared.\nHelp out with sector 6.",
+    /*" Length  ": "A virus has broken out in Green Vally!\nTake control over sector 11 and stop it from spreading! aaaaaaaaaaaaa aaaaaaaa aaaaaaaaaaa aaaaaa 2234567421 4121 24421 2132 415 122",*/
     "GoalType": 11,
     "GoalScore": 10000
   },
   {
     "Level": "level7",
-    "Title": "Level 7",
-    "Description": "",
+    "Title": "Vally St",
+    "Description": "The virus has escaped out of sector 2, it's headed towards Bold Town.\nGo down Vally ST and intercept it!",
     "GoalType": 11,
     "GoalScore": 10000
   },
   {
     "Level": "level8",
-    "Title": "Level 8",
-    "Description": "",
+    "Title": "Vally St",
+    "Description": "Good job, now head back towards Green Vally.",
     "GoalType": 11,
     "GoalScore": 10000
   },
