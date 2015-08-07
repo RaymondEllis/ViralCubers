@@ -88,7 +88,7 @@ namespace TheCubers
 		{
 			profiles = MyFiles.LoadProfiles();
 
-			if (profiles.Count == 0)
+			if (profiles == null || profiles.Count == 0)
 				return false;
 
 			DateTime last = new DateTime(0);
