@@ -58,8 +58,9 @@ namespace TheCubers
 					Ray ray = Camera.main.ScreenPointToRay(position);
 					if (World.FindGround(ray, out position))
 					{
-						if (World.Instance.NewEnergy(position, Energy, true))
-							--World.Instance.UserEnergy;
+						if (World.Instance.TestBounds(position))
+							if (World.Instance.NewEnergy(position, Energy, true))
+								--World.Instance.UserEnergy;
 					}
 				}
 
@@ -114,20 +115,20 @@ namespace TheCubers
 
 			if (move != Vector3.zero && World.Instance)
 			{
-				Vector3 newPos = transform.position + transform.rotation * move * MoveSpeed * deltaTime;
-				Vector3 size = World.Instance.transform.localScale * 1.5f;
+				Vector3 newPos = transform.position + transform.rotation * move * MoveSpeed * deltaTime - World.Instance.transform.position;
+				Vector3 bounds = World.Instance.transform.localScale * 1.5f;
 
-				if (newPos.x > size.x)
-					newPos.x = size.x;
-				else if (newPos.x < -size.x)
-					newPos.x = -size.x;
+				if (newPos.x > bounds.x)
+					newPos.x = bounds.x;
+				else if (newPos.x < -bounds.x)
+					newPos.x = -bounds.x;
 
-				if (newPos.z > size.z)
-					newPos.z = size.z;
-				else if (newPos.z < -size.z)
-					newPos.z = -size.z;
+				if (newPos.z > bounds.z)
+					newPos.z = bounds.z;
+				else if (newPos.z < -bounds.z)
+					newPos.z = -bounds.z;
 
-				transform.position = newPos;
+				transform.position = newPos + World.Instance.transform.position;
 
 				// move unlinks the target
 				Target = null;

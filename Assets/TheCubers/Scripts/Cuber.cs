@@ -184,7 +184,7 @@ namespace TheCubers
 				for (int i = 0; i < fourths.Count; ++i)
 				{
 					tmpDistance = Vector3.Distance(transform.position, fourths[i].transform.position);
-					tmpWeight = ((Fourths + 1) * g.WeightFourth) / (1 + fourths[i].Wanted * g.WeightWanted) / (1 + tmpDistance * g.WeightDistance);
+					tmpWeight = ((Fourths + 1) * g.WeightFourth) / chkZ(fourths[i].Wanted * g.WeightWanted) / chkZ(tmpDistance * g.WeightDistance);
 					if (debug)
 					{
 						Vector3 v = fourths[i].transform.position;
@@ -206,7 +206,7 @@ namespace TheCubers
 			for (int i = 0; i < energy.Count; ++i)
 			{
 				tmpDistance = Vector3.Distance(transform.position, energy[i].transform.position);
-				tmpWeight = (energy[i].Amount * g.WeightEnergy) / (1 + Energy * g.WeightCurrentEnergy) / (1 + energy[i].Wanted * g.WeightWanted) / (1 + tmpDistance * g.WeightDistance);
+				tmpWeight = (energy[i].Amount * g.WeightEnergy) / chkZ(Energy * g.WeightCurrentEnergy) / chkZ(energy[i].Wanted * g.WeightWanted) / chkZ(tmpDistance * g.WeightDistance);
 				if (debug)
 				{
 					Vector3 v = energy[i].transform.position;
@@ -244,6 +244,13 @@ namespace TheCubers
 				animator.SetTrigger("Hop");
 			}
 
+		}
+
+		private float chkZ(float val)
+		{
+			if (val == 0f)
+				return 1f;
+			return val;
 		}
 
 		public void FinishEating()

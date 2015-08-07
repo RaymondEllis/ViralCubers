@@ -51,10 +51,13 @@ namespace TheCubers
 
 		void Update()
 		{
-			if (World.Paused || (consumed >= count && count > 0))
+			if (World.Paused)
 				return;
 
-			OnUpdate();
+			if (Consumed)
+				OnConsumed();
+			else
+				OnUpdate();
 		}
 
 		protected abstract void OnUpdate();

@@ -125,7 +125,7 @@ namespace TheCubers
 			for (int i = 0; i < Startup.Cubers; ++i)
 			{
 				Vector3 position;
-				if (FindGround(new Ray(new Vector3(-sizeXhalf + Random.Next(sizeX), 100f, -sizeZhalf + Random.Next(sizeZ)), Vector3.down), out position))
+				if (FindGround(new Ray(transform.position + new Vector3(-sizeXhalf + Random.Next(sizeX), 100f, -sizeZhalf + Random.Next(sizeZ)), Vector3.down), out position))
 				{
 					cubers.Pull().Init(position, --infected >= 0, 0.5f + (float)Random.NextDouble() * 0.6f);//, Color.black);
 				}
@@ -267,7 +267,7 @@ namespace TheCubers
 		/// <summary> new random non special energy </summary>
 		public bool NewEnergy(float min, float max)
 		{
-			return NewEnergy(new Vector3(-sizeXhalf + (float)Random.NextDouble() * sizeX, 0f, -sizeZhalf + (float)Random.NextDouble() * sizeZ), min + (float)Random.NextDouble() * (max - min), false);
+			return NewEnergy(transform.position + new Vector3(-sizeXhalf + (float)Random.NextDouble() * sizeX, 0f, -sizeZhalf + (float)Random.NextDouble() * sizeZ), min + (float)Random.NextDouble() * (max - min), false);
 		}
 		public bool NewEnergy(Vector3 position, float amount, bool special)
 		{
@@ -336,6 +336,17 @@ namespace TheCubers
 			mat.color = c;
 
 			return mat;
+		}
+
+		public bool TestBounds(Vector3 point)
+		{
+			Vector2 s = v3v2(transform.localScale);
+			Rect rect = new Rect(v3v2(transform.position) - s * 0.5f, s);
+			return rect.Contains(v3v2(point));
+		}
+		private Vector2 v3v2(Vector3 v)
+		{
+			return new Vector2(v.x, v.z);
 		}
 	}
 }
