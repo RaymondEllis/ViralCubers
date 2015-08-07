@@ -35,7 +35,7 @@ PlayerSettings:
   useOSAutorotation: 1
   use32BitDisplayBuffer: 1
   disableDepthAndStencilBuffers: 0
-  defaultIsFullScreen: 0
+  defaultIsFullScreen: 1
   defaultIsNativeResolution: 1
   runInBackground: 1
   captureSingleScreen: 0
@@ -70,7 +70,7 @@ PlayerSettings:
     5:4: 1
     16:10: 1
     16:9: 1
-    Others: 1
+    Others: 0
   bundleIdentifier: com.Company.ProductName
   bundleVersion: 1.0
   preloadedAssets:
@@ -136,7 +136,7 @@ PlayerSettings:
   m_BuildTargetIcons:
   - m_BuildTarget: 
     m_Icons:
-    - m_Icon: {fileID: 0}
+    - m_Icon: {fileID: 2800000, guid: ceba3b1f4e2e42849bc0ad2d8d923d06, type: 3}
       m_Size: 128
   m_BuildTargetBatching: []
   m_BuildTargetGraphicsAPIs: []
