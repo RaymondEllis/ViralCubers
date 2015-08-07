@@ -567,6 +567,10 @@ Prefab:
       propertyPath: m_Name
       value: Text Energy Value
       objectReference: {fileID: 0}
+    - target: {fileID: 11448220, guid: e861438d076a7e94fad1843045d52369, type: 2}
+      propertyPath: m_FontData.m_FontSize
+      value: 20
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: e861438d076a7e94fad1843045d52369, type: 2}
   m_IsPrefabParent: 0
@@ -662,7 +666,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 11448220, guid: e861438d076a7e94fad1843045d52369, type: 2}
       propertyPath: m_Text
-      value: Title
+      value: <title>
       objectReference: {fileID: 0}
     - target: {fileID: 11448220, guid: e861438d076a7e94fad1843045d52369, type: 2}
       propertyPath: m_FontData.m_FontSize
@@ -1801,7 +1805,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 22452554, guid: 9d7a2773b81d94d4789b2230251c24ce, type: 2}
       propertyPath: m_AnchoredPosition.x
-      value: 584.5
+      value: 547.5
       objectReference: {fileID: 0}
     - target: {fileID: 22452554, guid: 9d7a2773b81d94d4789b2230251c24ce, type: 2}
       propertyPath: m_AnchoredPosition.y
@@ -2122,7 +2126,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 22452554, guid: 9d7a2773b81d94d4789b2230251c24ce, type: 2}
       propertyPath: m_AnchoredPosition.x
-      value: 584.5
+      value: 547.5
       objectReference: {fileID: 0}
     - target: {fileID: 22452554, guid: 9d7a2773b81d94d4789b2230251c24ce, type: 2}
       propertyPath: m_AnchoredPosition.y
@@ -2239,7 +2243,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &494207235
 RectTransform:
   m_ObjectHideFlags: 0
@@ -2408,7 +2412,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 22452554, guid: 9d7a2773b81d94d4789b2230251c24ce, type: 2}
       propertyPath: m_AnchoredPosition.x
-      value: 460.5
+      value: 423.5
       objectReference: {fileID: 0}
     - target: {fileID: 22452554, guid: 9d7a2773b81d94d4789b2230251c24ce, type: 2}
       propertyPath: m_AnchoredPosition.y
@@ -2898,7 +2902,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &666448565
 RectTransform:
   m_ObjectHideFlags: 0
@@ -3182,6 +3186,10 @@ Prefab:
     - target: {fileID: 151362, guid: e861438d076a7e94fad1843045d52369, type: 2}
       propertyPath: m_Name
       value: Text Score Value
+      objectReference: {fileID: 0}
+    - target: {fileID: 11448220, guid: e861438d076a7e94fad1843045d52369, type: 2}
+      propertyPath: m_FontData.m_FontSize
+      value: 20
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: e861438d076a7e94fad1843045d52369, type: 2}
@@ -4826,7 +4834,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 11448220, guid: e861438d076a7e94fad1843045d52369, type: 2}
       propertyPath: m_Text
-      value: Viral Cubers
+      value: Zones
       objectReference: {fileID: 0}
     - target: {fileID: 11448220, guid: e861438d076a7e94fad1843045d52369, type: 2}
       propertyPath: m_FontData.m_FontSize
@@ -5132,7 +5140,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 22452554, guid: 9d7a2773b81d94d4789b2230251c24ce, type: 2}
       propertyPath: m_AnchoredPosition.x
-      value: 460.5
+      value: 423.5
       objectReference: {fileID: 0}
     - target: {fileID: 22452554, guid: 9d7a2773b81d94d4789b2230251c24ce, type: 2}
       propertyPath: m_AnchoredPosition.y
@@ -5796,7 +5804,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 22452554, guid: 9d7a2773b81d94d4789b2230251c24ce, type: 2}
       propertyPath: m_AnchoredPosition.x
-      value: 336.5
+      value: 299.5
       objectReference: {fileID: 0}
     - target: {fileID: 22452554, guid: 9d7a2773b81d94d4789b2230251c24ce, type: 2}
       propertyPath: m_AnchoredPosition.y
@@ -7860,6 +7868,10 @@ Prefab:
       propertyPath: m_FontData.m_Alignment
       value: 5
       objectReference: {fileID: 0}
+    - target: {fileID: 11448220, guid: e861438d076a7e94fad1843045d52369, type: 2}
+      propertyPath: m_FontData.m_FontSize
+      value: 20
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: e861438d076a7e94fad1843045d52369, type: 2}
   m_IsPrefabParent: 0
@@ -7917,7 +7929,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 22497888, guid: e861438d076a7e94fad1843045d52369, type: 2}
       propertyPath: m_SizeDelta.x
-      value: 364
+      value: 500
       objectReference: {fileID: 0}
     - target: {fileID: 22497888, guid: e861438d076a7e94fad1843045d52369, type: 2}
       propertyPath: m_SizeDelta.y
@@ -8314,7 +8326,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 22452554, guid: 9d7a2773b81d94d4789b2230251c24ce, type: 2}
       propertyPath: m_AnchoredPosition.x
-      value: 336.5
+      value: 299.5
       objectReference: {fileID: 0}
     - target: {fileID: 22452554, guid: 9d7a2773b81d94d4789b2230251c24ce, type: 2}
       propertyPath: m_AnchoredPosition.y
@@ -8496,6 +8508,10 @@ Prefab:
     - target: {fileID: 11448220, guid: e861438d076a7e94fad1843045d52369, type: 2}
       propertyPath: m_FontData.m_Alignment
       value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 11448220, guid: e861438d076a7e94fad1843045d52369, type: 2}
+      propertyPath: m_FontData.m_FontSize
+      value: 20
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: e861438d076a7e94fad1843045d52369, type: 2}
