@@ -38,11 +38,11 @@ class BlenderProcessor : AssetPostprocessor
 					if (info.Destroy)
 						processCollider(obj, child, child.GetChild(j), true, true);
 					else
-					{
 						processCollider(child.gameObject, child, child.GetChild(j), false, false);
-						Object.DestroyImmediate(child.GetChild(j).gameObject);
-					}
 				}
+				if (!info.Destroy)
+					while (child.childCount > 0)
+						Object.DestroyImmediate(child.GetChild(0).gameObject);
 			}
 
 			if (info.Destroy)
