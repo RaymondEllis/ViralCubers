@@ -1,4 +1,5 @@
 ﻿using UnityEditor;
+using UnityEditor.SceneManagement;
 using UnityEngine;
 using System.IO;
 
@@ -28,8 +29,8 @@ public class ThumbGen : Editor
 
 			byte[] data = tex.EncodeToPNG();
 
-			string scenePath = Path.GetFullPath(Path.GetDirectoryName(EditorApplication.currentScene));
-			string sceneName = Path.GetFileNameWithoutExtension(EditorApplication.currentScene);
+			string scenePath = Path.GetFullPath(Path.GetDirectoryName(EditorSceneManager.GetActiveScene().path));
+			string sceneName = EditorSceneManager.GetActiveScene().name;
 			string file = scenePath + "/Thumbnails/" + sceneName + ".png";
 			File.WriteAllBytes(file, data);
 			Debug.Log("Thumbnail saved to: " + file);

@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 namespace TheCubers
 {
@@ -17,7 +18,7 @@ namespace TheCubers
 			{
 				if (last == null || last.Length == 0)
 				{
-					last = Application.loadedLevelName;
+					last = SceneManager.GetActiveScene().name;
 					Debug.Log("Empty last level, got level from Applcation.loadedLevelName :" + last);
 				}
 				return last;

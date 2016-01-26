@@ -31,3 +31,4 @@ UnityVS.TheCubers*.sln
 TheCubers-csharp.sln
 TheCubers.sln
 .vs/
+TheCubers.CSharp*.csproj

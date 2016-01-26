@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 using System.Collections;
 using System.Collections.Generic;
 
@@ -69,7 +70,7 @@ namespace TheCubers
 		{
 			DontDestroyOnLoad(gameObject);
 
-			goDefaultMenu(Application.loadedLevelName);
+			goDefaultMenu(SceneManager.GetActiveScene().name);
 		}
 
 		void Update()
@@ -206,7 +207,7 @@ namespace TheCubers
 			if (last)
 				Go(last);
 			else
-				goDefaultMenu(Application.loadedLevelName);
+				goDefaultMenu(SceneManager.GetActiveScene().name);
 		}
 
 		private void goDefaultMenu(string levelName)
@@ -235,7 +236,7 @@ namespace TheCubers
 
 		public void ReloadLevel()
 		{
-			LoadLevel(Application.loadedLevelName);
+			LoadLevel(SceneManager.GetActiveScene().name);
 		}
 
 		public void LoadLevel(string level)
@@ -244,7 +245,7 @@ namespace TheCubers
 		}
 		private IEnumerator loadLevel(string level)
 		{
-			yield return Application.LoadLevelAsync(level);
+			yield return SceneManager.LoadSceneAsync(level);
 			//if (Application.isLoadingLevel)
 			//	goDefaultMenu(level);
 			//else

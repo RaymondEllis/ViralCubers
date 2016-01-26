@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.SceneManagement;
 using System.Collections;
 
 class BaseChecker : MonoBehaviour
@@ -22,7 +23,7 @@ class BaseChecker : MonoBehaviour
 		if (GameObject.Find(testObj) == null)
 		{
 			Debug.Log("Adding base level");
-			var async = Application.LoadLevelAdditiveAsync("base");
+			var async = SceneManager.LoadSceneAsync("base", LoadSceneMode.Additive);
 			yield return async;
 		}
 		done = true;
