@@ -3,6 +3,9 @@ using UnityEditor.SceneManagement;
 using UnityEngine;
 using System.IO;
 
+/// <summary>
+/// Creates scene thumbnailes while in Unity editor.
+/// </summary>
 [CustomEditor(typeof(Camera))]
 public class ThumbGen : Editor
 {

@@ -1,6 +1,9 @@
 ﻿using UnityEditor;
 using UnityEngine;
 
+/// <summary>
+/// Model post processor, adds colliders and sets layer,tags.
+/// </summary>
 class BlenderProcessor : AssetPostprocessor
 {
 	private struct blendinfo

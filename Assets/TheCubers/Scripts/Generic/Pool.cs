@@ -4,6 +4,10 @@ using System.Collections.Generic;
 namespace TheCubers
 {
 	public enum PoolResizeMode { Additive, Double }
+	/// <summary>
+	/// Generic MonoBehaviour object pooler.
+	/// </summary>
+	/// <typeparam name="T"></typeparam>
 	public class Pool<T> where T : MonoBehaviour
 	{
 		private GameObject parent;
@@ -13,10 +17,20 @@ namespace TheCubers
 		private PoolResizeMode resizeMode;
 		private int resize;
 		public int Max { get; private set; }
+		/// <summary>Length of array, use Active() to get the number of active objects.</summary>
 		public int Length { get { return array.Length; } }
 
 		private string typeName = typeof(T).Name;
 
+		/// <summary>
+		/// Create new pooler
+		/// </summary>
+		/// <param name="rootParent">Transform to be the parent of this pool's base object.</param>
+		/// <param name="original">Prefab to use to fill pool, must be of T type.</param>
+		/// <param name="preallocate">Amount of objects to create, now.</param>
+		/// <param name="max">Max amount of activated objects.</param>
+		/// <param name="resizeMode">Mode to use to resize when pool is full.</param>
+		/// <param name="resize">Only used when mode is Additive.</param>
 		public Pool(Transform rootParent, T original, int preallocate, int max, PoolResizeMode resizeMode, int resize)
 		{
 			parent = new GameObject("Pool<" + typeName + ">");
@@ -71,6 +85,7 @@ namespace TheCubers
 		}
 
 		/// <summary> Get a unactive item, will actavate and rezise array if nessery. </summary>
+		/// <returns>Can return null if array size is euqal to Max</returns>
 		public T Pull()
 		{
 			for (int i = 0; i < array.Length; ++i)

@@ -2,6 +2,9 @@
 
 namespace TheCubers
 {
+	/// <summary>
+	/// Returns text based on how you failed.
+	/// </summary>
 	public static class ScoreInfo
 	{
 

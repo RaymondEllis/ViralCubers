@@ -3,6 +3,9 @@ using System.Collections;
 
 namespace TheCubers
 {
+	/// <summary>
+	/// Because you NEED the controls to move on the virtual controller.
+	/// </summary>
 	public class Tutorial1Script : MonoBehaviour
 	{
 		public Transform JoyCam;

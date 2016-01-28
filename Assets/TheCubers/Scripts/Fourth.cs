@@ -1,10 +1,9 @@
 ﻿using UnityEngine;
-using System.Collections;
 
 namespace TheCubers
 {
-	[RequireComponent(typeof(Rigidbody))]
 	[SelectionBase]
+	[RequireComponent(typeof(Rigidbody))]
 	public class Fourth : Edible
 	{
 		public MeshRenderer Mesh;

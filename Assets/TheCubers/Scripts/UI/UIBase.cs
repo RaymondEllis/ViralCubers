@@ -6,6 +6,9 @@ using System.Collections.Generic;
 
 namespace TheCubers
 {
+	/// <summary>
+	/// Base UI object, it knows about all menus.
+	/// </summary>
 	public class UIBase : MonoBehaviour
 	{
 		public static UIBase Instance { get { return instance; } }

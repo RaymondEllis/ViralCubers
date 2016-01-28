@@ -3,6 +3,9 @@ using System.Collections;
 
 namespace TheCubers
 {
+	/// <summary>
+	/// Base class for any object that can be eaten.
+	/// </summary>
 	public abstract class Edible : MonoBehaviour
 	{
 		int count;

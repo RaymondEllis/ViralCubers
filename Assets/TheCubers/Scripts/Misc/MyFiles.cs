@@ -1,8 +1,9 @@
 ﻿using UnityEngine;
 using System;
 using System.IO;
-using System.Collections;
 using System.Collections.Generic;
+
+// Structs and stuff related to loading/saving json files.
 
 namespace TheCubers
 {

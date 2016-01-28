@@ -1,12 +1,15 @@
 ﻿using UnityEngine;
-using System.Collections;
 
 namespace TheCubers
 {
-	[RequireComponent(typeof(Animator))]
+	/// <summary>
+	/// All of the Cubers 'AI' is in here.
+	/// </summary>
 	[SelectionBase]
+	[RequireComponent(typeof(Animator))]
 	public class Cuber : MonoBehaviour
 	{
+		/// <summary> Global variables used in every cuber. </summary>
 		[System.Serializable]
 		public class Global
 		{

@@ -4,7 +4,7 @@ using System;
 namespace TheCubers
 {
 	/// <summary>
-	/// Class to create the game pools
+	/// Singleton class to create the game pools, stays alive across scene loads.
 	/// </summary>
 	class PoolBase : MonoBehaviour
 	{

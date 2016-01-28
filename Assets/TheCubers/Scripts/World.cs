@@ -4,6 +4,11 @@ using UnityEngine;
 
 namespace TheCubers
 {
+	/// <summary>
+	/// Spawns and kills Cubers.
+	/// Spawns energy, and fourths.
+	/// And score.
+	/// </summary>
 	public class World : MonoBehaviour
 	{
 		public static World Instance { get { return instance; } }

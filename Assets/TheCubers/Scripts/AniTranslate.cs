@@ -2,6 +2,9 @@
 
 namespace TheCubers
 {
+	/// <summary>
+	/// Translates and rotates from Point1 to Point2 over time.
+	/// </summary>
 	public class AniTranslate : MonoBehaviour
 	{
 		public Transform Point1;
