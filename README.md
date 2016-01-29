@@ -9,5 +9,7 @@ Cubers need a certain amount of energy to live, they also have a short life span
 Your only way to interact with the simulation is to place high-power energy flowers. Depending on the level you may use energy flowers to distract the infected, other levels you may want to attract the Cubers.
 
 
+[Download latest build](https://github.com/RaymondEllis/ViralCubers/releases/latest)
+
 
 ![](http://i.imgur.com/tU88wVt.png)
